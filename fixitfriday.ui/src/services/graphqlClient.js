@@ -1,7 +1,7 @@
 import ApolloClient from "apollo-boost";
 
 const client = new ApolloClient({
-  uri: 'https://localhost:port', //URL of the GraphQL server
+  uri: 'https://localhost:5001',
 });
 
 export {
