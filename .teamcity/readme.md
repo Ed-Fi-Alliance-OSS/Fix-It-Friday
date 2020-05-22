@@ -1,1 +1,1 @@
-placeholder
+Eventually this will have instructions for setting up TeamCity build configurations.
