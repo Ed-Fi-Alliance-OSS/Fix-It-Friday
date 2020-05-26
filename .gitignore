@@ -1,6 +1,9 @@
 ﻿
 obj
 bin
+tools/
+downloads/
+dist/
 
 # dependencies
 node_modules
@@ -27,3 +30,6 @@ yarn-error.log*
 
 # TeamCity
 .teamcity/target/
+
+# packages
+*.nupkg
