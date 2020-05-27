@@ -1,6 +1,11 @@
 # Fix-It-Friday
 
-[Project Overview here]
+_Project overview will go here..._
+
+## Installation
+
+* To host in IIS, must install the [.NET Core 3.1 Hosting Bundle](https://dotnet.microsoft.com/download/dotnet-core/3.1).
+* More notes forthcoming
 
 ## Legal Information
 
