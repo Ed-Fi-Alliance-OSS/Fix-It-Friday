@@ -1,14 +1,13 @@
 import React, { FunctionComponent } from 'react';
 import { Card } from 'react-bootstrap';
+import { StudentCardProps } from './types/StudentCardProps';
 
-interface StudentCardProps {
-  studentId: number;
-  firstName: string;
-  lastName: string;
-  email: string;
-}
-
-const StudentCard: FunctionComponent<StudentCardProps> = (props: StudentCardProps) => {
+const StudentCard: FunctionComponent<StudentCardProps> = ({
+  studentFirstName,
+  studentLastName,
+  studentSchoolKey,
+  email,
+}) => {
   return (
     <Card
       style={{
@@ -30,12 +29,12 @@ const StudentCard: FunctionComponent<StudentCardProps> = (props: StudentCardProp
             minWidth: '70px',
           }}
         >
-          <Card.Img alt={` Picture of ${props.firstName} ${props.lastName}`} src="" />
+          <Card.Img alt={` Picture of ${studentFirstName} ${studentLastName}`} src="" />
         </div>
         <div style={{ flex: '1' }}>
-          <div style={{ fontWeight: 'bold' }}>{`${props.firstName} ${props.lastName}`}</div>
-          <div>Student ID: {props.studentId}</div>
-          <div>{props.email}</div>
+          <div style={{ fontWeight: 'bold' }}>{`${studentFirstName} ${studentLastName}`}</div>
+          <div>Student ID: {studentSchoolKey}</div>
+          <div>{email}</div>
         </div>
       </Card.Body>
     </Card>

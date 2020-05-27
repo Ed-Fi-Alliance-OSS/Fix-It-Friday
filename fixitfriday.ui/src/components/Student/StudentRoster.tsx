@@ -1,35 +1,29 @@
-import React, { FunctionComponent } from 'react';
+import React, { FC } from 'react';
 import { CardDeck } from 'react-bootstrap';
 import StudentCard from './StudentCard';
-import { useQuery } from "@apollo/react-hooks";
-import GET_STUDENTS_FOR_SECTION from "../../GraphQl/students/studentQueries";
+import { StudentClassType } from "./types/StudentClassType";
+import { StudentRosterProps } from "./types/StudentRosterProps";
 
-interface StudentRosterProps {
-  sectionKey: number;
-}
+const StudentRoster: FC<StudentRosterProps> = (props: StudentRosterProps) => {
+  const students = props.students;
 
-const StudentRoster: FunctionComponent<StudentRosterProps> = (props: StudentRosterProps) => {
+  const deck =
+    students && students.length > 0 ? (
+      students.map((student: StudentClassType) => (
+        <CardDeck style={{ alignItems: 'flex-start', justifyContent: 'space-around' }}>
+          <StudentCard
+            studentSchoolKey={student.studentSchoolKey}
+            studentFirstName={student.studentFirstName}
+            studentLastName={student.studentLastName}
+            email={'TODO: NO EMAIL YET'}
+          />
+        </CardDeck>
+      ))
+    ) : (
+      <div></div>
+    );
 
-  // variables: sectionKey = [props.sectionKey]
-  const { loading, error, data } = useQuery(GET_STUDENTS_FOR_SECTION, {
-    variables: { sectionKey: "9" }
-  });
-
-  if(loading) {
-    return (<div>Loading...</div>);
-  }
-  if(error || !data) {
-    return (<div>Error...</div>);
-  }
-
-  return (
-    data && data.studentsbysection ?
-    data.studentsbysection.map((student: any) => (
-      <CardDeck style={{ alignItems: 'flex-start', justifyContent: 'space-around' }}>
-        <StudentCard studentId={ student.studentSchoolKey } firstName={ student.studentFirstName } lastName={student.studentLastName } email={'TODO: NO EMAIL YET' } />
-      </CardDeck>)) : 
-      <div>There are no students for this section.</div>
-  );
+  return <React.Fragment>{deck}</React.Fragment>;
 };
 
 export default StudentRoster;
