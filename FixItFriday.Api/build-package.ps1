@@ -5,44 +5,55 @@
 
 #requires -version 5
 
+[CmdletBinding()]
 param(
     [string]
     [validateset("debug", "release")]
-    $Configuration = "debug",
+    $Configuration = "Release",
 
     [string]
     [Parameter(Mandatory=$true)]
     $Version,
 
     [string]
-    $VersionSuffix = ""
+    $BuildCounter = 0
 )
 
 $ErrorActionPreference = "Stop"
 
-if ($VersionSuffix) {
-    $Version += "-$VersionSuffix"
+function Invoke-DotnetPublish {
+    $parameters = @(
+        "publish",
+        "--configuration", $Configuration,
+        "-p:version=$Version.$BuildCounter"
+    )
+    Write-Host "dotnet $parameters"  -ForegroundColor Magenta
+    &dotnet @parameters
 }
 
-$parameters = @(
-    "publish",
-    "--configuration", 
-    $Configuration
-)
-Write-Host "dotnet $parameters"  -ForegroundColor Magenta
-&dotnet @parameters
+function Invoke-DotnetPack {
+    param (
+        [string]
+        [Parameter(Mandatory=$true)]
+        $PackageVersion
+    )
 
-$parameters = @(
-    "pack", "FixItFriday.Api.csproj",
-    "-p:PackageVersion=$Version"
-    "-p:NuspecFile=$(Resolve-Path "$PSScriptRoot/FixItFriday.Api.nuspec")",
-    "-p:NuspecProperties=\""Configuration=$Configuration;Version=$Version\""",
-    "--no-build",
-    "--no-restore",
-    "--output", "$PSScriptRoot/dist",
-    # Suppress warnings about script files not being recognized and executed
-    "-nowarn:NU5111,NU5110,NU5100"
-)
+    $parameters = @(
+        "pack", "FixItFriday.Api.csproj",
+        "-p:PackageVersion=$Version"
+        "-p:NuspecFile=$(Resolve-Path "$PSScriptRoot/FixItFriday.Api.nuspec")",
+        "-p:NuspecProperties=\""Configuration=$Configuration;Version=$Version\""",
+        "--no-build",
+        "--no-restore",
+        "--output", "$PSScriptRoot/dist",
+        # Suppress warnings about script files not being recognized and executed
+        "-nowarn:NU5111,NU5110,NU5100"
+    )
+    
+    Write-Host "dotnet $parameters"  -ForegroundColor Magenta
+    &dotnet @parameters
+}
 
-Write-Host "dotnet $parameters"  -ForegroundColor Magenta
-&dotnet @parameters
+Invoke-DotnetPublish
+Invoke-DotnetPack -PackageVersion "$Version-pre$BuildCounter"
+Invoke-DotnetPack -PackageVersion "$Version"

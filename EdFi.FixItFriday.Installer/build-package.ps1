@@ -5,6 +5,9 @@
 
 #requires -version 5
 
+# NB: must have Ed-Fi-ODS-Implementation as a peer to the Fix-It-Friday
+# repo directory, sourced from https://github.com/Ed-Fi-Alliance-OSS
+
 param(
     [string]
     [validateset("debug", "release")]
