@@ -8,9 +8,9 @@ import jetbrains.buildServer.configs.kotlin.v2019_2.triggers.vcs
 object BranchAPIBuild : BuildType ({
     name = "Branch Build and Test"
 
-    var fixItFridayDir = "Fix-It-Friday"
+    var fixItFridayApiDir = "Fix-It-Friday/FixItFriday.Api"
 
-    artifactRules = "+:$fixItFridayDir/dist/*.nupkg"
+    artifactRules = "+:$fixItFridayApiDir/dist/*.nupkg"
     
     templates(api.templates.BuildAndTestAPITemplate)
 
@@ -35,7 +35,7 @@ object BranchAPIBuild : BuildType ({
         powerShell {
             name = "Package"            
             id = "BranchAPIBuild_Package"
-            workingDir = "$fixItFridayDir"
+            workingDir = "$fixItFridayApiDir"
             formatStderrAsError = true
             scriptMode = script {
                 content = """
