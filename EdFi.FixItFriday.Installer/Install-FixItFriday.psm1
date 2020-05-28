@@ -33,9 +33,53 @@ function Install-FixItFridayAPI {
 
     .EXAMPLE
         PS c:\> $parameters = @{
-            ToolsPath = "C:/temp/tools"
+            DbConnectionInfo = @{
+                Server = "myserver.local"
+                DatabaseName = "FIF"
+            }
         }
         PS c:\> Install-FixItFridayAPI @parameters
+
+        All default parameters to install most recent full release.
+
+    .EXAMPLE
+        PS c:\> $parameters = @{
+            ToolsPath = "C:/temp/tools"
+            DbConnectionInfo = @{
+                Server = "myserver.local"
+                DatabaseName = "FIF"
+                Username = "my-sql-user"
+                password = "my-sql-password"
+            }
+        }
+        PS c:\> Install-FixItFridayAPI @parameters
+
+        Default parameters, except for a specialized "tools" download location
+        and using username and password for database connection.
+        
+    .EXAMPLE
+        PS c:\> $parameters = @{
+            PackageName = "fixItFriday-api"
+            PackageVersion = "0.1.0-pre0008"
+            PackageSource = "https://teamcity/httpAuth/app/nuget/feed/_Root/default/v3/index.json"
+            ToolsPath = "C:\temp\tools"
+            DownloadPath = "c:\temp\downloads"
+            WebSitePath = "d:\inetpub\EdFi"
+            WebSiteName = "EdFi"
+            WebSitePort = 444
+            WebApplicationPath = "d:\inetpub\EdFi\FIF\API"
+            WebApplicationName = "FIF-API"
+            DbConnectionInfo = @{
+                Server = "myserver.local"
+                DatabaseName = "FIF"
+                UseIntegratedSecurity = $true
+                Port = 23456
+            }
+            NoDuration = $true
+        }
+        PS c:\> Install-FixItFridayAPI @parameters
+
+        Complete customization
     #>
     [CmdletBinding()]
     param (
@@ -221,6 +265,12 @@ function Invoke-AssertDbConnectionInfo {
     )
 
     $DbConnectionInfo.Engine = "SqlServer"
+
+    if (-not $DbConnectionInfo.UseIntegratedSecurity -and -not $DbConnectionInfo.Username) {
+        # Default to integrated security
+        $DbConnectionInfo.UseIntegratedSecurity = $true
+    }
+
 
     Assert-DatabaseConnectionInfo -DbConnectionInfo $DbConnectionInfo
 }
