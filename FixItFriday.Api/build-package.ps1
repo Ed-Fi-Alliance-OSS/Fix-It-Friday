@@ -20,6 +20,14 @@ if ($VersionSuffix) {
 }
 
 $parameters = @(
+    "publish",
+    "--configuration", 
+    $Configuration
+)
+Write-Host "dotnet $parameters"  -ForegroundColor Magenta
+&dotnet @parameters
+
+$parameters = @(
     "pack", "FixItFriday.Api.csproj",
     "-p:PackageVersion=$Version"
     "-p:NuspecFile=$(Resolve-Path "$PSScriptRoot/FixItFriday.Api.nuspec")",
@@ -31,6 +39,5 @@ $parameters = @(
     "-nowarn:NU5111,NU5110,NU5100"
 )
 
-write-host @parameters
-
-dotnet @parameters
+Write-Host "dotnet $parameters"  -ForegroundColor Magenta
+&dotnet @parameters

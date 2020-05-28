@@ -13,7 +13,7 @@
   </metadata>
   <files>  
     <file src="../LICENSE" />
-    <file src="../NOTICES.md" />   
+    <file src="../NOTICES.md" />
     <file src="Install-FixItFridayAPI.psm1" /> 
     <file src="Ed-Fi-Common/**" />
     <file src="Ed-Fi-ODS/**" />

@@ -14,9 +14,7 @@
   <files>  
     <file src="..\LICENSE" />
     <file src="..\NOTICES.md" />
-    <file src="appsettings.*" />
     <!-- NB: nuget.exe does not handle widlcards with forward-slash paths. Must use back-slash. -->
-    <file src=".\bin\$configuration$\netcoreapp3.1\*.dll" />
-    <file src=".\bin\$configuration$\netcoreapp3.1\*.exe" />
+    <file src=".\bin\$configuration$\netcoreapp3.1\publish\*.*" exclude="**\web.Release.config" />
   </files>
 </package>
