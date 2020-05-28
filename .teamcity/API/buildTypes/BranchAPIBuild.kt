@@ -1,6 +1,7 @@
 package api.buildTypes
 
 import jetbrains.buildServer.configs.kotlin.v2019_2.*
+import jetbrains.buildServer.configs.kotlin.v2019_2.buildFeatures.swabra
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.powerShell
 import jetbrains.buildServer.configs.kotlin.v2019_2.triggers.VcsTrigger
 import jetbrains.buildServer.configs.kotlin.v2019_2.triggers.vcs
@@ -16,6 +17,12 @@ object BranchAPIBuild : BuildType ({
 
     vcs {
         root(_self.vcsRoots.EdFiOdsImplementation, "+: . => Ed-Fi-ODS-Implementation")
+    }
+
+    features {
+        // Default setting: clean before next build
+        swabra {
+        }
     }
 
     triggers {
