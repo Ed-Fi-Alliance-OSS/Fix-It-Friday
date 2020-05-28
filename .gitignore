@@ -36,6 +36,5 @@ publish/
 node_modules/
 *.pdf
 launchSettings.json
-.vscode/
 tempkey.rsa
-EdFi.FIF.API/.vs/EdFi.FIF/v16/.suo
+
