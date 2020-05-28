@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import { CardDeck } from 'react-bootstrap';
 import StudentCard from './StudentCard';
-import { StudentClassType } from "./types/StudentClassType";
-import { StudentRosterProps } from "./types/StudentRosterProps";
+import { StudentClassType } from './types/StudentClassType';
+import { StudentRosterProps } from './types/StudentRosterProps';
 
 const StudentRoster: FC<StudentRosterProps> = (props: StudentRosterProps) => {
   const students = props.students;
@@ -10,7 +10,7 @@ const StudentRoster: FC<StudentRosterProps> = (props: StudentRosterProps) => {
   const deck =
     students && students.length > 0 ? (
       students.map((s: StudentClassType, i: Number) => (
-        <CardDeck style={{ alignItems: 'flex-start', justifyContent: 'space-around' }}>
+        <CardDeck className={ "studentCard" } key={s.studentschoolkey} style={{ display: 'flex', flexDirection: 'row' }}>
           <StudentCard
             key={s.studentschoolkey}
             studentSchoolKey={s.studentschoolkey}

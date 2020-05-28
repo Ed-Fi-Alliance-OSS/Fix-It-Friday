@@ -15,7 +15,7 @@ const TeacherScreen: React.FunctionComponent = () => {
   });
 
   const { loading: rosterLoading, error: rosterError, data: rosterData } = useQuery(GET_STUDENTS_FOR_SECTION, {
-    variables: { key: "9" },
+    variables: { key: '9' },
   });
 
   let Header = <p>Loading...</p>;
@@ -34,18 +34,20 @@ const TeacherScreen: React.FunctionComponent = () => {
   } else if (headerError) {
     Detail = <p>An error has ocurred processing the request.</p>;
   } else {
-    let studentData: Array<StudentClassType> = rosterData.studentsbysection;
-    Detail = <StudentRoster students={ studentData } />;
+    let studentData: Array<StudentClassType> = rosterData.studentsbysection.map((c: any) => c.student);
+    Detail = <StudentRoster students={studentData} />;
   }
 
   return (
-    <Row>
-      <Col xs={12}>
-        {Header}
-        <hr />
-        {Detail}
-      </Col>
-    </Row>
+    <div>
+      <Row>
+        <Col xs={12}>
+          {Header}
+          <hr />
+        </Col>
+      </Row>
+      <div>{Detail}</div>
+    </div>
   );
 };
 

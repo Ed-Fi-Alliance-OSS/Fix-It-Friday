@@ -10,7 +10,9 @@ const StudentCard: FunctionComponent<StudentCardProps> = ({
 }) => {
   return (
     <Card
+      key={studentSchoolKey}
       style={{
+        flex: '1',
         border: '1px solid #afafaf',
         minWidth: '18rem',
         maxWidth: '18rem',
@@ -21,7 +23,6 @@ const StudentCard: FunctionComponent<StudentCardProps> = ({
       <Card.Body style={{ display: 'flex' }}>
         <div
           style={{
-            flex: '1 0 70px',
             border: '1px solid black',
             margin: '2px 2px 2px 2px',
             marginRight: '2rem',
@@ -31,7 +32,7 @@ const StudentCard: FunctionComponent<StudentCardProps> = ({
         >
           <Card.Img alt={` Picture of ${studentFirstName} ${studentLastName}`} src="" />
         </div>
-        <div style={{ flex: '1' }}>
+        <div>
           <div style={{ fontWeight: 'bold' }}>{`${studentFirstName} ${studentLastName}`}</div>
           <div>Student ID: {studentSchoolKey}</div>
           <div>{email}</div>
