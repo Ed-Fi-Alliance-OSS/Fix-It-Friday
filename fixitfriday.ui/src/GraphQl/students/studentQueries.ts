@@ -8,6 +8,7 @@ query StudentsBySection($key: String) {
       studentfirstname
       studentmiddlename
       studentlastname
+      pictureurl
     }
   }
 }

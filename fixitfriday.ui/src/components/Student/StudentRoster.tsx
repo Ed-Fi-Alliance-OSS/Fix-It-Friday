@@ -16,6 +16,7 @@ const StudentRoster: FC<StudentRosterProps> = (props: StudentRosterProps) => {
           studentFirstName={s.studentfirstname}
           studentLastName={s.studentlastname}
           email={'TODO: NO EMAIL YET'}
+          pictureurl={s.pictureurl}
         />
       ))
     ) : (
@@ -24,7 +25,7 @@ const StudentRoster: FC<StudentRosterProps> = (props: StudentRosterProps) => {
 
   return (
     <React.Fragment>
-      <CardDeck className={'studentCard'} style={{ display: 'flex', flexDirection: 'row' }}>
+      <CardDeck className={'studentCard'} style={{ display: 'flex', flexDirection: 'row', width:'100%' }}>
         {deck}
       </CardDeck>
     </React.Fragment>

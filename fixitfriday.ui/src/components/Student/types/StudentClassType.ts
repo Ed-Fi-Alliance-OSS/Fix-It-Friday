@@ -3,4 +3,5 @@ export type StudentClassType = {
     studentfirstname: string,
     studentlastname: string,
     studentmiddlename: string,
+    pictureurl: string,
   };
