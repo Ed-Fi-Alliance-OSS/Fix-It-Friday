@@ -18,7 +18,7 @@ param(
     $Version,
 
     [string]
-    $VersionSuffix = "",
+    $BuildCounter = "",
 
     [string]
     $AppCommonPackageVersion = "1.0.0-pre1055"
@@ -27,16 +27,17 @@ param(
 $ErrorActionPreference = "Stop"
 
 function Invoke-DotnetPack {
-
-    if ($VersionSuffix) {
-        $Version += "-$VersionSuffix"
-    }
+    param (
+        [string]
+        [Parameter(Mandatory=$true)]
+        $PackageVersion
+    )
 
     $parameters = @(
         "pack", "../FixItFriday.Api/FixItFriday.Api.csproj",
-        "-p:PackageVersion=$Version"
-        "-p:NuspecFile=$(Resolve-Path "$PSScriptRoot/FixItFriday.Api.Installer.nuspec")",
-        "-p:NuspecProperties=\""Configuration=$Configuration;Version=$Version\""",
+        "-p:PackageVersion=$PackageVersion"
+        "-p:NuspecFile=$(Resolve-Path "$PSScriptRoot/EdFi.FixItFriday.Installer.nuspec")",
+        "-p:NuspecProperties=\""Configuration=$Configuration;Version=$PackageVersion\""",
         "--no-build",
         "--no-restore",
         "--output", "$PSScriptRoot/dist",
@@ -106,4 +107,5 @@ New-EdFiDirectories
 $appCommonDirectory = Invoke-DownloadAppCommon
 Copy-AppCommonFilesIntoEdFiDirectories $appCommonDirectory
 
-Invoke-DotnetPack
+Invoke-DotnetPack -PackageVersion "$Version-pre$($BuildCounter.PadLeft(4,'0'))"
+Invoke-DotnetPack -PackageVersion "$Version"
