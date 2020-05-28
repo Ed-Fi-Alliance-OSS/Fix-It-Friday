@@ -9,7 +9,6 @@ node_modules
 
 # testing
 coverage
-junit.xml
 
 # production
 build
@@ -27,3 +26,16 @@ yarn-error.log*
 
 # TeamCity
 .teamcity/target/
+
+.vs/
+*.settings
+packages/
+*.user
+publish/
+*~
+node_modules/
+*.pdf
+launchSettings.json
+.vscode/
+tempkey.rsa
+EdFi.FIF.API/.vs/EdFi.FIF/v16/.suo
