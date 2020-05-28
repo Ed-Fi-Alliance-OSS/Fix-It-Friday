@@ -13,12 +13,14 @@ const ProfilePic: FunctionComponent<ProfilePicProps> = (props: ProfilePicProps) 
     element.style.visibility = 'hidden';
   };
 
+  const picSrc = props.pictureUrl && props.pictureUrl.length > 0 ? props.pictureUrl : ""
+
   return (
     <Card.Img
       style={{ width: 'auto', height: 'auto', minWidth: '100%' }}
-      alt={` Picture of ${props.firstname} ${props.lastname}`}
+      alt={`Picture of ${props.firstname} ${props.lastname}`}
       onError={addDefaultSrc}
-      src={props.pictureUrl}
+      src={picSrc}
     />
   );
 };
