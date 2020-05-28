@@ -43,7 +43,7 @@ function Invoke-DotnetPack {
         "pack", "FixItFriday.Api.csproj",
         "-p:PackageVersion=$Version"
         "-p:NuspecFile=$(Resolve-Path "$PSScriptRoot/FixItFriday.Api.nuspec")",
-        "-p:NuspecProperties=\""Configuration=$Configuration;Version=$Version\""",
+        "-p:NuspecProperties=\""Configuration=$Configuration;Version=$PackageVersion\""",
         "--no-build",
         "--output", "$PSScriptRoot/dist",
         # Suppress warnings about script files not being recognized and executed
@@ -53,6 +53,7 @@ function Invoke-DotnetPack {
     Write-Host "dotnet $parameters"  -ForegroundColor Magenta
     &dotnet @parameters
 }
+
 
 Invoke-DotnetPublish
 Invoke-DotnetPack -PackageVersion "$Version-pre$($BuildCounter.PadLeft(4,'0'))"

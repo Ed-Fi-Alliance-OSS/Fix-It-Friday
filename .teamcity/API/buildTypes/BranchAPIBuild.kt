@@ -39,7 +39,7 @@ object BranchAPIBuild : BuildType ({
             formatStderrAsError = true
             scriptMode = script {
                 content = """
-                    .\build-package.ps1 -Version %version% -BuildCounter %build.counter%
+                    .\build-package.ps1 -Version %version.core% -BuildCounter %build.counter%
                 """.trimIndent()
             }
         }
