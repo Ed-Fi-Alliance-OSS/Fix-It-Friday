@@ -7,7 +7,7 @@ import jetbrains.buildServer.configs.kotlin.v2019_2.triggers.VcsTrigger
 import jetbrains.buildServer.configs.kotlin.v2019_2.triggers.vcs
 
 object BranchAPIBuild : BuildType ({
-    name = "Branch Build and Test"
+    name = "Branch Build, Test, and Package"
 
     var fixItFridayApiDir = "Fix-It-Friday/FixItFriday.Api"
 
