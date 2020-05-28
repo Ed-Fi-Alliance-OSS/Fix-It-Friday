@@ -64,7 +64,7 @@ function Invoke-DownloadAppCommon {
         PackageVersion = $AppCommonPackageVersion
         ToolsPath = "../tools"
     }
-    
+
     Get-NugetPackage @parameters
 }
 
@@ -73,8 +73,8 @@ function Copy-AppCommonFilesIntoEdFiDirectories {
         [string]
         $AppCommonDirectory
     )
-    
-    # Copy Ed-Fi-XYZ folders from App Common folder to current 
+
+    # Copy Ed-Fi-XYZ folders from App Common folder to current
     @(
         "Ed-Fi-Common"
         "Ed-Fi-ODS"

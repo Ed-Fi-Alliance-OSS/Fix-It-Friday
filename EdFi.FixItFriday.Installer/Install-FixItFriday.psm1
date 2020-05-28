@@ -56,7 +56,7 @@ function Install-FixItFriday {
 
         Default parameters, except for a specialized "tools" download location
         and using username and password for database connection.
-        
+
     .EXAMPLE
         PS c:\> $parameters = @{
             PackageName = "fixItFriday-api"
@@ -140,7 +140,7 @@ function Install-FixItFriday {
     Write-InvocationInfo $MyInvocation
 
     Clear-Error
-    
+
     Invoke-AssertDbConnectionInfo $DbConnectionInfo
 
     $result = @()
@@ -233,7 +233,7 @@ function Uninstall-FixItFriday {
         WebApplicationName = $WebApplicationName
         WebSiteName = $WebSiteName
     }
-    
+
     $result = @()
 
     $elapsed = Use-StopWatch {
@@ -246,7 +246,7 @@ function Uninstall-FixItFriday {
         Uninstall-EdFiApplicationFromIIS @parameters
 
         $result
-    }    
+    }
 
     Test-Error
 
@@ -307,13 +307,13 @@ function New-ProductionAppSettingsFile {
     )
 
     $connectionString = New-ConnectionString -ConnectionInfo $Config.DbConnectionInfo
-    
+
     $prodSettings = @{
         ConnectionStrings = @{
                 FixItFriday = $connectionString
         }
     }
-    
+
     $prodSettingsFile = Join-Path -Path $Config.PackageDirectory -ChildPath "appsettings.Production.json"
 
     $prodSettings | ConvertTo-Json | Out-File -FilePath $prodSettingsFile -NoNewline -Encoding UTF8

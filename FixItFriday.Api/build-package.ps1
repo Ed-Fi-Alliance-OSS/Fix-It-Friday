@@ -49,7 +49,7 @@ function Invoke-DotnetPack {
         # Suppress warnings about script files not being recognized and executed
         "-nowarn:NU5111,NU5110,NU5100"
     )
-    
+
     Write-Host "dotnet $parameters"  -ForegroundColor Magenta
     &dotnet @parameters
 }
