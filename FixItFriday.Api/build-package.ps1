@@ -25,7 +25,8 @@ function Invoke-DotnetPublish {
     $parameters = @(
         "publish",
         "--configuration", $Configuration,
-        "-p:version=$Version.$BuildCounter"
+        "-p:version=$Version.$BuildCounter",
+        "--no-build"
     )
     Write-Host "dotnet $parameters"  -ForegroundColor Magenta
     &dotnet @parameters
@@ -44,7 +45,6 @@ function Invoke-DotnetPack {
         "-p:NuspecFile=$(Resolve-Path "$PSScriptRoot/FixItFriday.Api.nuspec")",
         "-p:NuspecProperties=\""Configuration=$Configuration;Version=$Version\""",
         "--no-build",
-        "--no-restore",
         "--output", "$PSScriptRoot/dist",
         # Suppress warnings about script files not being recognized and executed
         "-nowarn:NU5111,NU5110,NU5100"
@@ -55,5 +55,5 @@ function Invoke-DotnetPack {
 }
 
 Invoke-DotnetPublish
-Invoke-DotnetPack -PackageVersion "$Version-pre$BuildCounter"
+Invoke-DotnetPack -PackageVersion "$Version-pre$($BuildCounter.PadLeft(4,'0'))"
 Invoke-DotnetPack -PackageVersion "$Version"
