@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { Card } from 'react-bootstrap';
 import { StudentCardProps } from './types/StudentCardProps';
+import ProfilePic from '../utilities/ProfilePic';
 
 const StudentCard: FunctionComponent<StudentCardProps> = ({
   studentFirstName,
@@ -29,7 +30,7 @@ const StudentCard: FunctionComponent<StudentCardProps> = ({
             minWidth: '70px',
           }}
         >
-          <Card.Img style={{ width:'auto', height:'auto', minWidth:'100%' }} alt={` Picture of ${studentFirstName} ${studentLastName}`} src={pictureurl} />
+          <ProfilePic firstname={studentFirstName} lastname={studentLastName} pictureUrl={pictureurl} />
         </div>
         <div style={{ flex: 4 }}>
           <div style={{ fontWeight: 'bold' }}>{`${studentFirstName} ${studentLastName}`}</div>
