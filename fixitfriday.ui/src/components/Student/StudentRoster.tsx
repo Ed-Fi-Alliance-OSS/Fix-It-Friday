@@ -10,21 +10,25 @@ const StudentRoster: FC<StudentRosterProps> = (props: StudentRosterProps) => {
   const deck =
     students && students.length > 0 ? (
       students.map((s: StudentClassType, i: Number) => (
-        <CardDeck className={ "studentCard" } key={s.studentschoolkey} style={{ display: 'flex', flexDirection: 'row' }}>
-          <StudentCard
-            key={s.studentschoolkey}
-            studentSchoolKey={s.studentschoolkey}
-            studentFirstName={s.studentfirstname}
-            studentLastName={s.studentlastname}
-            email={'TODO: NO EMAIL YET'}
-          />
-        </CardDeck>
+        <StudentCard
+          key={s.studentschoolkey}
+          studentSchoolKey={s.studentschoolkey}
+          studentFirstName={s.studentfirstname}
+          studentLastName={s.studentlastname}
+          email={'TODO: NO EMAIL YET'}
+        />
       ))
     ) : (
       <div></div>
     );
 
-  return <React.Fragment>{deck}</React.Fragment>;
+  return (
+    <React.Fragment>
+      <CardDeck className={'studentCard'} style={{ display: 'flex', flexDirection: 'row' }}>
+        {deck}
+      </CardDeck>
+    </React.Fragment>
+  );
 };
 
 export default StudentRoster;
