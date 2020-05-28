@@ -8,9 +8,10 @@ import GET_TEACHER_NAME_AND_SECTIONS from '../../GraphQl/teacher/teacherQueries'
 import StudentRoster from '../Student/StudentRoster';
 import { StudentClassType } from '../Student/types/StudentClassType';
 import GET_STUDENTS_FOR_SECTION from '../../GraphQl/students/studentQueries';
+import ErrorMessage from '../utilities/ErrorMessage';
+import LoadingMessage from '../utilities/LoadingMessage';
 
 const TeacherScreen: React.FunctionComponent = () => {
-
   const [sectionKey, setSectionKey] = useState('9');
 
   const onSectionChange = (evt: any) => {
@@ -25,21 +26,27 @@ const TeacherScreen: React.FunctionComponent = () => {
     variables: { key: sectionKey },
   });
 
-  let Header = <p>Loading...</p>;
+  let Header = <LoadingMessage />;
   if (headerLoading) {
-    Header = <p>Loading...</p>;
+    Header = <LoadingMessage />;
   } else if (headerError) {
-    Header = <p>An error has ocurred processing the request.</p>;
+    Header = <ErrorMessage />;
   } else {
     const teacherName = `${headerData.sectionsbystaff.firstname} ${headerData.sectionsbystaff.middlename} ${headerData.sectionsbystaff.lastsurname}`;
-    Header = <PageHeader TeacherClass={headerData.sectionsbystaff.sections} TeacherName={teacherName} onClassChange={ onSectionChange } />;
+    Header = (
+      <PageHeader
+        TeacherClass={headerData.sectionsbystaff.sections}
+        TeacherName={teacherName}
+        onClassChange={onSectionChange}
+      />
+    );
   }
 
-  let Detail = <p>Loading...</p>;
+  let Detail = <LoadingMessage />;
   if (rosterLoading) {
-    Detail = <p>Loading...</p>;
+    Detail = <LoadingMessage />;
   } else if (rosterError) {
-    Detail = <p>An error has ocurred processing the request.</p>;
+    Detail = <ErrorMessage />;
   } else {
     let studentData: Array<StudentClassType> = rosterData.studentsbysection.map((c: any) => c.student);
     Detail = <StudentRoster students={studentData} />;
@@ -53,7 +60,7 @@ const TeacherScreen: React.FunctionComponent = () => {
           <hr />
         </Col>
       </Row>
-      <div>{Detail}</div>
+      <div className={'detailArea'}>{Detail}</div>
     </div>
   );
 };
