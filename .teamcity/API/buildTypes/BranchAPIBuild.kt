@@ -15,7 +15,7 @@ object BranchAPIBuild : BuildType ({
     templates(api.templates.BuildAndTestAPITemplate)
 
     vcs {
-        root(_self.vcsRoots.EdFiOdsImplementation)
+        root(_self.vcsRoots.EdFiOdsImplementation, "+: . => Ed-Fi-ODS-Implementation")
     }
 
     triggers {
