@@ -20,7 +20,7 @@ Import-Module -Force $folders.modules.invoke("Application/Install.psm1") -Scope 
 Import-Module -Force $folders.modules.invoke("Application/Uninstall.psm1") -Scope Global
 Import-Module -Force $folders.modules.invoke("Application/Configuration.psm1") -Scope Global
 
-function Install-FixItFridayAPI {
+function Install-FixItFriday {
     <#
     .SYNOPSIS
         Installs the Ed-Fi Fix-it-Friday API into IIS.
@@ -38,7 +38,7 @@ function Install-FixItFridayAPI {
                 DatabaseName = "FIF"
             }
         }
-        PS c:\> Install-FixItFridayAPI @parameters
+        PS c:\> Install-FixItFriday @parameters
 
         All default parameters to install most recent full release.
 
@@ -52,7 +52,7 @@ function Install-FixItFridayAPI {
                 password = "my-sql-password"
             }
         }
-        PS c:\> Install-FixItFridayAPI @parameters
+        PS c:\> Install-FixItFriday @parameters
 
         Default parameters, except for a specialized "tools" download location
         and using username and password for database connection.
@@ -77,7 +77,7 @@ function Install-FixItFridayAPI {
             }
             NoDuration = $true
         }
-        PS c:\> Install-FixItFridayAPI @parameters
+        PS c:\> Install-FixItFriday @parameters
 
         Complete customization
     #>
@@ -178,7 +178,7 @@ function Install-FixItFridayAPI {
     }
 }
 
-function Uninstall-FixItFridayAPI {
+function Uninstall-FixItFriday {
     <#
     .SYNOPSIS
         Removes the Ed-Fi Fix-it-Friday API application from IIS.
@@ -191,7 +191,7 @@ function Uninstall-FixItFridayAPI {
         Does not remove IIS or the URL Rewrite module.
 
     .EXAMPLE
-        PS c:\> Uninstall-FixItFridayAPI
+        PS c:\> Uninstall-FixItFriday
 
         Uninstall using all default values.
     .EXAMPLE
@@ -200,7 +200,7 @@ function Uninstall-FixItFridayAPI {
             WebApplicationPath="d:/octopus/applications/staging/FixItFridayAPI-3"
             WebApplicationName = "FixItFriday_API"
         }
-        PS c:\> Uninstall-FixItFridayAPI @p
+        PS c:\> Uninstall-FixItFriday @p
 
         Uninstall when the web application and web site were setup with non-default values.
     #>
@@ -341,4 +341,4 @@ function Install-Application {
     }
 }
 
-Export-ModuleMember -Function Install-FixItFridayAPI, Uninstall-FixItFridayAPI
+Export-ModuleMember -Function Install-FixItFriday, Uninstall-FixItFriday
