@@ -9,12 +9,13 @@ const StudentRoster: FC<StudentRosterProps> = (props: StudentRosterProps) => {
 
   const deck =
     students && students.length > 0 ? (
-      students.map((student: StudentClassType) => (
+      students.map((s: StudentClassType, i: Number) => (
         <CardDeck style={{ alignItems: 'flex-start', justifyContent: 'space-around' }}>
           <StudentCard
-            studentSchoolKey={student.studentSchoolKey}
-            studentFirstName={student.studentFirstName}
-            studentLastName={student.studentLastName}
+            key={s.studentschoolkey}
+            studentSchoolKey={s.studentschoolkey}
+            studentFirstName={s.studentfirstname}
+            studentLastName={s.studentlastname}
             email={'TODO: NO EMAIL YET'}
           />
         </CardDeck>

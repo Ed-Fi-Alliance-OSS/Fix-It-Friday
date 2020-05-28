@@ -1,5 +1,6 @@
 export interface StudentClassType {
-    studentSchoolKey: string,
-    studentFirstName: string,
-    studentLastName: string,
+    studentschoolkey: string,
+    studentfirstname: string,
+    studentlastname: string,
+    studentmiddlename: string,
   };
