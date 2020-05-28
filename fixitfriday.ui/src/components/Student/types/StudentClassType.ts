@@ -1,4 +1,4 @@
-export interface StudentClassType {
+export type StudentClassType = {
     studentschoolkey: string,
     studentfirstname: string,
     studentlastname: string,
