@@ -1,8 +1,9 @@
 import React, { SFC } from 'react';
+import { Alert } from 'react-bootstrap';
 
 const ErrorMessage: SFC = ( ) => {
   return (
-    <p>An error has ocurred processing the request.</p>
+    <Alert variant={"danger"}>An error has ocurred processing the request.</Alert>
   );
 };
 
