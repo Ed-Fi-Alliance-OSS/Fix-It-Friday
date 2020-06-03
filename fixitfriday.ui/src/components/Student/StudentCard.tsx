@@ -19,10 +19,9 @@ const StudentCard: FunctionComponent<StudentCardProps> = ({
       style={{
         flex: '1',
         border: '1px solid #696969',
-        minWidth: '21rem',
-        maxWidth: '21rem',
+        minWidth: '19rem',
         padding: '5px 5px',
-        margin: '10px 10px',
+        marginTop: '10px',
       }}
     >
       <Card.Body>
@@ -30,7 +29,6 @@ const StudentCard: FunctionComponent<StudentCardProps> = ({
           <div
             style={{
               flex: 1,
-              margin: '2px 2em 2px 2px',
               minWidth: '70px',
             }}
           >
