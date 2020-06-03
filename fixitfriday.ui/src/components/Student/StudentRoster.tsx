@@ -15,8 +15,9 @@ const StudentRoster: FC<StudentRosterProps> = (props: StudentRosterProps) => {
           studentSchoolKey={s.studentschoolkey}
           studentFirstName={s.studentfirstname}
           studentLastName={s.studentlastname}
-          email="TODO: NO EMAIL YET"
+          email={s.email}
           pictureurl={s.pictureurl}
+          guardianInformation={s.guardianInformation}
         />
       ))
     ) : (
