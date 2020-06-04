@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { Form, Modal, ModalBody, ModalTitle, ModalFooter } from 'react-bootstrap';
@@ -9,11 +9,14 @@ import { SurveyRosterProps } from './types/SurveyRosterProps';
 
 const SurveyRoster: FC<SurveyRosterProps> = ({ surveys }) => {
   const [state, setState] = useState<boolean>(false);
-  const [radioChecked, setRadioChecked] = useState<string>(surveys && surveys.length > 0 ? surveys[0].surveyKey : '');
+  const [radioChecked, setRadioChecked] = useState<string>('');
   // Set the first element checked
-  if (radioChecked === '' && surveys && surveys.length > 0) {
-    setRadioChecked(surveys[0].surveyKey);
-  }
+  useEffect(()=> {
+    if (radioChecked === '' && surveys && surveys.length > 0) {
+      setRadioChecked(surveys[0].surveyKey);
+    }
+  });
+
   const surveyOptions =
     surveys && surveys.length > 0 ? (
       surveys.map((s: SurveyClassType) => (
