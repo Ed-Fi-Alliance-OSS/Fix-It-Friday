@@ -28,8 +28,9 @@ const SurveyRoster: FC<SurveyRosterProps> = ({ surveys }) => {
           <input
             type="radio"
             key={s.surveyKey}
+            id={s.surveyKey}
             checked={radioChecked === s.surveyKey}
-            value={s.surveyName}
+            value={s.surveyKey}
             onChange={() => setRadioChecked(s.surveyKey)}
           />
           &nbsp;{s.surveyName}
