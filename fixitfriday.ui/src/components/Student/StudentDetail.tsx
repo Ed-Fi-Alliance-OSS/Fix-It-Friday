@@ -22,15 +22,6 @@ const StudentDetail: FunctionComponent<StudentDetailProps> = ({ match }) => {
     padding: '25px 12px',
   };
 
-  const siblingsStyle = {
-    padding: '25px 12px 0px 12px',
-  };
-
-  const siblingsContainer = {
-    border: '1px solid black',
-    padding: '10px 10px',
-  };
-
   useEffect(() => {
     const ourStudent = allStudents.filter((s) => s.id === match.params.id)[0];
     setStudent(ourStudent);
@@ -93,15 +84,22 @@ const StudentDetail: FunctionComponent<StudentDetailProps> = ({ match }) => {
           </div>
         </Col>
       </Row>
-      <Row style={siblingsStyle}>
+      <Row
+        style={{
+          padding: '25px 12px 0px 12px',
+        }}
+      >
         {student.siblings && student.siblings.length > 0 ? (
-          <Container fluid style={siblingsContainer}>
+          <Container fluid>
             <Row>
               <Col>
                 <h5>Siblings</h5>
               </Col>
             </Row>
-            <Row>
+            <Row style={{
+              border: '1px solid black',
+              padding: '10px 10px',
+            }}>
               <Col xs={12}>
                 <CardDeck>
                   {student.siblings.map((value: StudentDetailSiblingType) => (
