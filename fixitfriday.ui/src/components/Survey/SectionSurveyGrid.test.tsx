@@ -39,6 +39,7 @@ test('renders Survey Modal', () => {
           {
             id: '1',
             name: 'One John Doe',
+            date: '2020-06-01',
             questions: [
               {
                 id: '1',
@@ -65,6 +66,7 @@ test('renders Survey Modal', () => {
           {
             id: '2',
             name: 'One Jane Doe',
+            date: '2020-06-01',
             questions: [
               {
                 id: '1',
@@ -91,6 +93,7 @@ test('renders Survey Modal', () => {
           {
             id: '3',
             name: 'One Student Doe',
+            date: '2020-06-01',
             questions: [
               {
                 id: '1',
@@ -118,8 +121,7 @@ test('renders Survey Modal', () => {
       },
     ],
   };
-  const { getByText, getByDisplayValue } = render(<SectionSurveyGrid surveyresult={sectionSurveys} />);
-
+  const { getByText } = render(<SectionSurveyGrid surveyresult={sectionSurveys} />);
   const surveyHasSurveyQuestion = getByText(sectionSurveys.surveydefinition.questions[0].question);
   const surveyHasSurveyAnswer = getByText(sectionSurveys.answers[0].answers[0].questions[0].answer);
 
