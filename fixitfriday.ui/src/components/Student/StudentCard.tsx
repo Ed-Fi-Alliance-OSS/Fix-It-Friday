@@ -3,6 +3,10 @@ import { Link } from 'react-router-dom';
 import { Card } from 'react-bootstrap';
 import { StudentCardProps } from './types/StudentCardProps';
 import ProfilePic from '../utilities/ProfilePic';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPhone, faEnvelope, faLaptop } from '@fortawesome/free-solid-svg-icons';
+import { faGoogle } from '@fortawesome/free-brands-svg-icons';
+import { AccessEnum } from './types/StudentClassType';
 
 const StudentCard: FunctionComponent<StudentCardProps> = ({
   studentFirstName,
@@ -13,6 +17,18 @@ const StudentCard: FunctionComponent<StudentCardProps> = ({
   guardianInformation,
 }) => {
   const BoldText = ({ text }: { text: string }) => <div style={{ fontWeight: 'bold' }}>{text}</div>;
+
+  const AccessComponent = (access: Array<AccessEnum>) => {
+    return (
+      access && access.length > 0 ?
+      <div>
+        {access.includes(AccessEnum.GoogleClassroom) ? <FontAwesomeIcon icon={faGoogle} title="Has Google Classroom access" /> : ''}
+        {access.includes(AccessEnum.Email) ? <FontAwesomeIcon icon={faEnvelope} title="Has email access" /> : ''}
+        {access.includes(AccessEnum.Phone) ? <FontAwesomeIcon icon={faPhone} title="Has phone access" /> : ''}
+        {access.includes(AccessEnum.Internet) ? <FontAwesomeIcon icon={faLaptop} title="Has Internet access" /> : ''}
+      </div>: <></>
+    );
+  };
 
   return (
     <Card key={studentSchoolKey} className="student-card">
@@ -47,6 +63,18 @@ const StudentCard: FunctionComponent<StudentCardProps> = ({
           <div>{guardianInformation.contactNotes}</div>
         </div>
       </Card.Body>
+      <Card.Footer style={{ textAlign: 'right' }}>
+        <div>
+          <FontAwesomeIcon icon={faGoogle} title="Has access to Google Classroom" />
+          &nbsp;
+          <FontAwesomeIcon icon={faEnvelope} title="Has access to Email" />
+          &nbsp;
+          <FontAwesomeIcon icon={faPhone} title="Has phone access" />
+          &nbsp;
+          <FontAwesomeIcon icon={faLaptop} title="Has Internet access" />
+          &nbsp;
+        </div>
+      </Card.Footer>
     </Card>
   );
 };

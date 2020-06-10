@@ -1,3 +1,10 @@
+export enum AccessEnum {
+  Email = 'Email',
+  GoogleClassroom = 'Google Classroom',
+  Internet = 'Internet',
+  Phone = 'Phone',
+}
+
 export type GuardianInformationType = {
   name: string;
   email: string;
@@ -17,4 +24,5 @@ export type StudentClassType = {
   pictureurl: string;
   email: string;
   guardianInformation: GuardianInformationType;
+  access: Array<AccessEnum>;
 };
