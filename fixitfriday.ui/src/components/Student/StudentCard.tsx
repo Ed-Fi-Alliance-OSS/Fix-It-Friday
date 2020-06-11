@@ -1,11 +1,11 @@
 import React, { FunctionComponent } from 'react';
 import { Link } from 'react-router-dom';
 import { Card } from 'react-bootstrap';
-import { StudentCardProps } from './types/StudentCardProps';
-import ProfilePic from '../utilities/ProfilePic';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPhone, faEnvelope, faLaptop } from '@fortawesome/free-solid-svg-icons';
 import { faGoogle } from '@fortawesome/free-brands-svg-icons';
+import ProfilePic from '../utilities/ProfilePic';
+import { StudentCardProps } from './types/StudentCardProps';
 
 const BoldText = ({ text }: { text: string }) => <div style={{ fontWeight: 'bold' }}>{text}</div>;
 
@@ -17,13 +17,30 @@ type AccessComponentProps = {
 };
 
 const AccessComponent: FunctionComponent<AccessComponentProps> = ({ googleClassroom, email, phone, internet }) => {
-  const spaceAfter = {paddingRight: '3px'};
+  const spaceAfter = { paddingRight: '3px' };
   return (
     <div>
-      {googleClassroom ? <FontAwesomeIcon data-testid="google-classroom-icon" icon={faGoogle} title="Has Google Classroom access" style={spaceAfter} /> : ''}
-      {email ? <FontAwesomeIcon data-testid="email-icon" icon={faEnvelope} title="Has email access" style={spaceAfter} /> : ''}
+      {googleClassroom ? (
+        <FontAwesomeIcon
+          data-testid="google-classroom-icon"
+          icon={faGoogle}
+          title="Has Google Classroom access"
+          style={spaceAfter}
+        />
+      ) : (
+        ''
+      )}
+      {email ? (
+        <FontAwesomeIcon data-testid="email-icon" icon={faEnvelope} title="Has email access" style={spaceAfter} />
+      ) : (
+        ''
+      )}
       {phone ? <FontAwesomeIcon data-testid="phone-icon" icon={faPhone} title="Has phone access" style={spaceAfter} /> : ''}
-      {internet ? <FontAwesomeIcon data-testid="internet-icon" icon={faLaptop} title="Has Internet access" style={spaceAfter} /> : ''}
+      {internet ? (
+        <FontAwesomeIcon data-testid="internet-icon" icon={faLaptop} title="Has Internet access" style={spaceAfter} />
+      ) : (
+        ''
+      )}
     </div>
   );
 };

@@ -29,10 +29,10 @@ test('renders Student Card', () => {
         pictureurl=""
         email={email}
         guardianInformation={guardianInformation}
-        hasAccessToGoogleClassroom={true}
+        hasAccessToGoogleClassroom
         hasEmail={false}
-        hasInternetAccess={true}
-        hasPhone={true}
+        hasInternetAccess
+        hasPhone
       />
     </BrowserRouter>,
   );
