@@ -9,21 +9,21 @@ import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 
 const BoldText = ({ text }: { text: string }) => <div style={{ fontWeight: 'bold' }}>{text}</div>;
 
-type AccessesComponentProps = {
+type AccessComponentProps = {
   googleClassroom: boolean;
   email: boolean;
   phone: boolean;
   internet: boolean;
 };
 
-const AccessesComponent: FunctionComponent<AccessesComponentProps> = ({ googleClassroom, email, phone, internet }) => {
+const AccessComponent: FunctionComponent<AccessComponentProps> = ({ googleClassroom, email, phone, internet }) => {
   const spaceAfter = {paddingRight: '3px'};
   return (
     <div>
-      {googleClassroom ? <FontAwesomeIcon icon={faGoogle} title="Has Google Classroom access" style={spaceAfter} /> : ''}
-      {email ? <FontAwesomeIcon icon={faEnvelope} title="Has email access" style={spaceAfter} /> : ''}
-      {phone ? <FontAwesomeIcon icon={faPhone} title="Has phone access" style={spaceAfter} /> : ''}
-      {internet ? <FontAwesomeIcon icon={faLaptop} title="Has Internet access" style={spaceAfter} /> : ''}
+      {googleClassroom ? <FontAwesomeIcon data-testid="google-classroom-icon" icon={faGoogle} title="Has Google Classroom access" style={spaceAfter} /> : ''}
+      {email ? <FontAwesomeIcon data-testid="email-icon" icon={faEnvelope} title="Has email access" style={spaceAfter} /> : ''}
+      {phone ? <FontAwesomeIcon data-testid="phone-icon" icon={faPhone} title="Has phone access" style={spaceAfter} /> : ''}
+      {internet ? <FontAwesomeIcon data-testid="internet-icon" icon={faLaptop} title="Has Internet access" style={spaceAfter} /> : ''}
     </div>
   );
 };
@@ -83,7 +83,7 @@ const StudentCard: FunctionComponent<StudentCardProps> = ({
         </div>
       </Card.Body>
       <Card.Footer style={{ textAlign: 'right' }}>
-        <AccessesComponent
+        <AccessComponent
           googleClassroom={hasAccessToGoogleClassroom}
           email={hasEmail}
           phone={hasPhone}
