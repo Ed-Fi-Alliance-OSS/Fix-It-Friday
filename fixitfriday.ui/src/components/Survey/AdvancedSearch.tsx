@@ -7,7 +7,7 @@ import SurveyPieChart from '../Charts/SurveyPieChart';
 
 const Header = () => {
   return (
-    <Row>
+    <Row className="section-container">
       <Col xs={12}>
         <h1>Survey Results Finder</h1>
       </Col>

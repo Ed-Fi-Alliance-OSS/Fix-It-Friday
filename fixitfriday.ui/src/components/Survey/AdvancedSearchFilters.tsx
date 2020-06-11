@@ -38,7 +38,7 @@ const AdvancedSearchFilters: React.FC<AdvancedSearchProps> = ({ onFilterUpdate }
 
   return (
     <Form>
-      <Row style={{ marginTop: '15px' }}>
+      <Row className="section-container" style={{ marginTop: '15px' }}>
         <Col sm={12} md={4} style={scrollableStyles}>
           <RadioButton
             inputLabel={AdvancedSearchData.studentSelectionData.inputLabel}
