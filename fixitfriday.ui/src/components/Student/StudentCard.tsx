@@ -6,7 +6,27 @@ import ProfilePic from '../utilities/ProfilePic';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPhone, faEnvelope, faLaptop } from '@fortawesome/free-solid-svg-icons';
 import { faGoogle } from '@fortawesome/free-brands-svg-icons';
-import { AccessEnum } from './types/StudentClassType';
+
+const BoldText = ({ text }: { text: string }) => <div style={{ fontWeight: 'bold' }}>{text}</div>;
+
+type AccessesComponentProps = {
+  googleClassroom: boolean;
+  email: boolean;
+  phone: boolean;
+  internet: boolean;
+};
+
+const AccessesComponent: FunctionComponent<AccessesComponentProps> = ({ googleClassroom, email, phone, internet }) => {
+  const spaceAfter = {paddingRight: '3px'};
+  return (
+    <div>
+      {googleClassroom ? <FontAwesomeIcon icon={faGoogle} title="Has Google Classroom access" style={spaceAfter} /> : ''}
+      {email ? <FontAwesomeIcon icon={faEnvelope} title="Has email access" style={spaceAfter} /> : ''}
+      {phone ? <FontAwesomeIcon icon={faPhone} title="Has phone access" style={spaceAfter} /> : ''}
+      {internet ? <FontAwesomeIcon icon={faLaptop} title="Has Internet access" style={spaceAfter} /> : ''}
+    </div>
+  );
+};
 
 const StudentCard: FunctionComponent<StudentCardProps> = ({
   studentFirstName,
@@ -15,23 +35,22 @@ const StudentCard: FunctionComponent<StudentCardProps> = ({
   email,
   pictureurl,
   guardianInformation,
+  hasEmail,
+  hasAccessToGoogleClassroom,
+  hasInternetAccess,
+  hasPhone,
 }) => {
-  const BoldText = ({ text }: { text: string }) => <div style={{ fontWeight: 'bold' }}>{text}</div>;
-
-  const AccessComponent = (access: Array<AccessEnum>) => {
-    return (
-      access && access.length > 0 ?
-      <div>
-        {access.includes(AccessEnum.GoogleClassroom) ? <FontAwesomeIcon icon={faGoogle} title="Has Google Classroom access" /> : ''}
-        {access.includes(AccessEnum.Email) ? <FontAwesomeIcon icon={faEnvelope} title="Has email access" /> : ''}
-        {access.includes(AccessEnum.Phone) ? <FontAwesomeIcon icon={faPhone} title="Has phone access" /> : ''}
-        {access.includes(AccessEnum.Internet) ? <FontAwesomeIcon icon={faLaptop} title="Has Internet access" /> : ''}
-      </div>: <></>
-    );
-  };
-
   return (
-    <Card key={studentSchoolKey} className="student-card">
+    <Card
+      key={studentSchoolKey}
+      style={{
+        flex: '1',
+        border: '1px solid #696969',
+        minWidth: '19rem',
+        padding: '5px 5px',
+        marginTop: '10px',
+      }}
+    >
       <Card.Body>
         <div style={{ display: 'flex' }}>
           <div
@@ -64,16 +83,12 @@ const StudentCard: FunctionComponent<StudentCardProps> = ({
         </div>
       </Card.Body>
       <Card.Footer style={{ textAlign: 'right' }}>
-        <div>
-          <FontAwesomeIcon icon={faGoogle} title="Has access to Google Classroom" />
-          &nbsp;
-          <FontAwesomeIcon icon={faEnvelope} title="Has access to Email" />
-          &nbsp;
-          <FontAwesomeIcon icon={faPhone} title="Has phone access" />
-          &nbsp;
-          <FontAwesomeIcon icon={faLaptop} title="Has Internet access" />
-          &nbsp;
-        </div>
+        <AccessesComponent
+          googleClassroom={hasAccessToGoogleClassroom}
+          email={hasEmail}
+          phone={hasPhone}
+          internet={hasInternetAccess}
+        />
       </Card.Footer>
     </Card>
   );
