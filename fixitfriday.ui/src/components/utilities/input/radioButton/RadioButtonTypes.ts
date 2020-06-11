@@ -5,6 +5,8 @@ export type RadioButtonOption = {
 
 export type RadioButtonProps = {
   options: Array<RadioButtonOption>;
+  onInput?(value: string, inputName: string): void;
+  value?: string;
   inputLabel: string;
   inputName: string;
 };
