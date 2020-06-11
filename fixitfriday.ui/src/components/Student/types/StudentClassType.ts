@@ -1,10 +1,3 @@
-export enum AccessEnum {
-  Email = "Email",
-  GoogleClassroom = "Google Classroom",
-  Internet = "Internet",
-  Phone = "Phone",
-}
-
 export type GuardianInformationType = {
   name: string;
   email: string;
