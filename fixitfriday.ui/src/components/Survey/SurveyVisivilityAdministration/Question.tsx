@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import Form from 'react-bootstrap/Form';
-import { QuestionInputGroupProps } from './types/QuestionInputGroupProps';
+import { QuestionPropsType } from './types/QuestionPropsType';
 
-const Question: FC<QuestionInputGroupProps> = ({ id, question, checked, surveyDisabled }) => {
+const Question: FC<QuestionPropsType> = ({ id, question, checked, surveyDisabled }) => {
   const [questionChecked, setCheckedVisible] = React.useState(checked);
   const updateDisabled = () => setCheckedVisible(!questionChecked);
 

@@ -1,4 +1,4 @@
-export type QuestionInputGroupProps = {
+export type QuestionPropsType = {
   id: string;
   question: string;
   checked: boolean;

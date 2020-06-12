@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
 import Col from 'react-bootstrap/Col';
 import { Row } from 'react-bootstrap';
-import { QuestionsPropsType } from './types/QuestionsPropsType';
+import { SurveyQuestionsPropsType } from './types/SurveyQuestionsPropsType';
 import { SurveyQuestionType } from '../types/SurveyQuestionType';
 import Question from './Question';
 
-const SurveyQuestions: FC<QuestionsPropsType> = (props: QuestionsPropsType) => {
+const SurveyQuestions: FC<SurveyQuestionsPropsType> = (props: SurveyQuestionsPropsType) => {
   const { survey, disabled } = props;
 
   const questions =
