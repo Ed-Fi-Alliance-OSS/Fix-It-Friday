@@ -18,13 +18,17 @@ const StudentSurveyAnswerModal: FC<StudentSurveyAnswerProps> = ({
 }) => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [currentQuestion, setCurrentQuestion] = useState<string>('');
+  const [textAreaValue, setTextAreaValue] = useState<string>('');
 
   useEffect(() => {
     const question = surveyDefinition.questions.filter((q) => q.id === studentanswer.id);
     if (question && question.length > 0) {
       setCurrentQuestion(question[0].question);
     }
-  }, [currentQuestion, studentanswer.id, surveyDefinition.questions]);
+    if (studentanswer.comments && studentanswer.comments !== undefined) {
+      setTextAreaValue(studentanswer.comments);
+    }
+  }, [currentQuestion, studentanswer.id, surveyDefinition.questions, studentanswer.comments]);
 
   return (
     <div>
@@ -58,7 +62,12 @@ const StudentSurveyAnswerModal: FC<StudentSurveyAnswerProps> = ({
             </Row>
             <Row>
               <Col xs={12}>
-                <Form.Control as="textarea" rows={3} value={studentanswer.comments} onChange={()=>''}/>
+                <Form.Control
+                  as="textarea"
+                  rows={3}
+                  value={textAreaValue}
+                  onChange={(e) => setTextAreaValue(e.target.value)}
+                />
               </Col>
             </Row>
           </ModalBody>
