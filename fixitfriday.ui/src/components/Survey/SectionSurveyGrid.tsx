@@ -14,11 +14,17 @@ const SectionSurveyGrid: FC<SectionSurveyGridProps> = ({ surveyresult }) => {
     <Table striped bordered hover size="sm" responsive>
       <thead>
         <tr>
-          <th>Student Name</th>
-          {definition.questions && definition.questions.length > 0 ? (
+          {definition.questions && definition.questions.length > 0 && surveyanswers && surveyanswers.length > 0 ? (
+            <th>Student Name</th>
+          ) : (
+            ''
+          )}
+          {definition.questions && definition.questions.length > 0 && surveyanswers && surveyanswers.length > 0 ? (
             definition.questions.map((q: SurveyQuestionType) => <th key={q.id}>{q.question}</th>)
           ) : (
-            <th>&nbsp;</th>
+            <th>
+              <strong>No data</strong>
+            </th>
           )}
         </tr>
       </thead>
