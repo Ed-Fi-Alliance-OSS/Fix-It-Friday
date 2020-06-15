@@ -64,6 +64,8 @@ object DeployUIBuild : BuildType ({
                         "--deploymenttimeout=%octopus.deploy.timeout%"
                     )
                     octo.exe @parameters
+
+                    exit ${"$"}LastErrorCode
                 """.trimIndent()
             }
         }
