@@ -55,14 +55,14 @@ object DeployUIBuild : BuildType ({
             formatStderrAsError = true
             scriptMode = script {
                 content = """
-                    ${"$"}parameters = @{
+                    ${"$"}parameters = @(
                         "create-release",
                         "--project=%octopus.release.project%",
                         "--version=%octopus.release.version%"
                         "--package=%octopus.release.version%",
                         "--deployTo=%octopus.release.environment%"
                         "--deploymenttimeout=%octopus.deploy.timeout%""
-                    }
+                    )
                     octo.exe @parameters
                 """.trimIndent()
             }
