@@ -17,7 +17,7 @@ object DeployUIBuild : BuildType ({
     dependencies {
         artifacts(BranchUIBuild) {
             buildRule = lastSuccessful()
-            artifactRules = "+:*-pre*.nupkg"
+            artifactRules = "+:*-pre*.nupkg=>packages"
         }
     }
 
@@ -35,7 +35,7 @@ object DeployUIBuild : BuildType ({
             formatStderrAsError = true
             scriptMode = script {
                 content = """
-                    ${"$"}packages = Get-ChildItem -Path . -Filter *pre*.nupkg -Recurse
+                    ${"$"}packages = Get-ChildItem -Path ./packages -Filter *pre*.nupkg -Recurse
                     ${"$"}packageName = ${"$"}packages[0].Name
                     ${"$"}packageName -Match "fixitfriday\.ui\.(.+)\.nupkg"
                     ${"$"}packageVersion = ${"$"}Maches[1]
