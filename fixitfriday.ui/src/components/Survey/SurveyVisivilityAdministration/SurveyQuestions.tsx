@@ -5,14 +5,13 @@ import { SurveyQuestionsPropsType } from './types/SurveyQuestionsPropsType';
 import { SurveyQuestionType } from '../types/SurveyQuestionType';
 import Question from './Question';
 
-const SurveyQuestions: FC<SurveyQuestionsPropsType> = (props: SurveyQuestionsPropsType) => {
-  const { survey, disabled } = props;
+const SurveyQuestions: FC<SurveyQuestionsPropsType> = ({ survey, surveyDisabled } : SurveyQuestionsPropsType) => {
 
   const questions =
     survey && survey.length > 0 ? (
-      survey.map((s: SurveyQuestionType) => (
-        <Col key={s.id} xs={12} sm={12} md={12} lg={12} xl={12}>
-          <Question id={s.id} question={s.question} checked={!s.disabled} surveyDisabled={disabled} />
+      survey.map(({ id, question, disabled }: SurveyQuestionType) => (
+        <Col key={id} xs={12} sm={12} md={12} lg={12} xl={12}>
+          <Question id={id} question={question} checked={!disabled} surveyDisabled={surveyDisabled} />
         </Col>
       ))
     ) : (

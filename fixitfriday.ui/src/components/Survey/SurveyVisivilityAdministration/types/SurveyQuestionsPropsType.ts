@@ -1,8 +1,8 @@
 import { SurveyQuestionType } from '../../types/SurveyQuestionType';
 
-export interface SurveyQuestionsPropsType {
+export type SurveyQuestionsPropsType = {
   survey: Array<SurveyQuestionType>;
-  disabled?: boolean;
+  surveyDisabled?: boolean;
 
   onHide?(): void;
-}
+};

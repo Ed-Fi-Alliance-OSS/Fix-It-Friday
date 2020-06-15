@@ -1,4 +1,4 @@
-import React, { useState, useCallback, FC } from 'react';
+import React, { useEffect, useState, useCallback, FC } from 'react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
@@ -12,36 +12,32 @@ import { SurveyDefinitionType } from '../types/SurveyDefinitionType';
 const headerData: Array<SurveyDefinitionType> = SectionSurveyResultsData.surveydefinition;
 
 const SurveyVisibilityAdministration: FC = () => {
-  const [surveyKey, setSectionKey] = useState<string>('');
-  const [SurveysData, setSurveyQuestionsData] = useState<Array<SurveyQuestionType>>([]);
-
-  const [surveyDisabled, setSurveyAvailability] = useState<boolean>(false);
+  const [surveyKey, setSurveyKey] = useState<string>('');
+  const [surveysData, setSurveysData] = useState<Array<SurveyQuestionType>>([]);
+  const [surveyAvailability, setSurveyAvailability] = useState<boolean>(false);
 
   const onSurveyChange = useCallback(
     (evt: string) => {
-      setSectionKey(evt);
-      let roster: Array<SurveyQuestionType> = [];
-      if (surveyKey) {
-        const survey = headerData.find((x) => x.surveykey === surveyKey);
-        if (survey !== undefined) roster = survey.questions;
-      }
-      setSurveyQuestionsData(roster);
+      setSurveyKey(evt);
     },
-    [surveyKey],
+    []
   );
 
   const onSurveyAvailabilityChange = useCallback(
     (evt: boolean) => {
       setSurveyAvailability(evt);
-      let roster: Array<SurveyQuestionType> = [];
-      if (surveyKey) {
-        const survey = headerData.find((x) => x.surveykey === surveyKey);
-        if (survey !== undefined) roster = survey.questions;
-      }
-      setSurveyQuestionsData(roster);
     },
-    [surveyKey],
+    []
   );
+  
+  useEffect(() => {
+    let roster: Array<SurveyQuestionType> = [];
+    if (surveyKey) {
+      const survey = headerData.find((x) => x.surveykey === surveyKey);
+      if (survey !== undefined) roster = survey.questions;
+    }
+    setSurveysData(roster);
+  }, [surveyKey, surveyAvailability]);
 
   return (
     <>
@@ -55,7 +51,7 @@ const SurveyVisibilityAdministration: FC = () => {
           <hr />
         </Col>
         <Col xs={12} sm={12} md={12} lg={12} xl={12}>
-          <SurveyQuestions survey={SurveysData} disabled={surveyDisabled} />
+          <SurveyQuestions survey={surveysData} surveyDisabled={surveyAvailability} />
         </Col>
       </Row>
     </>

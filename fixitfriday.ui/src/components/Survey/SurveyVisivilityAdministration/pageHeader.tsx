@@ -18,7 +18,7 @@ const PageHeader: React.FunctionComponent<PageHeaderProps> = ({ Surveys, onSurve
     </option>
   ));
 
-  const [selectedSurvey, setSelectedClass] = React.useState<string>('');
+  const [selectedSurvey, setSelectedSurvey] = React.useState<string>('');
 
   const [checkedSurveyEnabled, setCheckedSurveyEnabled] = React.useState(true);
   const updateSurveyEnabled = () => setCheckedSurveyEnabled(!checkedSurveyEnabled);
@@ -46,7 +46,7 @@ const PageHeader: React.FunctionComponent<PageHeaderProps> = ({ Surveys, onSurve
         <Col xs={12} sm={12} md={6} lg={6} xl={6}>
           <Form>
             <Form.Group>
-              <Form.Control as="select" value={selectedSurvey} size="sm" onChange={(e) => setSelectedClass(e.target.value)}>
+              <Form.Control as="select" value={selectedSurvey} size="sm" onChange={(e) => setSelectedSurvey(e.target.value)}>
                 <option value="">Select a survey</option>
                 {Options}
               </Form.Control>
