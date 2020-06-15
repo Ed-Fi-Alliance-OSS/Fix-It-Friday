@@ -114,7 +114,7 @@ function Install-NginxService {
 
   # Inject the correct path to nginx.exe into the config XML file
   $content = Get-Content -Path $xmlFile -Encoding UTF8
-  $content.Replace("{0}", "$InstallPath\$nginxVersion") | Out-Null
+  $content = $content.Replace("{0}", "$InstallPath\$nginxVersion")
   $content | Out-File -FilePath $xmlFile -Encoding UTF8 -Force
 
   # Create and start the service
