@@ -11,7 +11,7 @@ object DeployUIBuild : BuildType ({
 
     params {
         param("octopus.release.version","<placeholder value>")
-        param("octopus.release.project", "fix-it-friday-ui")
+        param("octopus.release.project", "Fix-it-Friday UI")
         param("octopus.project.id", "Projects-112")
     }
 
