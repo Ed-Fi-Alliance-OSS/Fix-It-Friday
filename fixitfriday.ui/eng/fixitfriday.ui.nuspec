@@ -12,11 +12,11 @@
     <description>Fix-It-Friday end-user web site</description>
   </metadata>
   <files>
-    <file src="..\LICENSE" />
-    <file src="..\NOTICES.md" />
+    <file src="..\..\LICENSE" />
+    <file src="..\..\NOTICES.md" />
     <!-- NB: nuget.exe does not handle widlcards with forward-slash paths. Must use back-slash. -->
-    <file src=".\build\**" target="build" />
-    <file src=".\windows\**" target="windows" />
+    <file src="..\build\**" target="build" />
+    <file src="windows\**" target="windows" />
     <file src="nginx.conf" />
   </files>
 </package>
