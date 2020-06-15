@@ -13,11 +13,8 @@ object FixItFridayProject : Project({
             refs/heads/(*)
             refs/(pull/*)/merge
         """.trimIndent())
-        // param("octopus.release.version", "%version%")
-        // param("octopus.release.channel", "v%version.core%")
         param("octopus.deploy.timeout", "00:45:00")
-        //param("octopus.deploy.arguments", "--deploymenttimeout=%octopus.deploy.timeout% --packageversion=%version%")
-        param("octopus.deploy.environment", "Integration")
+        param("octopus.release.environment", "Integration")
     }
 
     subProject(ui.UIProject)

@@ -28,5 +28,35 @@ object DeployUIBuild : BuildType ({
             serverUrl = "%octopus.server.nugetFeed%"
             apiKey = "%octopus.apiKey%"
         }
+        powerShell {
+            name = "Extract release version from NuGet package"
+            formatStderrAsError = true
+            scriptMode = script {
+                content = """
+                    ${"$"}packages = Get-ChildItem -Path . -Filter *pre*.nupkg -Recurse
+                    ${"$"}packageName = ${"$"}packages[0].Name
+                    ${"$"}packageName -Match "fixitfriday\.ui\.(.+)\.nupkg"
+                    Write-Host "##teamcity[setParameter name='octopus.release.version' value='${"$"}Matches[0]']"
+                """.trimIndent()
+            }
+        }
+        powerShell {
+            name = "Create Release and Deploy to Integration"
+            formatStderrAsError = true
+            scriptMode = script {
+                content = """
+                    ${"$"}parameters = @{
+                        "create-release",
+                        "--project=%octopus.release.project%",
+                        "--version=%octopus.release.version%"
+                        "--package=%octopus.release.version%",
+                        "--deployTo=%octopus.release.environment%"
+                        "--deploymenttimeout=%octopus.deploy.timeout%""
+                    }
+                    octo.exe @parameters
+                """.trimIndent()
+            }
+        }
     }
+
 })
