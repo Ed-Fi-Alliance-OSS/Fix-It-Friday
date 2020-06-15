@@ -28,6 +28,7 @@ object DeployUIBuild : BuildType ({
             packages = "**/*.nupkg"
             serverUrl = "%octopus.server.nugetFeed%"
             apiKey = "%octopus.apiKey%"
+            args = "-SkipDuplicate"
         }
         powerShell {
             name = "Extract release version from NuGet package"
