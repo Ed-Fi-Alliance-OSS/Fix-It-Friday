@@ -10,7 +10,7 @@ object UIProject : Project({
 
     buildType(ui.buildTypes.PullRequestUIBuild)
     buildType(ui.buildTypes.BranchUIBuild)
-    buildType(ui.buildTypes.Deploy)
+    buildType(ui.buildTypes.DeployUIBuild)
 
     template(ui.templates.BuildAndTestUITemplate)
 })

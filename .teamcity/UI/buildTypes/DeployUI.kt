@@ -14,7 +14,7 @@ object DeployUIBuild : BuildType ({
     }
 
     dependencies {
-        artifacts(BranchAUIBuild) {
+        artifacts(BranchUIBuild) {
             buildRule = lastSuccessful()
             artifactRules = "+:*-pre*.nupkg"
         }
@@ -26,7 +26,7 @@ object DeployUIBuild : BuildType ({
             toolPath = "%teamcity.tool.NuGet.CommandLine.DEFAULT%"
             packages = "**/*.nupkg"
             serverUrl = "%octopus.server.nugetFeed%"
-            apiKey = "$octopus.apiKey%"
+            apiKey = "%octopus.apiKey%"
         }
     }
-)}
+})
