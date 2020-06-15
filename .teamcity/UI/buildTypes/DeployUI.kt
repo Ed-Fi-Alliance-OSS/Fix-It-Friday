@@ -61,7 +61,7 @@ object DeployUIBuild : BuildType ({
                         "--version=%octopus.release.version%"
                         "--package=%octopus.release.version%",
                         "--deployTo=%octopus.release.environment%"
-                        "--deploymenttimeout=%octopus.deploy.timeout%""
+                        "--deploymenttimeout=%octopus.deploy.timeout%"
                     )
                     octo.exe @parameters
                 """.trimIndent()
