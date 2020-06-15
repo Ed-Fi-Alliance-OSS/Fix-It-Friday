@@ -57,6 +57,7 @@ object DeployUIBuild : BuildType ({
                 content = """
                     ${"$"}parameters = @(
                         "create-release",
+                        "--server=%octopus.server%",
                         "--project=%octopus.release.project%",
                         "--defaultPackageVersion=%octopus.release.version%",
                         "--releaseNumber=%octopus.release.version%",
