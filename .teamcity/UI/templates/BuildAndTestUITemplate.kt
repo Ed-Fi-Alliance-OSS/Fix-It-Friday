@@ -9,13 +9,11 @@ object BuildAndTestUITemplate : Template({
 
     option("shouldFailBuildOnAnyErrorMessage", "true")
 
-    var workingDir = "./fixitfriday.ui"
-
     steps {
         powerShell {
             name = "Install Packages"
             id = "BuildAndTestUITemplate_YarnInstall"
-            workingDir = "$workingDir"
+            workingDir = "./fixitfriday.ui"
             formatStderrAsError = true
             scriptMode = script {
                 content = """
@@ -26,7 +24,7 @@ object BuildAndTestUITemplate : Template({
         powerShell {
             name = "Build"
             id = "BuildAndTestUITemplate_YarnBuild"
-            workingDir = "$workingDir"
+            workingDir = "./fixitfriday.ui"
             formatStderrAsError = true
             scriptMode = script {
                 content = """
@@ -37,7 +35,7 @@ object BuildAndTestUITemplate : Template({
         powerShell {
             name = "Test"
             id = "BuildAndTestUITemplate_YarnTest"
-            workingDir = "$workingDir"
+            workingDir = "./fixitfriday.ui"
             formatStderrAsError = true
             scriptMode = script {
                 content = """
