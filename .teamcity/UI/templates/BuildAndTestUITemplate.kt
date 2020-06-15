@@ -9,6 +9,11 @@ object BuildAndTestUITemplate : Template({
 
     option("shouldFailBuildOnAnyErrorMessage", "true")
 
+    vcs {
+        // Map the API project as the build root directory.
+        root(DslContext.settingsRoot, "+:.")
+    }
+
     steps {
         powerShell {
             name = "Install Packages"
