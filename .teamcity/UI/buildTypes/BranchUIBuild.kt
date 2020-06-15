@@ -23,10 +23,11 @@ object BranchUIBuild : BuildType ({
         powerShell {
             name = "Package"
             id = "BranchUIBuild_Package"
+            workingDir = "./eng"
             formatStderrAsError = true
             scriptMode = script {
                 content = """
-                    .\eng\build-package.ps1 -BuildCounter %build.counter%
+                    .\build-package.ps1 -BuildCounter %build.counter%
                 """.trimIndent()
             }
         }
