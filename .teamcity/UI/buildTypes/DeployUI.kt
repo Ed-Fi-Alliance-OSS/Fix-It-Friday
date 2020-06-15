@@ -65,7 +65,7 @@ object DeployUIBuild : BuildType ({
                     )
                     octo.exe @parameters
 
-                    exit ${"$"}LastErrorCode
+                    exit ${"$"}LASTEXITCODE
                 """.trimIndent()
             }
         }
