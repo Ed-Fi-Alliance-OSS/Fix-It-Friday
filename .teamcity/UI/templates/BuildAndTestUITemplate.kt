@@ -9,18 +9,13 @@ object BuildAndTestUITemplate : Template({
 
     option("shouldFailBuildOnAnyErrorMessage", "true")
 
-    vcs {
-        // To avoid duplicate VCS roots, we don't redefine the vcsroot here in
-        // source code. We can access it through "DslContext.settingsRoot".
-        
-        // Map the UI project as the build root directory.
-        root(DslContext.settingsRoot, "+:./fixitfriday.ui => .")
-    }
+    var workingDir = "./fixitfriday.ui"
 
     steps {
         powerShell {
             name = "Install Packages"
             id = "BuildAndTestUITemplate_YarnInstall"
+            workingDir = "$workingDir"
             formatStderrAsError = true
             scriptMode = script {
                 content = """
@@ -31,6 +26,7 @@ object BuildAndTestUITemplate : Template({
         powerShell {
             name = "Build"
             id = "BuildAndTestUITemplate_YarnBuild"
+            workingDir = "$workingDir"
             formatStderrAsError = true
             scriptMode = script {
                 content = """
@@ -41,6 +37,7 @@ object BuildAndTestUITemplate : Template({
         powerShell {
             name = "Test"
             id = "BuildAndTestUITemplate_YarnTest"
+            workingDir = "$workingDir"
             formatStderrAsError = true
             scriptMode = script {
                 content = """
