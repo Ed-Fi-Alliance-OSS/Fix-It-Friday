@@ -25,6 +25,7 @@ function Invoke-NuGetPack{
 
   $parameters = @(
     "pack",
+    "fixitfriday.ui.nuspec",
     "-version",
     $FullVersion
   )
