@@ -1,6 +1,7 @@
 package ui.buildTypes
 
 import jetbrains.buildServer.configs.kotlin.v2019_2.*
+import jetbrains.buildServer.configs.kotlin.v2019_2.buildFeatures.swabra
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.nuGetPublish
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.powerShell
 
@@ -14,10 +15,16 @@ object DeployUIBuild : BuildType ({
         param("octopus.project.id", "Projects-112")
     }
 
+    features {
+        // Default setting is to clean before next build
+        swabra {
+        }
+    }
+
     dependencies {
         artifacts(BranchUIBuild) {
             buildRule = lastSuccessful()
-            artifactRules = "+:*-pre*.nupkg=>packages"
+            artifactRules = "+:*-pre*.nupkg"
         }
     }
 
@@ -35,7 +42,7 @@ object DeployUIBuild : BuildType ({
             formatStderrAsError = true
             scriptMode = script {
                 content = """
-                    ${"$"}packages = Get-ChildItem -Path ./packages -Filter *pre*.nupkg -Recurse
+                    ${"$"}packages = Get-ChildItem -Path %teamcity.build.checkoutDir% -Filter *pre*.nupkg -Recurse
                     ${"$"}packageName = ${"$"}packages[0].Name
                     ${"$"}packageName -Match "fixitfriday\.ui\.(.+)\.nupkg"
                     ${"$"}packageVersion = ${"$"}Maches[1]
