@@ -4,10 +4,11 @@ import SectionService from '../services/section.service';
 
 @Resolver('Section')
 export default class SectionResolvers {
+  // eslint-disable-next-line no-useless-constructor
   constructor(private readonly sectionsService: SectionService) {}
 
   @Query()
-  async sections() {
+  async sections(): Promise<Section[]> {
     return this.sectionsService.findAll();
   }
 

@@ -5,6 +5,7 @@ import SectionEntity from '../entities/section.entity';
 
 @Injectable()
 export default class SectionService {
+  // eslint-disable-next-line no-useless-constructor
   constructor(@InjectRepository(SectionEntity) private readonly FixItFridayRepository: Repository<SectionEntity>) {}
 
   async findAll(): Promise<SectionEntity[]> {
