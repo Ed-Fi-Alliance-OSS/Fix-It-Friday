@@ -88,3 +88,10 @@ CREATE TABLE fif.StaffSectionAssociation (
     CONSTRAINT FK_StaffSectionAssociation_StaffKey_StaffKey FOREIGN KEY (StaffKey) REFERENCES fif.Staff (StaffKey),
     CONSTRAINT FK_StaffSectionAssociation_SectionKey_SectionKey FOREIGN KEY (SectionKey) REFERENCES fif.Section (SectionKey)
 );
+
+CREATE TABLE fif.Survey (
+    SurveyKey varchar(128) NOT NULL,
+    Title varchar(128) NOT NULL,
+    Info json NOT NULL,
+    CONSTRAINT PK_SurveySurveyKey PRIMARY KEY (SurveyKey)
+);

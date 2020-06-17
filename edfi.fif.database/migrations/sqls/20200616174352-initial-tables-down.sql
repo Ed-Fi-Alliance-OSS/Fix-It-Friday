@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS fif.Survey;
 DROP TABLE IF EXISTS fif.StaffSectionAssociation;
 DROP TABLE IF EXISTS fif.Staff;
 DROP TABLE IF EXISTS fif.StudentSection;
