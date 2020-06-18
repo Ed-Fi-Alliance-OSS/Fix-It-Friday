@@ -15,6 +15,7 @@ test('renders Student Detail', () => {
 
   const firstSurveyQuestion = student.surveys[0];
 
+  /* eslint-disable  @typescript-eslint/no-explicit-any */
   const routeComponentPropsMock = {
     history: {} as any,
     location: {} as any,
