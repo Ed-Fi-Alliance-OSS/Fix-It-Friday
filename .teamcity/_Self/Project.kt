@@ -11,7 +11,7 @@ object FixItFridayProject : Project({
         param("git.branch.default", "development")
         param("git.branch.specification", """
             refs/heads/(*)
-            refs/(pull/*)/merge
+            refs/(pull/*)/head
         """.trimIndent())
         param("octopus.deploy.timeout", "00:45:00")
         param("octopus.release.environment", "Integration")
