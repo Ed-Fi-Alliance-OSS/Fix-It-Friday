@@ -16,6 +16,9 @@ object PullRequestUIBuild : BuildType ({
             id ="vcsTrigger"
             quietPeriodMode = VcsTrigger.QuietPeriodMode.USE_CUSTOM
             quietPeriod = 120
+            // This allows triggering on "anything" and then removes
+            // triggering on the default branch and in feature branches,
+            // thus leaving only the pull requests.
             branchFilter = """
                 +:*
                 -:<default>
