@@ -15,7 +15,7 @@ object PullRequestUIBuild : BuildType ({
             quietPeriodMode = VcsTrigger.QuietPeriodMode.USE_CUSTOM
             quietPeriod = 120
             triggerRules = "+:**"
-            branchFilter = "+:refs/pull/*/head"
+            branchFilter = "+:pull/*/head"
         }
     }
 
@@ -25,7 +25,7 @@ object PullRequestUIBuild : BuildType ({
             publisher = github {
                 githubUrl = "https://api.github.com"
                 authType = personalToken {
-                    token = "%github.accessToken.protected%"
+                    token = "%github.accessToken%"
                 }
             }
         }
