@@ -1,6 +1,11 @@
 type Query{
   sections: [Section]
   section(sectionkey: ID!): Section
+  staffs: [Staff]
+  staff(staffkey: ID!): Staff
+  students: [StudentSchool]
+  student(studentschoolkey: ID!): StudentSchool
+
 }
 type Section{
   sectionkey: String
@@ -9,4 +14,47 @@ type Section{
   sessionname: String
   sectionidentifier: String
   schoolyear: Int
+  students: [StudentSchool]
+}
+type StudentSchool
+{
+  studentschoolkey: String
+  studentkey: String
+  schoolkey: String
+  schoolyear: String
+  studentfirstname: String
+  studentmiddlename: String
+  studentlastname: String
+  enrollmentdatekey: String
+  gradelevel: String
+  limitedenglishproficiency: String
+  ishispanic: Boolean
+  sex: String
+  pictureurl: String
+}
+
+type Staff
+{
+  staffkey: Int
+  personaltitleprefix: String
+  firstname: String
+  middlename: String
+  lastsurname: String
+  staffuniqueid: String
+  sections: [Section]
+}
+
+type StudentSection{
+  studentsectionkey: String
+  studentschoolkey: String
+  studentkey: String
+  sectionkey: String
+  localcoursecode: String
+  subject: String
+  coursetitle: String
+  teachername: String
+  studentsectionstartdatekey: String
+  studentsectionenddatekey: String
+  schoolkey: String
+  schoolyear: String
 }
