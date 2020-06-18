@@ -4,7 +4,7 @@ import jetbrains.buildServer.configs.kotlin.v2019_2.*
 import jetbrains.buildServer.configs.kotlin.v2019_2.Project
 
 object FixItFridayProject : Project({
-    description = "Projects Owned by the ODS Platform Team"
+    description = "Projects Owned by the Analytics Team"
 
     params {
         param("build.feature.freeDiskSpace", "2gb")
