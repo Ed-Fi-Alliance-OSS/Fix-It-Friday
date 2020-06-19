@@ -1,11 +1,10 @@
 type Query{
+  staff: [Staff]
+  sectionsbystaff(staffkey: ID!): Staff
   sections: [Section]
   section(sectionkey: ID!): Section
-  staffs: [Staff]
-  staff(staffkey: ID!): Staff
   students: [StudentSchool]
   student(studentschoolkey: ID!): StudentSchool
-
 }
 type Section{
   sectionkey: String

@@ -6,13 +6,13 @@
 /* tslint:disable */
 /* eslint-disable */
 export abstract class IQuery {
+    abstract staff(): Staff[] | Promise<Staff[]>;
+
+    abstract sectionsbystaff(staffkey: string): Staff | Promise<Staff>;
+
     abstract sections(): Section[] | Promise<Section[]>;
 
     abstract section(sectionkey: string): Section | Promise<Section>;
-
-    abstract staffs(): Staff[] | Promise<Staff[]>;
-
-    abstract staff(staffkey: string): Staff | Promise<Staff>;
 
     abstract students(): StudentSchool[] | Promise<StudentSchool[]>;
 

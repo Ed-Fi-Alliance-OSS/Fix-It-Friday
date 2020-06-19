@@ -14,6 +14,14 @@ export default class SectionService {
     return this.FixItFridayRepository.find();
   }
 
+  async findAllBySection(id: string): Promise<StudentSchoolEntity[]> {
+    return this.FixItFridayRepository.createQueryBuilder('section')
+      .leftJoin(StudentSchoolEntity, 'ss', 'ss.sectionkey = section.sectionkey')
+      .leftJoinAndSelect('section.students', 'student', 'student.studentschoolkey = ss.studentschoolkey')
+      .where({ sectionkey: id })
+      .getMany();
+  }
+
   async findOneById(id: string): Promise<StudentSchoolEntity> {
     return this.FixItFridayRepository.findOne({ where: { studentschoolvkey: id } });
   }

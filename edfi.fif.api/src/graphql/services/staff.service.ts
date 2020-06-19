@@ -8,20 +8,22 @@ import StaffSectionAssociationEntity from '../entities/staffsectionassociation.e
 @Injectable()
 export default class StaffService {
   // eslint-disable-next-line no-useless-constructor
-  constructor(@InjectRepository(StaffEntity) private readonly FixItFridayRepository: Repository<StaffEntity>) {}
+  constructor(
+    @InjectRepository(StaffEntity) private readonly FixItFridayRepository: Repository<StaffEntity>,
+    @InjectRepository(SectionEntity) private readonly FixItFridaySectionRepository: Repository<SectionEntity>,
+  ) {}
 
   async findAll(): Promise<StaffEntity[]> {
-    return this.FixItFridayRepository.createQueryBuilder('staff')
-      .leftJoin(StaffSectionAssociationEntity, 'ssa', 'staff.staffkey = ssa.staffkey')
-      .leftJoinAndMapMany('staff.sections', SectionEntity, 'section', 'ssa.sectionkey = section.sectionkey')
-      .getMany();
+    return this.FixItFridayRepository.find();
   }
 
   async findOneById(id: number): Promise<StaffEntity> {
-    return this.FixItFridayRepository.createQueryBuilder('staff')
-      .leftJoin(StaffSectionAssociationEntity, 'ssa', 'staff.staffkey = ssa.staffkey')
-      .leftJoinAndMapMany('staff.sections', SectionEntity, 'section', 'ssa.sectionkey = section.sectionkey')
-      .where({ staffkey: id })
-      .getOne();
+    return this.FixItFridayRepository.findOne({ where: { staffkey: id } });
+  }
+
+  async findSectionByStaff(staffkey: number): Promise<SectionEntity[]> {
+    return this.FixItFridaySectionRepository.createQueryBuilder('section')
+      .leftJoin(StaffSectionAssociationEntity, 'ssa', `section.sectionkey = ssa.sectionkey and ssa.staffkey='${staffkey}'`)
+      .getMany();
   }
 }
