@@ -3,7 +3,7 @@
   "host": "localhost",
   "port": 5432,
   "username": "postgres",
-  "password": "P@ssw0rd",
+  "password": "gapUser123",
   "database": "FixItFriday",
   "entities": ["dist/**/*.entity.js"],
   "synchronize": true,
