@@ -16,7 +16,6 @@ object BuildAndTestTemplate : BuildAndTestBaseClass() {
                 id ="vcsTrigger"
                 quietPeriodMode = VcsTrigger.QuietPeriodMode.USE_CUSTOM
                 quietPeriod = 120
-                triggerRules = "+:%project.directory%"
                 branchFilter = "+:<default>"
             }
         }
