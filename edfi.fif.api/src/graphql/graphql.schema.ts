@@ -20,7 +20,11 @@ export abstract class IQuery {
 
     abstract surveys(): Survey[] | Promise<Survey[]>;
 
-    abstract survey(surveykey: string): Survey | Promise<Survey>;
+    abstract survey(): Survey | Promise<Survey>;
+
+    abstract surveysummary(title?: string): SurveySummary[] | Promise<SurveySummary[]>;
+
+    abstract surveysummarybysection(sectionkey: string, title?: string): SurveySummaryBySection[] | Promise<SurveySummaryBySection[]>;
 }
 
 export class Section {
@@ -77,36 +81,26 @@ export class StudentSection {
     schoolyear?: string;
 }
 
-export class Data {
-    question?: string;
-    answer?: string;
-}
-
-export class Metadata {
-    timestamp?: string;
-    studentschoolkey?: string;
-    studentname?: string;
-    studentemail?: string;
-}
-
-export class Question {
-    question?: string;
-}
-
-export class Answer {
-    metadata?: Metadata;
-    data?: Data[];
-}
-
-export class SurveyJson {
-    questions?: Question[];
-    answers?: Answer[];
-}
-
 export class Survey {
     surveykey?: string;
     title?: string;
-    info?: SurveyJson[];
+}
+
+export class SurveySummary {
+    surveykey?: string;
+    title?: string;
+    studentsanswered?: number;
+    numberofquestions?: number;
+    totalstudents?: number;
+}
+
+export class SurveySummaryBySection {
+    sectionkey?: string;
+    surveykey?: string;
+    title?: string;
+    studentsanswered?: number;
+    numberofquestions?: number;
+    totalstudents?: number;
 }
 
 export class ContactPerson {

@@ -6,7 +6,9 @@ type Query{
   students: [StudentSchool]
   student(studentschoolkey: ID!): StudentSchool
   surveys: [Survey]
-  survey(surveykey: ID!): Survey
+  survey: Survey
+  surveysummary(title: String): [SurveySummary]
+  surveysummarybysection(sectionkey: String!, title: String): [SurveySummaryBySection]
 }
 type Section{
   sectionkey: String
@@ -63,31 +65,24 @@ type StudentSection{
   schoolyear: String
 }
 
-type Data {
-  question: String
-  answer: String
-}
-type Metadata {
-  timestamp: String
-  studentschoolkey: String
-    studentname: String
-    studentemail: String
-}
-type Question {
-  question: String
-}
-type Answer {
-  metadata: Metadata
-  data: [Data]
-}
-type SurveyJson {
-  questions: [Question]
-  answers: [Answer]
-}
-type Survey{
+type Survey {
   surveykey: String
   title: String
-  info: [SurveyJson]
+}
+type SurveySummary {
+  surveykey: String
+  title: String
+  studentsanswered: Int
+  numberofquestions: Int
+  totalstudents: Int
+}
+type SurveySummaryBySection {
+  sectionkey: String
+  surveykey: String
+  title: String
+  studentsanswered: Int
+  numberofquestions: Int
+  totalstudents: Int
 }
 type ContactPerson{
   uniquekey: String
