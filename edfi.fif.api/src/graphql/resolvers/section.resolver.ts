@@ -14,7 +14,7 @@ export default class SectionResolvers {
 
   @Query('section')
   async findOneById(
-    @Args('sectionkey', 'studentkey')
+    @Args('sectionkey')
     sectionkey: string,
   ): Promise<Section> {
     return this.sectionsService.findOneById(sectionkey);

@@ -88,7 +88,7 @@ type Survey{
   surveykey: String
   title: String
   info: [SurveyJson]
-
+}
 type ContactPerson{
   uniquekey: String
   contactpersonkey: String

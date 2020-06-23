@@ -1,4 +1,3 @@
-
 /** ------------------------------------------------------
  * THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
  * -------------------------------------------------------
@@ -78,7 +77,6 @@ export class StudentSection {
     schoolyear?: string;
 }
 
-
 export class Data {
     question?: string;
     answer?: string;
@@ -109,6 +107,7 @@ export class Survey {
     surveykey?: string;
     title?: string;
     info?: SurveyJson[];
+}
 
 export class ContactPerson {
     uniquekey?: string;
