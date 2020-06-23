@@ -48,6 +48,9 @@ export class StudentSchool {
     ishispanic?: boolean;
     sex?: string;
     pictureurl?: string;
+    contacts?: ContactPerson[];
+    siblingscount?: number;
+    siblings?: StudentSchool[];
 }
 
 export class Staff {
@@ -74,6 +77,7 @@ export class StudentSection {
     schoolkey?: string;
     schoolyear?: string;
 }
+
 
 export class Data {
     question?: string;
@@ -105,4 +109,22 @@ export class Survey {
     surveykey?: string;
     title?: string;
     info?: SurveyJson[];
+
+export class ContactPerson {
+    uniquekey?: string;
+    contactpersonkey?: string;
+    studentkey?: string;
+    contactfirstname?: string;
+    contactlastname?: string;
+    relationshiptostudent?: string;
+    streetnumbername?: string;
+    apartmentroomsuitenumber?: string;
+    state?: string;
+    postalcode?: string;
+    phonenumber?: string;
+    primaryemailaddress?: string;
+    isprimarycontact?: boolean;
+    preferredcontactmethod?: string;
+    besttimetocontact?: string;
+    contactnotes?: string;
 }
