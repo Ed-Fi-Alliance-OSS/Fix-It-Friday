@@ -1,3 +1,4 @@
+
 /** ------------------------------------------------------
  * THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
  * -------------------------------------------------------
@@ -5,11 +6,6 @@
 
 /* tslint:disable */
 /* eslint-disable */
-export class Answer {
-    metadata?: Metadata;
-    data?: Data[];
-}
-
 export class ContactPerson {
     uniquekey?: string;
     contactpersonkey?: string;
@@ -29,18 +25,6 @@ export class ContactPerson {
     contactnotes?: string;
 }
 
-export class Data {
-    question?: string;
-    answer?: string;
-}
-
-export class Metadata {
-    timestamp?: string;
-    studentschoolkey?: string;
-    studentname?: string;
-    studentemail?: string;
-}
-
 export abstract class IQuery {
     abstract staff(): Staff[] | Promise<Staff[]>;
 
@@ -56,11 +40,11 @@ export abstract class IQuery {
 
     abstract surveys(): Survey[] | Promise<Survey[]>;
 
-    abstract survey(surveykey: string): Survey | Promise<Survey>;
-}
+    abstract survey(): Survey | Promise<Survey>;
 
-export class Question {
-    question?: string;
+    abstract surveysummary(title?: string): SurveySummary[] | Promise<SurveySummary[]>;
+
+    abstract surveysummarybysection(sectionkey: string, title?: string): SurveySummaryBySection[] | Promise<SurveySummaryBySection[]>;
 }
 
 export class School {
@@ -139,10 +123,21 @@ export class StudentSection {
 export class Survey {
     surveykey?: string;
     title?: string;
-    info?: SurveyJson[];
 }
 
-export class SurveyJson {
-    questions?: Question[];
-    answers?: Answer[];
+export class SurveySummary {
+    surveykey?: string;
+    title?: string;
+    studentsanswered?: number;
+    numberofquestions?: number;
+    totalstudents?: number;
+}
+
+export class SurveySummaryBySection {
+    sectionkey?: string;
+    surveykey?: string;
+    title?: string;
+    studentsanswered?: number;
+    numberofquestions?: number;
+    totalstudents?: number;
 }
