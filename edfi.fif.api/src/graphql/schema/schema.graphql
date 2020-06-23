@@ -1,14 +1,14 @@
 type Query{
   staff: [Staff]
-  staffbyid(staffkey: ID!): Staff
-  sectionsbystaff(staffkey: ID!): [Section]
-  sectionbystaff(staffkey: ID!, sectionkey:String): Section
-  studentbystaff(staffkey: ID!, studentschoolkey: String!): StudentSchool
-  studentsbystaff(staffkey: ID!): [StudentSchool]
+  sectionsbystaff(staffkey: ID!): Staff
+  sections: [Section]
+  section(sectionkey: ID!): Section
+  students: [StudentSchool]
+  student(studentschoolkey: ID!): StudentSchool
   surveys: [Survey]
   survey: Survey
-  surveysummary(sectionkey: String!, title: String): [SurveySummary]
-  questions: [SurveySummaryQuestions]
+  surveysummary(title: String): [SurveySummary]
+  surveysummarybysection(sectionkey: String!, title: String): [SurveySummaryBySection]
 }
 type Section{
   sectionkey: String
@@ -17,7 +17,6 @@ type Section{
   sessionname: String
   sectionidentifier: String
   schoolyear: Int
-  student(studentschoolkey: String!): StudentSchool
   students: [StudentSchool]
 }
 type StudentSchool
@@ -25,7 +24,6 @@ type StudentSchool
   studentschoolkey: String
   studentkey: String
   schoolkey: String
-  schoolname: String
   schoolyear: String
   studentfirstname: String
   studentmiddlename: String
@@ -39,22 +37,6 @@ type StudentSchool
   contacts: [ContactPerson]
   siblingscount: Int,
   siblings: [StudentSchool]
-  studentsurveys: [StudentSurvey]
-  notes: [StudentNote]
-}
-type StudentNote {
-  studentnotekey: String
-  note: String
-  studentschoolkey: String
-}
-
-type StudentSurvey{
-  studentsurveykey:String
-  surveykey: String
-  studentschoolkey: String
-  date: String
-  survey: Survey
-  answers: [AnswersByStudent]
 }
 
 type Staff
@@ -65,7 +47,6 @@ type Staff
   middlename: String
   lastsurname: String
   staffuniqueid: String
-  section(sectionkey:String!): Section
   sections: [Section]
 }
 
@@ -84,51 +65,24 @@ type StudentSection{
   schoolyear: String
 }
 
-
 type Survey {
   surveykey: String
   title: String
-  questions: [SurveyQuestion]
 }
-type SurveyQuestion {
-  surveyquestionkey: String
-  surveykey: String
-  question: String
-  studentanswer: SurveySummaryAnswers
-}
-type AnswersByStudent {
-  surveykey: String
-  surveyquestionkey: String
-  question: String
-  studentschoolkey: String
-  answer: String
-}
-
 type SurveySummary {
-  sectionkey: Int
-  surveykey: Int
+  surveykey: String
   title: String
   studentsanswered: Int
   numberofquestions: Int
   totalstudents: Int
-  questions: [SurveySummaryQuestions]
 }
-type SurveySummaryQuestions {
-  surveykey: Int
+type SurveySummaryBySection {
+  sectionkey: String
+  surveykey: String
   title: String
-  surveyquestionkey: Int
-  question: String
-  answers: [SurveySummaryAnswers]
-}
-type SurveySummaryAnswers {
-  sectionkey: Int
-  surveykey: Int
-  title: String
-  surveyquestionkey: Int
-  question: String
-  studentschoolkey: Int
-  studentname: String
-  answer: String
+  studentsanswered: Int
+  numberofquestions: Int
+  totalstudents: Int
 }
 type ContactPerson{
   uniquekey: String
@@ -147,20 +101,4 @@ type ContactPerson{
   preferredcontactmethod: String
   besttimetocontact: String
   contactnotes: String
-}
-
-type School{
-  schoolkey: String
-  schoolname: String
-  schooltype: String
-  schooladdress: String
-  schoolcity: String
-  schoolcounty: String
-  schoolstate: String
-  localeducationagencyname: String
-  localeducationagencykey: Int
-  stateeducationagencyname: String
-  stateeducationagencykey: Int
-  educationservicecentername: String
-  educationservicecenterkey: Int
 }
