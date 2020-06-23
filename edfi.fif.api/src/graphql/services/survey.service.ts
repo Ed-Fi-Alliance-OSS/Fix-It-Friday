@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
-import SurveyEntity from '../entities/survey.entity';
+import SurveyEntity from '../entities/survey/survey.entity';
 
 @Injectable()
 export default class SurveyService {
