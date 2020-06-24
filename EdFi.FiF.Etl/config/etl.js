@@ -16,6 +16,11 @@ var studentContactSourceSQL = fs.readFileSync(
 	"utf8"
 		);
 
+var sectionSourceSQL = fs.readFileSync(
+	path.join(__dirname, "./../sql/0004-ImportSection.sql"),
+	"utf8"
+		);
+
 var staffSourceSQL = fs.readFileSync(
 	path.join(__dirname, "./../sql/0005-ImportStaff.sql"),
 	"utf8"
@@ -44,11 +49,18 @@ exports.studentContactConfig = {
 	sourceSql: studentContactSourceSQL
 };
 
+exports.sectionConfig = {
+	recordType: "Section",
+	selectSql: "SELECT 1 FROM fif.section WHERE sectionkey=$1",
+	insertSql: "INSERT INTO fif.section (sectionkey, schoolkey, localcoursecode, sessionname, sectionidentifier, schoolyear) VALUES ($1, $2, $3, $4, $5, $6)",
+	updateSql: "UPDATE fif.section SET schoolkey=$2, localcoursecode=$3, sessionname=$4, sectionidentifier=$5, schoolyear=$6 WHERE sectionkey=$1",
+	sourceSql: sectionSourceSQL
+};
+
 exports.staffConfig = {
-    recordType: "Staff",
-    selectSql: "SELECT 1 FROM fif.staff WHERE staffkey=$1",
+	recordType: "Staff",
+	selectSql: "SELECT 1 FROM fif.staff WHERE staffkey=$1",
 	insertSql: "INSERT INTO fif.staff (staffkey, personaltitleprefix, firstname, middlename, lastsurname, staffuniqueid) VALUES ($1, $2, $3, $4, $5, $6)",
 	updateSql: "UPDATE fif.staff SET personaltitleprefix=$2, firstname=$3, middlename=$4, lastsurname=$5, staffuniqueid=$6 WHERE staffkey=$1",
 	sourceSql: staffSourceSQL
 };
-
