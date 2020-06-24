@@ -8,7 +8,7 @@ import StaffModule from './graphql/modules/staff.module';
 import StudentSchoolModule from './graphql/modules/studentschool.module';
 import SurveyModule from './graphql/modules/survey.module';
 import SurveySummaryModule from './graphql/modules/surveysummary.module';
-import SurveySummaryBysectionModule from './graphql/modules/surveysummarybysection.module';
+import SurveySummaryQuestionsModule from './graphql/modules/surveysummaryquestions.module';
 
 @Module({
   imports: [
@@ -22,7 +22,7 @@ import SurveySummaryBysectionModule from './graphql/modules/surveysummarybysecti
     StudentSchoolModule,
     SurveyModule,
     SurveySummaryModule,
-    SurveySummaryBysectionModule
+    SurveySummaryQuestionsModule
   ],
   controllers: [AppController],
   providers: [AppService],
