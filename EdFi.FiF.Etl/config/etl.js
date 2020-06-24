@@ -16,6 +16,11 @@ var studentContactSourceSQL = fs.readFileSync(
 	"utf8"
 		);
 
+var staffSourceSQL = fs.readFileSync(
+	path.join(__dirname, "./../sql/0005-ImportStaff.sql"),
+	"utf8"
+		);
+
 exports.studentSchoolConfig = {
 	recordType: "StudentSchool",
 	selectSql: "SELECT 1 FROM fif.studentschool WHERE studentschoolkey=$1",
@@ -32,11 +37,18 @@ exports.contactPersonConfig = {
 	sourceSql: contactPersonSourceSQL
 };
 
-
 exports.studentContactConfig = {
 	recordType: "StudentContact",
 	deleteSql: "DELETE FROM fif.studentcontact",
 	insertSql: "INSERT INTO fif.studentcontact (contactkey, studentschoolkey) VALUES ($1::text, $2::text)",
 	sourceSql: studentContactSourceSQL
+};
+
+exports.staffConfig = {
+    recordType: "Staff",
+    selectSql: "SELECT 1 FROM fif.staff WHERE staffkey=$1",
+	insertSql: "INSERT INTO fif.staff (staffkey, personaltitleprefix, firstname, middlename, lastsurname, staffuniqueid) VALUES ($1, $2, $3, $4, $5, $6)",
+	updateSql: "UPDATE fif.staff SET personaltitleprefix=$2, firstname=$3, middlename=$4, lastsurname=$5, staffuniqueid=$6 WHERE staffkey=$1",
+	sourceSql: staffSourceSQL
 };
 
