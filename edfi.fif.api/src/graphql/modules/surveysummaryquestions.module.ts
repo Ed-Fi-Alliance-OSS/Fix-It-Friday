@@ -3,10 +3,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import SurveySummaryQuestionsResolvers from '../resolvers/surveysummaryquestions.resolver';
 import SurveySummaryQuestionsService from '../services/surveysummaryquestions.service';
 import SurveySummaryQuestionsEntity from '../entities/survey/surveysummaryquestions.entity';
-import SurveySummaryAnswersEntity from '../entities/survey/surveysummaryanswers.entity';
+import SurveySummaryAnsweresEntity from '../entities/survey/surveysummaryansweres.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([SurveySummaryQuestionsEntity, SurveySummaryAnswersEntity])],
+  imports: [TypeOrmModule.forFeature([SurveySummaryQuestionsEntity, SurveySummaryAnsweresEntity])],
   providers: [SurveySummaryQuestionsService, SurveySummaryQuestionsResolvers],
 })
 export default class SurveySummaryQuestionsModule {}

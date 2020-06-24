@@ -1,2 +1,3 @@
-DROP VIEW fif.SurveySummaryBySection;
+DROP VIEW fif.SurveySummaryAnsweres
+DROP VIEW fif.SurveySummaryQuestions;
 DROP VIEW fif.SurveySummary;
