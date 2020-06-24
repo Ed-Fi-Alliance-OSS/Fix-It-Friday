@@ -43,10 +43,12 @@ module.exports.process = function (pgConfig, mssqlConfig, studentSchoolConfig) {
 				pool.query(studentSchoolConfig.selectSql, [args[0][0].value])
 				.then((res) => {
 					if (res.rowCount == 0) {
-						pool.query(studentSchoolConfig.insertSql, values).catch(err => console.error(err.stack));
+                        pool.query(studentSchoolConfig.insertSql, values)
+                        .catch((err) => console.error(`An error occurred trying to insert this object:\n${JSON.stringify(args)}\n${err.stack}`));
 					}
 					if (res.rowCount == 1) {
-						pool.query(studentSchoolConfig.updateSql, values).catch(err => console.error(err.stack));
+                        pool.query(studentSchoolConfig.updateSql, values)
+                        .catch((err) => console.error(`An error occurred trying to update this object:\n${JSON.stringify(args)}\n${err.stack}`));
 					}
 				})
 				.catch(err => console.error(err.stack));
