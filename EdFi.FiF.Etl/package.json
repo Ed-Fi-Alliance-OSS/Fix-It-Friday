@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "etl": "^0.6.12",
+    "fs": "^0.0.1-security",
+    "msnodesqlv8": "^1.1.6",
+    "mssql": "^6.2.0",
+    "path": "^0.12.7",
+    "pg": "^8.2.1",
+    "tedious": "^8.3.0"
+  }
+}
