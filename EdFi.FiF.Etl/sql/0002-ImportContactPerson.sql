@@ -1,8 +1,3 @@
-/*
-INSERT INTO fif.ContactPerson
-    (UniqueKey, ContactPersonKey, StudentKey, ContactFirstName, ContactLastName, RelationshipToStudent, StreetNumberName, ApartmentRoomSuiteNumber, State, PostalCode, PhoneNumber, PrimaryEmailAddress, IsPrimaryContact, PreferredContactMethod, BestTimeToContact, ContactNotes
-    )
-*/
 SELECT
 	p.ParentUniqueId as UniqueKey,
 	p.ParentUSI as ContactPersonKey,

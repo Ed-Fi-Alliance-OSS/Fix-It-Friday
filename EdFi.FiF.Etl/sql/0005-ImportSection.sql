@@ -1,8 +1,3 @@
-/*
-INSERT INTO fif.Staff
-    (StaffKey, PersonalTitlePrefix, FirstName, MiddleName, LastSurname, StaffUniqueId
-    )
-*/
 SELECT
     s.*,
     s.StaffUSI as StaffKey,

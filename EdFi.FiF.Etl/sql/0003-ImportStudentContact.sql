@@ -1,4 +1,3 @@
--- INSERT INTO fif.StudentContact (ContactKey, StudentSchoolKey)
 SELECT
     p.ParentUSI as ContactPersonKey,
     s.StudentUSI as StudentKey
