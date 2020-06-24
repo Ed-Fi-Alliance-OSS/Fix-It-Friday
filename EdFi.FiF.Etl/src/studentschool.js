@@ -3,6 +3,8 @@ var { Pool } = require('pg');
 
 module.exports.process = function (pgConfig, mssqlConfig, studentSchoolConfig) {
 
+	const timeLabel = `${studentSchoolConfig.recordType}-process`;
+
 	console.log(`Processing ${studentSchoolConfig.recordType} records`);
 
 	var pool = new Pool(pgConfig);
@@ -14,14 +16,14 @@ module.exports.process = function (pgConfig, mssqlConfig, studentSchoolConfig) {
 		}
 
 		var request = new Request(studentSchoolConfig.sourceSql, () => {
-			console.timeEnd("tedious");
+			console.timeEnd(timeLabel);
 			console.log('closing connection');
 			connection.close();
 				});
 
-				request.on('done', () => {
-					pool.close();
-				});
+		request.on('done', () => {
+			pool.close();
+		});
 
 		request.on('row', (...args) => {
 			var values = [
@@ -46,10 +48,10 @@ module.exports.process = function (pgConfig, mssqlConfig, studentSchoolConfig) {
 					if (res.rowCount == 1) {
 						pool.query(studentSchoolConfig.updateSql, values).catch(err => console.error(err.stack));
 					}
-                })
+				})
 				.catch(err => console.error(err.stack));
 		});
-		console.time("tedious");
+		console.time(timeLabel);
 		connection.execSql(request);
 			});
 };
