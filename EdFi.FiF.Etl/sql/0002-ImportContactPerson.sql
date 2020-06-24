@@ -1,4 +1,4 @@
-SELECT
+SELECT DISTINCT
 	p.ParentUniqueId as UniqueKey,
 	p.ParentUSI as ContactPersonKey,
 	s.StudentUSI as StudentKey,

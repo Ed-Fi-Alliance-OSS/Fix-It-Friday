@@ -1,4 +1,4 @@
-SELECT
+SELECT DISTINCT
 	seoa.Id as StudentSchoolKey,
 	seoa.StudentUSI as StudentKey,
 	seoa.EducationOrganizationId as SchoolKey,

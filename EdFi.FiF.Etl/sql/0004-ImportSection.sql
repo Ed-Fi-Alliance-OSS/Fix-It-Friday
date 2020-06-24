@@ -1,4 +1,4 @@
-SELECT
+SELECT DISTINCT
     s.SectionIdentifier as SectionKey,
     s.SchoolId As SchoolKey,
     s.LocalCourseCode,
