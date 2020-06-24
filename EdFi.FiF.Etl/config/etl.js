@@ -24,12 +24,17 @@ var sectionSourceSQL = fs.readFileSync(
 var staffSourceSQL = fs.readFileSync(
 	path.join(__dirname, "./../sql/0005-ImportStaff.sql"),
 	"utf8"
-        );
+		);
 
 var staffSectionSourceSQL = fs.readFileSync(
-    path.join(__dirname, "./../sql/0006-ImportStaffSectionAssociation.sql"),
-    "utf8"
-        );
+	path.join(__dirname, "./../sql/0006-ImportStaffSectionAssociation.sql"),
+	"utf8"
+		);
+
+var studentSectionSourceSQL = fs.readFileSync(
+	path.join(__dirname, "./../sql/0007-ImportStudentSection.sql"),
+	"utf8"
+		);
 
 exports.studentSchoolConfig = {
 	recordType: "StudentSchool",
@@ -75,4 +80,12 @@ exports.staffSectionConfig = {
 	deleteSql: "DELETE FROM fif.staffsectionassociation",
 	insertSql: "INSERT INTO fif.staffsectionassociation (staffkey, sectionkey, begindate, enddate)  VALUES ($1, $2, $3, $4)",
 	sourceSql: staffSectionSourceSQL
+};
+
+exports.studentSectionConfig = {
+	recordType: "StudentSection",
+	selectSql: "SELECT 1 FROM fif.studentsection WHERE studentsectionkey=$1",
+    insertSql: "INSERT INTO fif.studentsection (studentsectionkey, studentschoolkey, studentkey, sectionkey, localcoursecode, subject, coursetitle, teachername, studentsectionstartdatekey, studentsectionenddatekey, schoolkey, schoolyear) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)",
+    updateSql: "UPDATE fif.studentsection SET studentschoolkey=$2, studentkey=$3, sectionkey=$4, localcoursecode=$5, subject=$6, coursetitle=$7, teachername=$8, studentsectionstartdatekey=$9, studentsectionenddatekey=$10, schoolkey=$11, schoolyear=$12 WHERE studentsectionkey=$1",
+	sourceSql: studentSectionSourceSQL
 };
