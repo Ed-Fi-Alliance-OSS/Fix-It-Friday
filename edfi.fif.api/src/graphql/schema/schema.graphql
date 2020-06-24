@@ -7,8 +7,8 @@ type Query{
   student(studentschoolkey: ID!): StudentSchool
   surveys: [Survey]
   survey: Survey
-  surveysummary(title: String): [SurveySummary]
-  surveysummarybysection(sectionkey: String!, title: String): [SurveySummaryBySection]
+  surveysummary(sectionkey: String!, title: String): [SurveySummary]
+  questions: [SurveySummaryQuestions]
 }
 type Section{
   sectionkey: String
@@ -70,19 +70,30 @@ type Survey {
   title: String
 }
 type SurveySummary {
-  surveykey: String
+  sectionkey: Int
+  surveykey: Int
   title: String
   studentsanswered: Int
   numberofquestions: Int
   totalstudents: Int
+  questions: [SurveySummaryQuestions]
 }
-type SurveySummaryBySection {
-  sectionkey: String
-  surveykey: String
+type SurveySummaryQuestions {
+  surveykey: Int
   title: String
-  studentsanswered: Int
-  numberofquestions: Int
-  totalstudents: Int
+  surveyquestionkey: Int
+  question: String
+  answers: [SurveySummaryAnsweres]
+}
+type SurveySummaryAnsweres {
+  sectionkey: Int
+  surveykey: Int
+  title: String
+  surveyquestionkey: Int
+  question: String
+  studentschoolkey: Int
+  studentname: String
+  answer: String
 }
 type ContactPerson{
   uniquekey: String
