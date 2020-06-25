@@ -33,6 +33,8 @@
     "apollo-gateway": "^0.0.1",
     "apollo-server": "^2.14.4",
     "apollo-server-fastify": "^2.14.4",
+    "class-transformer": "0.2.3",
+    "class-validator": "0.12.2",
     "eslint-teamcity": "^3.0.1",
     "graphql": "14.4.0",
     "graphql-tools": "^6.0.10",
