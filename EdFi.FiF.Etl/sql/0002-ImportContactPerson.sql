@@ -24,4 +24,4 @@ From edfi.Student s
 				LEFT JOIN edfi.Descriptor as spad on spa.RelationDescriptorId = spad.DescriptorId
 				LEFT JOIN edfi.ParentAddress pa ON p.ParentUSI = pa.ParentUSI
 				LEFT JOIN edfi.Descriptor d ON pa.StateAbbreviationDescriptorId = d.DescriptorId
-WHERE COALESCE(uniquekey, '') <> '';
+WHERE COALESCE(p.ParentUniqueId, '') <> '';
