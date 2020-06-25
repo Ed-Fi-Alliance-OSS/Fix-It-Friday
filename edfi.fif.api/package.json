@@ -40,7 +40,8 @@
     "rimraf": "^3.0.2",
     "rxjs": "^6.5.4",
     "type-graphql": "^1.0.0-rc.2",
-    "typeorm": "^0.2.25"
+    "typeorm": "^0.2.25",
+    "@apollo/gateway": "^0.16.9"
   },
   "devDependencies": {
     "@nestjs/cli": "^7.0.0",
@@ -79,7 +80,6 @@
     "testEnvironment": "node"
   },
   "peerDependencies": {
-    "@apollo/gateway": "^0.16.9",
     "apollo-server-core": "^2.15.0"
   }
 }
