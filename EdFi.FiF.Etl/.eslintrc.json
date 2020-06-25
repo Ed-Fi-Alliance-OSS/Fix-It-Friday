@@ -1,7 +1,8 @@
 {
-	"extends": ["airbnb"],
-	"plugins": ["prettier"],
-	"rules": {
-		"prettier/prettier": ["error"]
-	}
+    "extends": ["airbnb"],
+    "plugins": ["prettier"],
+    "rules": {
+      "no-console": "off",
+      "indent": ["error", 2]
+    }
 }
