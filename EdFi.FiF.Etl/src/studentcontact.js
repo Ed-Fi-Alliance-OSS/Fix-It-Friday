@@ -1,7 +1,7 @@
 var { Connection, Request } = require("tedious");
 var { Pool } = require("pg");
 
-module.exports.process = function (pgConfig, mssqlConfig, config) {
+const loadRecords = function (pgConfig, mssqlConfig, config) {
 	const timeLabel = `${config.recordType}-process`;
 
 	console.log(`Processing ${config.recordType} records`);
@@ -35,9 +35,24 @@ module.exports.process = function (pgConfig, mssqlConfig, config) {
 
 			pool
 				.query(config.insertSql, values)
-				.catch((err) => { /* console.error(`An error occurred trying to insert ${config.recordType}:\n${JSON.stringify(args)}\n${err.stack}`)*/});
+				.catch((err) => {
+                    console.error(`An error occurred trying to insert ${config.recordType}:\n${JSON.stringify(args)}\n${err.stack}`)
+                });
 		});
 		console.time(timeLabel);
 		connection.execSql(request);
 	});
 };
+
+const process = function (pgConfig, mssqlConfig, config) {
+    return new Promise((resolve, reject) => {
+        try {
+            loadRecords(pgConfig, mssqlConfig, config);
+            return resolve(`${config.recordType} done`);
+        } catch (error) {
+            return reject(error);
+        }
+    });
+};
+
+exports.process = process;
