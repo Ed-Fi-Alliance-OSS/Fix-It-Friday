@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "dotenv": "^8.2.0",
     "eslint": "^7.3.1",
     "etl": "^0.6.12",
     "fs": "^0.0.1-security",
