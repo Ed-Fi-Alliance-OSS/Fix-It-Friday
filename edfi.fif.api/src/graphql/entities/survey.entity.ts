@@ -7,5 +7,4 @@ export default class SurveyEntity {
 
   @Column({ type: 'varchar', nullable: false })
   title: string;
-
 }
