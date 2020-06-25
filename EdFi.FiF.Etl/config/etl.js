@@ -84,8 +84,7 @@ exports.staffSectionConfig = {
 
 exports.studentSectionConfig = {
 	recordType: "StudentSection",
-	selectSql: "SELECT 1 FROM fif.studentsection WHERE studentsectionkey=$1",
+	deleteSql: "DELETE FROM fif.studentsection",
     insertSql: "INSERT INTO fif.studentsection (studentsectionkey, studentschoolkey, studentkey, sectionkey, localcoursecode, subject, coursetitle, teachername, studentsectionstartdatekey, studentsectionenddatekey, schoolkey, schoolyear) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)",
-    updateSql: "UPDATE fif.studentsection SET studentschoolkey=$2, studentkey=$3, sectionkey=$4, localcoursecode=$5, subject=$6, coursetitle=$7, teachername=$8, studentsectionstartdatekey=$9, studentsectionenddatekey=$10, schoolkey=$11, schoolyear=$12 WHERE studentsectionkey=$1",
-	sourceSql: studentSectionSourceSQL
+    sourceSql: studentSectionSourceSQL
 };

@@ -15,50 +15,50 @@ const pg = config.pgConfig;
 const ms = config.mssqlConfig;
 
 const loadBaseEntities = function () {
-    return new Promise((resolve, reject) => {
-        try {
-            console.log('a');
-            (async () => {
-                studentSchool.process(pg, ms, etl.studentSchoolConfig)
-                .then(() => staff.process(pg, ms, etl.staffConfig))
-                .then(() => section.process(pg, ms, etl.sectionConfig))
-                .then(() => contactPerson.process(pg, ms, etl.contactPersonConfig))
-                .then(() => resolve());
-            })();
-            console.log('b');
-        } catch (error) {
-            reject(error);
-        }
-    });
+	return new Promise((resolve, reject) => {
+		try {
+			(async () => {
+                console.log('loading entities');
+                await contactPerson.process(pg, ms, etl.contactPersonConfig);
+                await studentSchool.process(pg, ms, etl.studentSchoolConfig);
+				await staff.process(pg, ms, etl.staffConfig);
+				await section.process(pg, ms, etl.sectionConfig);
+                console.log('finished loading entities');
+                resolve();
+			})();
+		} catch (error) {
+			reject(error);
+		}
+	});
 }
 
 const loadAssociations = function () {
-    return new Promise((resolve, reject) => {
-        try {
-            console.log('a');
-            (async () => {
-                staffSection.process(pg, ms, etl.staffSectionConfig)
-                //.then(() => studentSection.process(pg, ms, etl.studentSectionConfig))
-                //.then(() => studentContact.process(pg, ms, etl.studentContactConfig))
-                .then(() => resolve());
-            })();
-            console.log('b');
-        } catch (error) {
-            reject(error);
-        }
-    });
+	return new Promise((resolve, reject) => {
+		try {
+			(async () => {
+                console.log('loading associations');
+                await staffSection.process(pg, ms, etl.staffSectionConfig);
+				await studentSection.process(pg, ms, etl.studentSectionConfig);
+                await studentContact.process(pg, ms, etl.studentContactConfig);
+                console.log('finished loading associations');
+				resolve();
+			})();
+		} catch (error) {
+			reject(error);
+		}
+	});
 }
 
 const run = function(){
-    return new Promise(resolve => {
-        (async () => {
-            await Promise.resolve()
-                .then(loadBaseEntities)
-                .then(() => { console.log('c');})
-                //.then(loadAssociations)
-                .then(() => { console.log('d');});
-        })();
-    });
+	return new Promise(resolve => {
+		(async () => {
+            console.log('load starting');
+			await loadBaseEntities();
+            await loadAssociations();
+            console.log('finished loading');
+            resolve();
+		})();
+	});
 };
 
-run().then(() => { console.log('e');});
+run().then(process.exit);
