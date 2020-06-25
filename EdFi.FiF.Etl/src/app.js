@@ -1,3 +1,6 @@
+var dotnet = require('dotenv');
+dotnet.config();
+
 var studentSchool = require('./studentschool');
 var contactPerson = require('./contactPerson');
 var studentContact = require('./studentContact');
