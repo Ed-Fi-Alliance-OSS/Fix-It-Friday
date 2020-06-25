@@ -18,11 +18,11 @@ SELECT
   ) AS numberofquestions,
   (
     SELECT
-      COUNT(fif.studentsection.studentschoolkey)
+      COUNT(studsection.studentschoolkey)
     FROM
-      fif.studentsection
-    GROUP BY
-      fif.studentsection.sectionkey
+      fif.studentsection studsection
+    WHERE 
+      studsection.sectionkey = fif.studentsection.sectionkey
   ) AS totalstudents
 FROM
   fif.survey
