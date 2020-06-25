@@ -79,6 +79,7 @@
     "testEnvironment": "node"
   },
   "peerDependencies": {
+    "@apollo/gateway": "^0.16.9",
     "apollo-server-core": "^2.15.0"
   }
 }
