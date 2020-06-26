@@ -1,40 +1,19 @@
 const fs = require('fs');
 const path = require('path');
 
-const studentSchoolSourceSQL = fs.readFileSync(
-  path.join(__dirname, './../sql/0001-ImportStudentSchool.sql'),
-  'utf8',
-);
+const studentSchoolSourceSQL = fs.readFileSync(path.join(__dirname, './../sql/0001-ImportStudentSchool.sql'), 'utf8');
 
-const contactPersonSourceSQL = fs.readFileSync(
-  path.join(__dirname, './../sql/0002-ImportContactPerson.sql'),
-  'utf8',
-);
+const contactPersonSourceSQL = fs.readFileSync(path.join(__dirname, './../sql/0002-ImportContactPerson.sql'), 'utf8');
 
-const studentContactSourceSQL = fs.readFileSync(
-  path.join(__dirname, './../sql/0003-ImportStudentContact.sql'),
-  'utf8',
-);
+const studentContactSourceSQL = fs.readFileSync(path.join(__dirname, './../sql/0003-ImportStudentContact.sql'), 'utf8');
 
-const sectionSourceSQL = fs.readFileSync(
-  path.join(__dirname, './../sql/0004-ImportSection.sql'),
-  'utf8',
-);
+const sectionSourceSQL = fs.readFileSync(path.join(__dirname, './../sql/0004-ImportSection.sql'), 'utf8');
 
-const staffSourceSQL = fs.readFileSync(
-  path.join(__dirname, './../sql/0005-ImportStaff.sql'),
-  'utf8',
-);
+const staffSourceSQL = fs.readFileSync(path.join(__dirname, './../sql/0005-ImportStaff.sql'), 'utf8');
 
-const staffSectionSourceSQL = fs.readFileSync(
-  path.join(__dirname, './../sql/0006-ImportStaffSectionAssociation.sql'),
-  'utf8',
-);
+const staffSectionSourceSQL = fs.readFileSync(path.join(__dirname, './../sql/0006-ImportStaffSectionAssociation.sql'), 'utf8');
 
-const studentSectionSourceSQL = fs.readFileSync(
-  path.join(__dirname, './../sql/0007-ImportStudentSection.sql'),
-  'utf8',
-);
+const studentSectionSourceSQL = fs.readFileSync(path.join(__dirname, './../sql/0007-ImportStudentSection.sql'), 'utf8');
 
 exports.studentSchoolConfig = {
   recordType: 'StudentSchool',
@@ -44,22 +23,20 @@ exports.studentSchoolConfig = {
   sourceSql: studentSchoolSourceSQL,
   keyIndex: 0,
   isEntityMap: false,
-  valueFunc: (row) => {
-    return  [
-      row.studentschoolkey,
-      row.studentkey,
-      row.schoolkey,
-      row.schoolyear,
-      row.studentfirstname,
-      row.studentmiddlename,
-      row.studentlastname,
-      row.enrollmentdatekey,
-      row.gradelevel,
-      row.limitedenglishproficiency,
-      (row.ishispanic === 'true') ? 1 : 0,
-      row.sex
-    ];
-  }
+  valueFunc: (row) => [
+    row.studentschoolkey,
+    row.studentkey,
+    row.schoolkey,
+    row.schoolyear,
+    row.studentfirstname,
+    row.studentmiddlename,
+    row.studentlastname,
+    row.enrollmentdatekey,
+    row.gradelevel,
+    row.limitedenglishproficiency,
+    (row.ishispanic === 'true') ? 1 : 0,
+    row.sex,
+  ],
 };
 
 exports.contactPersonConfig = {
@@ -70,26 +47,24 @@ exports.contactPersonConfig = {
   sourceSql: contactPersonSourceSQL,
   keyIndex: 0,
   isEntityMap: false,
-  valueFunc: (row) => {
-    return  [
-      row.uniquekey,
-      row.contactpersonkey,
-      row.studentkey,
-      row.contactfirstname,
-      row.contactlastname,
-      row.relationshiptostudent,
-      row.streetnumbername,
-      row.apartmentroomsuitenumber,
-      row.state,
-      row.postalcode,
-      row.phonenumber,
-      row.primaryemailaddress,
-      (row.isprimarycontact === 'true') ? 1 : 0,
-      row.preferredcontactmethod,
-      row.besttimetocontact,
-      row.contactnotes
-    ];
-  }
+  valueFunc: (row) => [
+    row.uniquekey,
+    row.contactpersonkey,
+    row.studentkey,
+    row.contactfirstname,
+    row.contactlastname,
+    row.relationshiptostudent,
+    row.streetnumbername,
+    row.apartmentroomsuitenumber,
+    row.state,
+    row.postalcode,
+    row.phonenumber,
+    row.primaryemailaddress,
+    (row.isprimarycontact === 'true') ? 1 : 0,
+    row.preferredcontactmethod,
+    row.besttimetocontact,
+    row.contactnotes,
+  ],
 };
 
 exports.studentContactConfig = {
@@ -99,12 +74,10 @@ exports.studentContactConfig = {
   sourceSql: studentContactSourceSQL,
   keyIndex: 0,
   isEntityMap: true,
-  valueFunc: (row) => {
-    return  [
-      row.contactkey,
-      row.studentschoolkey
-    ];
-  }
+  valueFunc: (row) => [
+    row.contactkey,
+    row.studentschoolkey,
+  ],
 };
 
 exports.sectionConfig = {
@@ -115,16 +88,14 @@ exports.sectionConfig = {
   sourceSql: sectionSourceSQL,
   keyIndex: 0,
   isEntityMap: false,
-  valueFunc: (row) => {
-    return  [
-      row.sectionkey,
-      row.schoolkey,
-      row.localcoursecode,
-      row.sessionname,
-      row.sectionidentifier,
-      row.schoolyear
-    ];
-  }
+  valueFunc: (row) => [
+    row.sectionkey,
+    row.schoolkey,
+    row.localcoursecode,
+    row.sessionname,
+    row.sectionidentifier,
+    row.schoolyear,
+  ],
 };
 
 exports.staffConfig = {
@@ -135,16 +106,14 @@ exports.staffConfig = {
   sourceSql: staffSourceSQL,
   keyIndex: 0,
   isEntityMap: false,
-  valueFunc: (row) => {
-    return  [
-      row.staffkey,
-      row.personaltitleprefix,
-      row.firstname,
-      row.middlename,
-      row.lastsurname,
-      row.staffuniqueid
-    ];
-  }
+  valueFunc: (row) => [
+    row.staffkey,
+    row.personaltitleprefix,
+    row.firstname,
+    row.middlename,
+    row.lastsurname,
+    row.staffuniqueid,
+  ],
 };
 
 exports.staffSectionConfig = {
@@ -154,14 +123,12 @@ exports.staffSectionConfig = {
   sourceSql: staffSectionSourceSQL,
   keyIndex: 0,
   isEntityMap: true,
-  valueFunc: (row) => {
-    return  [
-      row.staffkey,
-      row.sectionkey,
-      row.begindate,
-      row.enddate
-    ];
-  }
+  valueFunc: (row) => [
+    row.staffkey,
+    row.sectionkey,
+    row.begindate,
+    row.enddate,
+  ],
 };
 
 exports.studentSectionConfig = {
@@ -171,20 +138,18 @@ exports.studentSectionConfig = {
   sourceSql: studentSectionSourceSQL,
   keyIndex: 0,
   isEntityMap: true,
-  valueFunc: (row) => {
-    return  [
-      row.studentsectionkey,
-      row.studentschoolkey,
-      row.studentkey,
-      row.sectionkey,
-      row.localcoursecode,
-      row.subject,
-      row.coursetitle,
-      row.teachername,
-      row.studentsectionstartdatekey,
-      row.studentsectionenddatekey,
-      row.schoolkey,
-      row.schoolyear
-    ];
-  }
+  valueFunc: (row) => [
+    row.studentsectionkey,
+    row.studentschoolkey,
+    row.studentkey,
+    row.sectionkey,
+    row.localcoursecode,
+    row.subject,
+    row.coursetitle,
+    row.teachername,
+    row.studentsectionstartdatekey,
+    row.studentsectionenddatekey,
+    row.schoolkey,
+    row.schoolyear,
+  ],
 };

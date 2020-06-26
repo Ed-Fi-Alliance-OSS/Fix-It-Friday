@@ -32,8 +32,8 @@ const mssqlConfig = {
   requestTimeout: 0,
   pool: {
     idleTimeoutMillis: 30000,
-    max: 100
-  }
+    max: 100,
+  },
 };
 
 exports.pgConfig = pgConfig;

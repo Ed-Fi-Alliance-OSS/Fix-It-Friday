@@ -1,12 +1,12 @@
 {
     "extends": ["airbnb"],
     "parserOptions": {
-      "ecmaVersion": 2015,
+        "ecmaVersion": 2015
     },
     "plugins": ["prettier"],
     "rules": {
-      "no-console": "off",
-      "no-cond-assign": "off",
-      "indent": ["error", 2]
+        "no-console": "off",
+        "no-cond-assign": "off",
+        "indent": ["error", 2]
     }
 }
