@@ -28,6 +28,12 @@ const mssqlConfig = {
     database: process.env.ODS_DBNAME,
     encrypt: process.env.ODS_ENCRYPT === 'true',
   },
+  connectionTimeout: 30000,
+  requestTimeout: 0,
+  pool: {
+    idleTimeoutMillis: 30000,
+    max: 100
+  }
 };
 
 exports.pgConfig = pgConfig;

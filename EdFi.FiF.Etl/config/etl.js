@@ -95,7 +95,7 @@ exports.contactPersonConfig = {
 exports.studentContactConfig = {
   recordType: 'StudentContact',
   deleteSql: 'DELETE FROM fif.studentcontact',
-  insertSql: 'INSERT INTO fif.studentcontact (contactkey, studentschoolkey) VALUES ($1::text, $2::text)',
+  insertSql: 'INSERT INTO fif.studentcontact (contactkey, studentschoolkey) SELECT $1::text, $2::text WHERE EXISTS(SELECT 1 FROM fif.contactperson WHERE uniquekey = $1) AND  EXISTS(SELECT 1 FROM fif.studentschool WHERE studentschoolkey = $2)',
   sourceSql: studentContactSourceSQL,
   keyIndex: 0,
   isEntityMap: true,
@@ -150,7 +150,7 @@ exports.staffConfig = {
 exports.staffSectionConfig = {
   recordType: 'StaffSection',
   deleteSql: 'DELETE FROM fif.staffsectionassociation',
-  insertSql: 'INSERT INTO fif.staffsectionassociation (staffkey, sectionkey, begindate, enddate)  VALUES ($1, $2, $3, $4)',
+  insertSql: 'INSERT INTO fif.staffsectionassociation (staffkey, sectionkey, begindate, enddate)  VALUES ($1, $2::text, $3, $4) ON CONFLICT (staffkey, sectionkey) DO NOTHING',
   sourceSql: staffSectionSourceSQL,
   keyIndex: 0,
   isEntityMap: true,
@@ -167,7 +167,7 @@ exports.staffSectionConfig = {
 exports.studentSectionConfig = {
   recordType: 'StudentSection',
   deleteSql: 'DELETE FROM fif.studentsection',
-  insertSql: 'INSERT INTO fif.studentsection (studentsectionkey, studentschoolkey, studentkey, sectionkey, localcoursecode, subject, coursetitle, teachername, studentsectionstartdatekey, studentsectionenddatekey, schoolkey, schoolyear) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)',
+  insertSql: 'INSERT INTO fif.studentsection (studentsectionkey, studentschoolkey, studentkey, sectionkey, localcoursecode, subject, coursetitle, teachername, studentsectionstartdatekey, studentsectionenddatekey, schoolkey, schoolyear) VALUES ($1::text, $2::text, $3::text, $4::text, $5::text, $6::text, $7::text, $8::text, $9::text, $10::text, $11::text, $12::text) ON CONFLICT (studentsectionkey) DO NOTHING',
   sourceSql: studentSectionSourceSQL,
   keyIndex: 0,
   isEntityMap: true,
