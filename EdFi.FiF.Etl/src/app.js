@@ -56,4 +56,4 @@ const run = () => new Promise((resolve) => {
   })();
 });
 
-run().then(process.exit);
+run();
