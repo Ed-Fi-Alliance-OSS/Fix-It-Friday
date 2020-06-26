@@ -98,7 +98,7 @@ exports.studentContactConfig = {
   insertSql: 'INSERT INTO fif.studentcontact (contactkey, studentschoolkey) VALUES ($1::text, $2::text)',
   sourceSql: studentContactSourceSQL,
   keyIndex: 0,
-  isEntityMap: false,
+  isEntityMap: true,
   valueFunc: (row) => {
     return  [
       row.contactkey,
