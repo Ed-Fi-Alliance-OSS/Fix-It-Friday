@@ -1,21 +1,14 @@
 const csv = require('csv-parser');
 const fs = require('fs');
-const { isMainThread } = require('worker_threads');
+var config = require("./config.json");
 
 const SURVEY_DATE_FIELD = "Timestamp";
 const STUDENT_SCHOOL_KEY_FIELD = "StudentUSI";
-const METADATA_FIELDS = [SURVEY_DATE_FIELD, STUDENT_SCHOOL_KEY_FIELD, "FirstName", "LastSurname", "ElectronicMailAddress"];
+const METADATA_FIELDS = [SURVEY_DATE_FIELD, STUDENT_SCHOOL_KEY_FIELD, "FirstName", "LastSurname", "ElectronicMailAddress", "GradeLevel", "StudentsELATeacher"];
 
 async function getDB() {
-    var pgConfig = {
-        userName: "postgres",
-        password: "dockerpwd",
-        host: "172.17.0.1",
-        port: 5432,
-        database: "FixItFriday",
-    }
+    var pgConfig = config.conection;
     var connectionString = `postgres://${pgConfig.userName}:${pgConfig.password}@${pgConfig.host}:${pgConfig.port}/${pgConfig.database}`;
-
 
     const { Client } = require('pg');
     const client = new Client({ connectionString: connectionString });
@@ -37,9 +30,6 @@ async function Extract(fileName) {
             });
     });
 
-}
-
-async function Transform(csvArray) {
 }
 
 async function Load(surveytitle, questions, answers, db) {
@@ -88,17 +78,22 @@ async function Load(surveytitle, questions, answers, db) {
                 if (result.rows.length > 0) { return result.rows[0] }
                 return await db
                     .query("INSERT INTO fif.studentsurvey (surveykey, studentschoolkey, \"date\") VALUES($1, $2, $3) RETURNING *;", [surveykey, studentschoolkey, date])
-                    .then(result => result.rows[0]);
+                    .then(result => result.rows[0])
+                    .catch(err => { console.error("ERROR: " + err.detail); return null; });
             });
     }
 
-    async function saveAnswers(surveykey, questions, studentSurveyAnswers, db) {
+    async function saveAnswers(surveykey, questions, studentSurveyAnswers, db, surveyProfile) {
         let questionKeyMap = {};
         questions.forEach(element => {
             questionKeyMap[element.question] = element.surveyquestionkey;
         });
         for (currentStudentAnswers in studentSurveyAnswers) {
             let studentsurvey = await getOrSaveStudentSurvey(surveykey, answers[currentStudentAnswers], db);
+            if (!studentsurvey) {
+                surveyProfile.answers.rejected++;
+                continue;
+            }
             for (q in studentSurveyAnswers[currentStudentAnswers]) {
                 if (!questionKeyMap[q]) { continue; }
                 db
@@ -106,40 +101,46 @@ async function Load(surveytitle, questions, answers, db) {
 INSERT INTO fif.studentsurveyanswer (studentsurveykey, surveyquestionkey, answer)
 SELECT $1, $2, $3
 WHERE NOT EXISTS (SELECT FROM fif.studentsurveyanswer WHERE studentsurveykey = $1 AND surveyquestionkey = $2)
-`, [studentsurvey.studentsurveykey, questionKeyMap[q], studentSurveyAnswers[currentStudentAnswers][q]]);
-                ;
+`, [studentsurvey.studentsurveykey, questionKeyMap[q], studentSurveyAnswers[currentStudentAnswers][q]])
+                    .then(result => {
+                        if (result.rowCout > 0) { surveyProfile.answers.load++; }
+                        else { surveyProfile.answers.alreadyLoaded++; }
+                    });
+
+
             }
         }
         await db.query("select 1");
     }
 
     let survey = await getOrSaveSurvey(surveytitle, db);
+    let surveyProfile = {
+        survey,
+        answers: {
+            load: 0,
+            rejected: 0,
+            alreadyLoaded: 0
+        }
+    }
     survey.questions = await getOrSaveQuestions(questions, survey.surveykey, db);
-    await saveAnswers(survey.surveykey, survey.questions, answers, db);
+    await saveAnswers(survey.surveykey, survey.questions, answers, db, surveyProfile);
     await db.end();
-    console.log({ surveykey: survey.surveykey, title:survey.title, questionCount: survey.questions.length, answers: answers.length } );
+    return surveyProfile;
 }
 
 async function ETLRunner(surveytitle, filename) {
     let data = await Extract(filename);
     let db = await getDB();
-    await Load(surveytitle, data.questions, data.answers, db);
+    let result = await Load(surveytitle, data.questions, data.answers, db);
+    console.log("result:", {
+        survey: {
+            surveykey:  result.survey.surveykey,
+            title: result.survey.title,
+            questions: result.survey.questions.length,
+        },
+         answers: result.answers
+    });
 }
-
-// async function main() {
-//     console.time("Start");
-//     console.time("Survey 1");
-//     await ETLRunner("Contact", 1, "./sampleData/surveys/ContactSurvey.csv");
-//     console.timeEnd("Survey 1");
-
-//     console.time("Survey 2");
-//     await ETLRunner("Internet Access", 2, "./sampleData/surveys/InternetAccessSurvey.csv");
-//     console.timeEnd("Survey 2");
-
-//     console.timeEnd("Start");
-// }
-
-// main();
 
 function getArgs(argv) {
     var args = {
@@ -155,7 +156,7 @@ function getArgs(argv) {
     }
 
     if (argv.length > 4 || argv.length < 4) {
-        args.help = !args.debug && argv.length < 4 ;
+        args.help = !args.debug && argv.length < 4;
         return args;
     }
 
@@ -169,9 +170,9 @@ function getArgs(argv) {
 async function main() {
     let args = getArgs(process.argv);
 
-    if (args.help) { 
+    if (args.help) {
         var path = require("path");
-        console.log(`Usage: node ${path.basename(process.argv[1])} [-h | --help] | filename surveyTitle`) 
+        console.log(`Usage: node ${path.basename(process.argv[1])} [-h | --help] | filename surveyTitle`)
         return;
     }
 
