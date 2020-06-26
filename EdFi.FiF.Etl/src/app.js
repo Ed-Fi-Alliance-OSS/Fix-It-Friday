@@ -2,15 +2,9 @@ const dotnet = require('dotenv');
 
 dotnet.config();
 
-const studentSchool = require('./studentschool');
-const contactPerson = require('./contactperson');
-const studentContact = require('./studentcontact');
-const staff = require('./staff');
-const section = require('./section.js');
-const staffSection = require('./staffsectionassociation');
-const studentSection = require('./studentsection');
 const config = require('../config/dbs');
 const etl = require('../config/etl');
+const loadMsSqlData = require('./loadMsSqlData');
 
 const pg = config.pgConfig;
 const ms = config.mssqlConfig;
@@ -19,30 +13,32 @@ const loadBaseEntities = () => new Promise((resolve, reject) => {
   try {
     (async () => {
       console.log('loading entities');
-      await contactPerson.process(pg, ms, etl.contactPersonConfig);
-      await studentSchool.process(pg, ms, etl.studentSchoolConfig);
-      await staff.process(pg, ms, etl.staffConfig);
-      await section.process(pg, ms, etl.sectionConfig);
+      await loadMsSqlData.loadMsSqlData(pg, ms, etl.studentSchoolConfig);
+      await loadMsSqlData.loadMsSqlData(pg, ms, etl.contactPersonConfig);
+      await loadMsSqlData.loadMsSqlData(pg, ms, etl.staffConfig);
+      await loadMsSqlData.loadMsSqlData(pg, ms, etl.sectionConfig);
       console.log('finished loading entities');
-      resolve();
+      resolve(true);
     })();
   } catch (error) {
     reject(error);
   }
 });
 
-const loadAssociations = () => new Promise((resolve, reject) => {
-  try {
-    (async () => {
-      console.log('loading associations');
-      await staffSection.process(pg, ms, etl.staffSectionConfig);
-      await studentSection.process(pg, ms, etl.studentSectionConfig);
-      await studentContact.process(pg, ms, etl.studentContactConfig);
-      console.log('finished loading associations');
-      resolve();
-    })();
-  } catch (error) {
-    reject(error);
+const loadAssociations = (ready) => new Promise((resolve, reject) => {
+  while (ready) {
+    console.log('loading associations');
+    try {
+      (async () => {
+        await loadMsSqlData.loadMsSqlData(pg, ms, etl.staffSectionConfig);
+        await loadMsSqlData.loadMsSqlData(pg, ms, etl.studentSectionConfig);
+        await loadMsSqlData.loadMsSqlData(pg, ms, etl.studentContactConfig);
+        resolve(true);
+      })();
+    } catch (error) {
+      reject(error);
+    }
+    console.log('finished associations');
   }
 });
 
@@ -51,9 +47,9 @@ const run = () => new Promise((resolve) => {
     console.log('load starting');
     await loadBaseEntities();
     await loadAssociations();
-    console.log('finished loading');
     resolve();
   })();
 });
 
 run();
+console.log('finished loading');

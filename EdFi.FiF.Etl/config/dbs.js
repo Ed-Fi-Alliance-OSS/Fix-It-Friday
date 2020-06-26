@@ -4,12 +4,16 @@ const pgConfig = {
   password: process.env.FIF_PASSWORD || 'p@ssw0rd',
   database: process.env.FIF_DBNAME || 'FixItFriday',
   max: parseInt(process.env.FIF_MAX || 20, 10),
-  idleTimeoutMillis: parseInt(process.env.FIF_IDLETIMEOUTMILLIS || 30000, 10),
+  idleTimeoutMillis: parseInt(process.env.FIF_IDLETIMEOUTMILLIS || 5000, 10),
   connectionTimeoutMillis: parseInt(process.env.FIF_CONNECTIONTIMEOUTMILLIS || 2000, 10),
 };
 
 const mssqlConfig = {
-  server: process.env.ODS_SERVER || '127.0.0.1',
+  server: process.env.ODS_SERVER,
+  database: process.env.ODS_DBNAME,
+  user: process.env.ODS_USER,
+  password: process.env.ODS_PASSWORD,
+  port: parseInt(process.env.ODS_PORT, 10),
   authentication: {
     type: 'default',
     options: {
@@ -18,11 +22,11 @@ const mssqlConfig = {
     },
   },
   options: {
-    port: parseInt(process.env.ODS_PORT, 10) || 49412,
-    trustServerCertificate: process.env.ODS_TRUSTSERVERCERTIFICATE === 'true' || false,
-    enableArithAbort: process.env.ODS_ENABLEARITHABORT === 'true' || true,
-    database: process.env.ODS_DBNAME || 'ods-with-amt',
-    encrypt: process.env.ODS_ENCRYPT === 'true' || false,
+    port: parseInt(process.env.ODS_PORT, 10),
+    trustServerCertificate: process.env.ODS_TRUSTSERVERCERTIFICATE === 'true',
+    enableArithAbort: process.env.ODS_ENABLEARITHABORT === 'true',
+    database: process.env.ODS_DBNAME,
+    encrypt: process.env.ODS_ENCRYPT === 'true',
   },
 };
 
