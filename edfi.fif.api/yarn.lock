@@ -3161,6 +3161,11 @@ cipher-base@^1.0.0, cipher-base@^1.0.1, cipher-base@^1.0.3:
     inherits "^2.0.1"
     safe-buffer "^5.0.1"
 
+class-transformer-safe@^0.2.8:
+  version "0.2.8"
+  resolved "https://registry.yarnpkg.com/class-transformer-safe/-/class-transformer-safe-0.2.8.tgz#4523e6154695b7708a68e7bc3e059e02453a5022"
+  integrity sha512-ofi6H6nW6NciDw1LvgqPi2bisTv9+zM7e6rviuB4+gboF+43OLx4jqHKlJGA/0Q9nDBfDG/hOuNQIeGTcnR4bg==
+
 class-transformer@0.2.3:
   version "0.2.3"
   resolved "https://registry.yarnpkg.com/class-transformer/-/class-transformer-0.2.3.tgz#598c92ca71dcca73f91ccb875d74a3847ccfa32d"
