@@ -1,7 +1,7 @@
 SELECT DISTINCT
-    ssa.StaffUSI as StaffKey,
-    ssa.SectionIdentifier as SectionKey,
-    ssa.BeginDate as BeginDate,
-    ssa.EndDate as EndDate
+    ssa.staffusi as staffkey,
+    ssa.sectionidentifier as sectionkey,
+    ssa.begindate as begindate,
+    ssa.enddate as enddate
 FROM edfi.StaffSectionAssociation ssa
 

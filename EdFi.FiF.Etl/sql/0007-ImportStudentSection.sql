@@ -1,16 +1,16 @@
 SELECT DISTINCT
-    ssa.Id as StudentSectionKey,
-    ssa.SchoolId as StudentSchoolKey,
-    ssa.StudentUSI as StudentKey,
-    ssa.SectionIdentifier as SectionKey,
-    ssa.LocalCourseCode as LocalCourseCode,
-    cd.CodeValue as 'Subject',
-    c.CourseTitle as CourseTitle,
-    'TODO' as TeacherName,
-    ssa.BeginDate as StudentSectionStartDateKey,
-    ssa.EndDate as StudentSectionEndDateKey,
-    sec.SchoolId as SchoolKey,
-    ssa.SchoolYear as SchoolYear
+    ssa.id as studentsectionkey,
+    ssa.schoolid as studentschoolkey,
+    ssa.studentusi as studentkey,
+    ssa.sectionidentifier as sectionkey,
+    ssa.localcoursecode as localcoursecode,
+    cd.codevalue as 'subject',
+    c.coursetitle as coursetitle,
+    'todo' as teachername,
+    ssa.begindate as studentsectionstartdatekey,
+    ssa.enddate as studentsectionenddatekey,
+    sec.schoolid as schoolkey,
+    ssa.schoolyear as schoolyear
 FROM edfi.StudentSectionAssociation ssa
     INNER JOIN edfi.Section sec ON ssa.SectionIdentifier = sec.SectionIdentifier
     INNER JOIN edfi.StaffSectionAssociation stsa on sec.SectionIdentifier = stsa.SectionIdentifier

@@ -1,6 +1,6 @@
 SELECT DISTINCT
-    p.ParentUniqueId as ContactPersonKey,
-    seoa.Id as StudentKey
+    p.parentuniqueid as contactpersonkey,
+    seoa.id as studentkey
 From edfi.Student s
 	-- Demogs reported at the district level
 	INNER JOIN edfi.StudentEducationOrganizationAssociation seoa on s.StudentUSI = seoa.StudentUSI

@@ -1,20 +1,20 @@
 SELECT DISTINCT
-	p.ParentUniqueId as UniqueKey,
-	p.ParentUSI as ContactPersonKey,
-	s.StudentUSI as StudentKey,
-	p.FirstName as ContactFirstName,
-	p.LastSurname as ContactLastName,
-	spad.CodeValue as RelationshipToStudent,
-	pa.StreetNumberName as StreetNumberName,
-	pa.ApartmentRoomSuiteNumber as ApartmentRoomSuiteNumber,
-	d.CodeValue as 'State',
-	pa.PostalCode as PostalCode,
-	pt.TelephoneNumber as PhoneNumber,
-	pe.ElectronicMailAddress as PrimaryEmailAddress,
-	spa.PrimaryContactStatus as IsPrimaryContact,
-	NULL as PreferredContactMethod,
-	NULL as BestTimeToContact,
-	NULL As ContactNotes
+	p.parentuniqueid as uniquekey,
+	p.parentusi as contactpersonkey,
+	s.studentusi as studentkey,
+	p.firstname as contactfirstname,
+	p.lastsurname as contactlastname,
+	spad.codevalue as relationshiptostudent,
+	pa.streetnumbername as streetnumbername,
+	pa.apartmentroomsuitenumber as apartmentroomsuitenumber,
+	d.codevalue as 'state',
+	pa.postalcode as postalcode,
+	pt.telephonenumber as phonenumber,
+	pe.electronicmailaddress as primaryemailaddress,
+	spa.primarycontactstatus as isprimarycontact,
+	null as preferredcontactmethod,
+	null as besttimetocontact,
+	null as contactnotes
 From edfi.Student s
 			-- Contact Info
 			LEFT JOIN edfi.StudentParentAssociation spa ON s.StudentUSI = spa.StudentUSI and PrimaryContactStatus = 1

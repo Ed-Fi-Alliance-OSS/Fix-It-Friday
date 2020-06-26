@@ -1,8 +1,8 @@
 SELECT DISTINCT
-    s.SectionIdentifier as SectionKey,
-    s.SchoolId As SchoolKey,
-    s.LocalCourseCode,
-    s.SessionName,
-    s.SectionIdentifier,
-    s.SchoolYear
+    s.sectionidentifier as sectionkey,
+    s.schoolid as schoolkey,
+    s.localcoursecode,
+    s.sessionname,
+    s.sectionidentifier,
+    s.schoolyear
 FROM edfi.Section s

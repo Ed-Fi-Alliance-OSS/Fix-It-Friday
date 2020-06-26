@@ -1,8 +1,8 @@
 SELECT DISTINCT
-    s.StaffUSI as StaffKey,
-    s.PersonalTitlePrefix as PersonalTitlePrefix,
-    s.FirstName as FirstName,
-    s.MiddleName as MiddleName,
-    s.LastSurname as LastSurname,
-    s.StaffUniqueId as StaffUniqueId
+    s.staffusi as staffkey,
+    s.personaltitleprefix as personaltitleprefix,
+    s.firstname as firstname,
+    s.middlename as middlename,
+    s.lastsurname as lastsurname,
+    s.staffuniqueid as staffuniqueid
 FROM edfi.Staff s
