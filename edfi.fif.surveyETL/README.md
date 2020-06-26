@@ -16,12 +16,13 @@ We recommend that the following prerequisites are installed on the machine that 
 That is it =)
 
 
-## Setup Instructions for Development
+## Setup Instructions
 
 1. Download the repository
-2. Setup database using edfi.fif.database if needed (Edit its database.json config file and run yarn migrate)
-3. Edit config.json with the correct Postgres server data
-4. For using the sample data:
+2. Setup database using edfi.fif.database if needed (Edit its database.json config file and run `yarn migrate`)
+3. Install dependencies with `npm install`
+4. Edit config.json with the correct Postgres server data
+5. For using the sample data:
     1. use sampleData/InsertSampleStudentData.sql to insert fif.studentschool
     2. sampleData/surveys/* are example csv's to import that have studentkeys references to sampleData/InsertSampleStudentData.sql
 
