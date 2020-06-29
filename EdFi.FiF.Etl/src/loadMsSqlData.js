@@ -7,7 +7,7 @@ const removeMapRecords = async (rowConfig, pgConfig) => {
   }
 
   const pool = new Pool(pgConfig);
-  let pgClient = await pool.connect();
+  const pgClient = await pool.connect();
 
   try {
     await pgClient.query('BEGIN');
@@ -46,11 +46,12 @@ const processMappedEntity = async (values, pgClient, rowConfig) => {
 
 const processRowArray = async (rows, request, rowConfig, pgConfig) => {
   const pool = new Pool(pgConfig);
-  let pgClient = await pool.connect();
+  const pgClient = await pool.connect();
 
   try {
     await pgClient.query('BEGIN');
     let row;
+    /* eslint-disable no-await-in-loop */
     while ((row = rows.pop())) {
       const values = rowConfig.valueFunc(row);
 
@@ -72,51 +73,43 @@ const processRowArray = async (rows, request, rowConfig, pgConfig) => {
 };
 
 const processRecords = async (config, rowConfig, pgConfig) => {
-  try {
-    const rowsToProcess = [];
-    await sql.connect(config);
-    const request = new sql.Request();
-    request.stream = true;
-    request.query(rowConfig.sourceSql);
+  const rowsToProcess = [];
+  await sql.connect(config);
+  const request = new sql.Request();
+  request.stream = true;
+  request.query(rowConfig.sourceSql);
 
-    request.on('row', (values) => {
-      rowsToProcess.push(values);
-      if (rowsToProcess.length >= 50) {
-        request.pause();
-        (async function () {
-          await processRowArray(rowsToProcess, request, rowConfig, pgConfig);
-        })();
-      }
-    });
-
-    request.on('done', () => {
-      (async function () {
+  request.on('row', (values) => {
+    rowsToProcess.push(values);
+    if (rowsToProcess.length >= 50) {
+      request.pause();
+      (async () => {
         await processRowArray(rowsToProcess, request, rowConfig, pgConfig);
-        sql.close();
       })();
-    });
+    }
+  });
 
-    request.on('error', (e) => {
-      console.error(`[${rowConfig.recordType}] request.error:\n${e.stack}`);
-    });
-  } catch (error) {
-    throw error;
-  }
+  request.on('done', () => {
+    (async () => {
+      await processRowArray(rowsToProcess, request, rowConfig, pgConfig);
+      sql.close();
+    })();
+  });
+
+  request.on('error', (e) => {
+    console.error(`[${rowConfig.recordType}] request.error:\n${e.stack}`);
+  });
 };
 
 sql.on('error', (sqlerror) => {
-  console.error(`[${rowConfig.recordType}] sql.error:\n${sqlerror.stack}`);
+  console.error(`sql.error:\n${sqlerror.stack}`);
 });
 
 const loadMsSqlData = async (pgConfig, mssqlConfig, config) => {
-  try {
-    console.error(`[${config.recordType}] loading records`);
-    await removeMapRecords(config, pgConfig);
-    await processRecords(mssqlConfig, config, pgConfig);
-    console.log(`[${config.recordType}] records processed`);
-  } catch (error) {
-    throw error;
-  }
+  console.error(`[${config.recordType}] loading records`);
+  await removeMapRecords(config, pgConfig);
+  await processRecords(mssqlConfig, config, pgConfig);
+  console.log(`[${config.recordType}] records processed`);
 };
 
 exports.loadMsSqlData = loadMsSqlData;
