@@ -33,7 +33,6 @@
     "apollo-gateway": "^0.0.1",
     "apollo-server": "^2.14.4",
     "apollo-server-fastify": "^2.14.4",
-    "class-transformer": "0.2.3",
     "class-transformer-safe": "^0.2.8",
     "class-validator": "0.12.2",
     "eslint-teamcity": "^3.0.1",
@@ -86,7 +85,7 @@
   },
   "peerDependencies": {
     "apollo-server-core": "^2.15.0",
-    "class-transformer": "0.2.3",
+    "class-transformer-safe": "^0.2.8",
     "class-validator": "0.12.2"
   }
 }
