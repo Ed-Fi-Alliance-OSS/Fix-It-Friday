@@ -119,7 +119,7 @@ exports.staffConfig = {
 exports.staffSectionConfig = {
   recordType: 'StaffSection',
   deleteSql: 'DELETE FROM fif.staffsectionassociation',
-  insertSql: 'INSERT INTO fif.staffsectionassociation (staffkey, sectionkey, begindate, enddate)  VALUES ($1, $2::text, $3, $4) ON CONFLICT (staffkey, sectionkey) DO NOTHING',
+  insertSql: 'INSERT INTO fif.staffsectionassociation (staffkey, sectionkey, begindate, enddate)  VALUES ($1, $2::text, $3, $4) ON CONFLICT (sectionkey, staffkey) DO NOTHING',
   sourceSql: staffSectionSourceSQL,
   keyIndex: 0,
   isEntityMap: true,

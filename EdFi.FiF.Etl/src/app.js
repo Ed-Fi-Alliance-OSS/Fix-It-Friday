@@ -9,23 +9,20 @@ const loadMsSqlData = require('./loadMsSqlData');
 const pg = config.pgConfig;
 const ms = config.mssqlConfig;
 
-const loadBaseEntities = () => {
+const loadingOdsData = async () => {
   try {
-    (async () => {
-      console.log('loading entities');
-      loadMsSqlData.loadMsSqlData(pg, ms, etl.studentSchoolConfig);
-      loadMsSqlData.loadMsSqlData(pg, ms, etl.contactPersonConfig);
-      loadMsSqlData.loadMsSqlData(pg, ms, etl.staffConfig);
-      loadMsSqlData.loadMsSqlData(pg, ms, etl.sectionConfig);
-      loadMsSqlData.loadMsSqlData(pg, ms, etl.staffSectionConfig);
-      loadMsSqlData.loadMsSqlData(pg, ms, etl.studentSectionConfig);
-      loadMsSqlData.loadMsSqlData(pg, ms, etl.studentContactConfig);
-      console.log('finished loading entities');
-    })();
+    console.log('loading records from ODS');
+    await loadMsSqlData.loadMsSqlData(pg, ms, etl.staffConfig);
+    await loadMsSqlData.loadMsSqlData(pg, ms, etl.sectionConfig);
+    await loadMsSqlData.loadMsSqlData(pg, ms, etl.studentSchoolConfig);
+    await loadMsSqlData.loadMsSqlData(pg, ms, etl.contactPersonConfig);
+    await loadMsSqlData.loadMsSqlData(pg, ms, etl.studentSectionConfig);
+    await loadMsSqlData.loadMsSqlData(pg, ms, etl.studentContactConfig);
+    await loadMsSqlData.loadMsSqlData(pg, ms, etl.staffSectionConfig);
+    console.log('finished loading records');
   } catch (error) {
-    reject(error);
+    throw error;
   }
 };
 
-loadBaseEntities();
-console.log('loadEntities done');
+loadingOdsData();
