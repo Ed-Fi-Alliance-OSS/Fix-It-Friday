@@ -4,7 +4,13 @@ const { Pool } = require('pg');
 
 const ROW_COUNT_TO_LOAD = 50;
 
-const removeMapRecords = async function (rowConfig, pgConfig) {
+function rewriteLine(text, stream) {
+  readline.clearLine(stream); // clear current text
+  readline.cursorTo(stream, 0); // move cursor to beginning of line
+  stream.write(text);
+}
+
+const removeMapRecords = async (rowConfig, pgConfig) => {
   if (!rowConfig.isEntityMap) {
     return;
   }
@@ -15,13 +21,13 @@ const removeMapRecords = async function (rowConfig, pgConfig) {
     pgClient = await pool.connect();
     await pgClient.query('BEGIN');
     await pgClient.query(rowConfig.deleteSql)
-      .then(res => {
+      .then((res) => {
         console.log(`[${rowConfig.recordType}] ${res.rowCount} records deleted`);
       });
     await pgClient.query('COMMIT');
-  } catch (error) {
+  } catch (err) {
     await pgClient.query('ROLLBACK');
-    console.error(`[${rowConfig.recordType}] removeMapRecords:\n${error.stack}`);
+    console.error(`[${rowConfig.recordType}] removeMapRecords:\n${err.stack}`);
   } finally {
     if (pgClient.release) {
       pgClient.release();
@@ -35,15 +41,17 @@ const processEntity = async (values, pgClient, rowConfig) => {
     .query(rowConfig.selectSql, [values[rowConfig.keyIndex]])
     .then(async (res) => {
       if (res.rowCount === 0) {
-        await pgClient.query(rowConfig.insertSql, values).catch(() => {
-          console.error(`[${rowConfig.recordType}] ERROR insert error:\n${error.stack}`);
-        });
+        await pgClient.query(rowConfig.insertSql, values)
+          .catch((err) => {
+            console.error(`[${rowConfig.recordType}] ERROR insert error:\n${err.stack}`);
+          });
       }
 
       if (res.rowCount === 1) {
-        await pgClient.query(rowConfig.updateSql, values).catch(() => {
-          console.error(`[${rowConfig.recordType}] ERROR update error:\n${error.stack}`);
-        });
+        await pgClient.query(rowConfig.updateSql, values)
+          .catch((err) => {
+            console.error(`[${rowConfig.recordType}] ERROR update error:\n${err.stack}`);
+          });
       }
     })
     .catch((err) => {
@@ -99,7 +107,7 @@ const processRecords = async (config, rowConfig, pgConfig) => {
   request.on('row', async (values) => {
     rowsToProcess.push(values);
     if (rowsToProcess.length >= ROW_COUNT_TO_LOAD) {
-      processedRows += rowsToProcess.length
+      processedRows += rowsToProcess.length;
 
       request.pause();
       await processRowArray(rowsToProcess, request, rowConfig, pgConfig);
@@ -124,26 +132,20 @@ const processRecords = async (config, rowConfig, pgConfig) => {
   });
   await request.query(rowConfig.sourceSql);
   /* returns before 'done' is run. To prevent that we wait */
-  await (async () => { while (!done)( await new Promise(resolve => setTimeout(resolve, 100)) ); })();
+  await (async () => {
+    while (!done) {
+      (await new Promise((resolve) => setTimeout(resolve, 100)));
+    }
+  })();
 };
 
-function rewriteLine(text, stream) {
-  readline.clearLine(stream);     // clear current text
-  readline.cursorTo(stream, 0);   // move cursor to beginning of line
-  stream.write(text);
-}
-
 sql.on('error', (sqlerror) => {
-  console.error(`[${rowConfig.recordType}] sql.error:\n${sqlerror.stack}`);
+  console.error(`sql.error:\n${sqlerror.stack}`);
 });
 
 const loadMsSqlData = async (pgConfig, mssqlConfig, config) => {
-  try {
-    await processRecords(mssqlConfig, config, pgConfig);
-    console.log(`${config.recordType} done`);
-  } catch (error) {
-    throw error;
-  }
+  await processRecords(mssqlConfig, config, pgConfig);
+  console.log(`${config.recordType} done`);
 };
 
 exports.loadMsSqlData = loadMsSqlData;
