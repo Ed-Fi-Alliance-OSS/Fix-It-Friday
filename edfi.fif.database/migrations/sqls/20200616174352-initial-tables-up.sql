@@ -1,18 +1,18 @@
 CREATE TABLE fif.School(
     SchoolKey varchar NOT NULL,
     SchoolName varchar NOT NULL,
-    SchoolType varchar,
-    SchoolAddress varchar,
-    SchoolCity varchar,
-    SchoolCounty varchar,
-    SchoolState varchar,
-    LocalEducationAgencyName varchar,
-    LocalEducationAgencyKey int,
-    StateEducationAgencyName varchar,
-    StateEducationAgencyKey int,
-    EducationServiceCenterName varchar,
-    EducationServiceCenterKey int,
-    LastModifiedDate date,
+    SchoolType varchar NULL,
+    SchoolAddress varchar NULL,
+    SchoolCity varchar NULL,
+    SchoolCounty varchar NULL,
+    SchoolState varchar NULL,
+    LocalEducationAgencyName varchar NULL,
+    LocalEducationAgencyKey int NULL,
+    StateEducationAgencyName varchar NULL,
+    StateEducationAgencyKey int NULL,
+    EducationServiceCenterName varchar NULL,
+    EducationServiceCenterKey int NULL,
+    LastModifiedDate date NULL,
     CONSTRAINT PK_SchoolKey PRIMARY KEY (SchoolKey)
 );
 
@@ -70,7 +70,6 @@ CREATE TABLE fif.Section (
     SectionIdentifier varchar(255) NULL,
     SchoolYear smallint NOT NULL,
     CONSTRAINT PK_SectionSectionKey PRIMARY KEY (SectionKey),
-    CONSTRAINT FK_Section_SchoolKey FOREIGN KEY (SchoolKey) REFERENCES fif.School (SchoolKey)
 );
 
 CREATE TABLE fif.StudentSection (
