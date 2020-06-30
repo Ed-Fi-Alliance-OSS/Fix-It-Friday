@@ -60,10 +60,12 @@ const processEntity = async (values, pgClient, rowConfig) => {
 };
 
 const processMappedEntity = async (values, pgClient, rowConfig) => {
-  await pgClient.query(rowConfig.insertSql, values)
-    .catch((err) => {
-      console.error(`[${rowConfig.recordType}] ERROR processMappedEntity:\n${err.stack}`);
-    });
+  try {
+    await pgClient.query(rowConfig.insertSql, values);
+  } catch (error) {
+    console.log(JSON.stringify(values));
+    throw error;
+  }
 };
 
 const processRowArray = async (rows, request, rowConfig, pgConfig) => {

@@ -1,19 +1,23 @@
 const fs = require('fs');
 const path = require('path');
 
-const studentSchoolSourceSQL = fs.readFileSync(path.join(__dirname, './../sql/0001-ImportStudentSchool.sql'), 'utf8');
+const sqlSourceDir = `./../sql/${process.env.FIF_SQLSOURCE || 'ods'}/`;
 
-const contactPersonSourceSQL = fs.readFileSync(path.join(__dirname, './../sql/0002-ImportContactPerson.sql'), 'utf8');
+const studentSchoolSource = `${sqlSourceDir}/0001-ImportStudentSchool.sql`;
+const contactPersonSource = `${sqlSourceDir}/0002-ImportContactPerson.sql`;
+const studentContactSource = `${sqlSourceDir}/0003-ImportStudentContact.sql`;
+const sectionSource = `${sqlSourceDir}/0004-ImportSection.sql`;
+const staffSource = `${sqlSourceDir}/0005-ImportStaff.sql`;
+const staffSectioNSource = `${sqlSourceDir}/0006-ImportStaffSectionAssociation.sql`;
+const studentSectionSource = `${sqlSourceDir}/0007-ImportStudentSection.sql`;
 
-const studentContactSourceSQL = fs.readFileSync(path.join(__dirname, './../sql/0003-ImportStudentContact.sql'), 'utf8');
-
-const sectionSourceSQL = fs.readFileSync(path.join(__dirname, './../sql/0004-ImportSection.sql'), 'utf8');
-
-const staffSourceSQL = fs.readFileSync(path.join(__dirname, './../sql/0005-ImportStaff.sql'), 'utf8');
-
-const staffSectionSourceSQL = fs.readFileSync(path.join(__dirname, './../sql/0006-ImportStaffSectionAssociation.sql'), 'utf8');
-
-const studentSectionSourceSQL = fs.readFileSync(path.join(__dirname, './../sql/0007-ImportStudentSection.sql'), 'utf8');
+const studentSchoolSourceSQL = fs.readFileSync(path.join(__dirname, studentSchoolSource), 'utf8');
+const contactPersonSourceSQL = fs.readFileSync(path.join(__dirname, contactPersonSource), 'utf8');
+const studentContactSourceSQL = fs.readFileSync(path.join(__dirname, studentContactSource), 'utf8');
+const sectionSourceSQL = fs.readFileSync(path.join(__dirname, sectionSource), 'utf8');
+const staffSourceSQL = fs.readFileSync(path.join(__dirname, staffSource), 'utf8');
+const staffSectionSourceSQL = fs.readFileSync(path.join(__dirname, staffSectioNSource), 'utf8');
+const studentSectionSourceSQL = fs.readFileSync(path.join(__dirname, studentSectionSource), 'utf8');
 
 exports.studentSchoolConfig = {
   recordType: 'StudentSchool',
