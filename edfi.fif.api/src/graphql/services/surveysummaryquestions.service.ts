@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import SurveySummaryQuestionsEntity from '../entities/survey/surveysummaryquestions.entity';
-import SurveySummaryAnsweresEntity from '../entities/survey/surveysummaryansweres.entity';
+import SurveySummaryAnsweresEntity from '../entities/survey/surveysummaryanswers.entity';
 
 @Injectable()
 export default class SurveySummaryQuestionsService {
