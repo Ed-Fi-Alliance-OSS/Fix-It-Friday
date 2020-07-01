@@ -1,5 +1,5 @@
 {
-    "conection": {
+    "connection": {
         "userName": "postgres",
         "password": "p@ssw0rd",
         "host": "localhost",

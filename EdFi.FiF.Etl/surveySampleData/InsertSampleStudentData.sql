@@ -2,7 +2,7 @@ INSERT INTO fif.studentschool
 	(studentschoolkey, studentkey, schoolkey, studentfirstname, studentmiddlename, studentlastname, gradelevel, ishispanic, sex)
 VALUES
 	 ('2', '2', '255901001', 'Lisa', 'Sybil', 'Woods', 'Ninth grade', 1::bit, 'NoData' )
-	 ('3', '3', '255901001', 'Julie', 'Randi', 'Randolph', 'Tenth grade', 1::bit, 'NoData' )
+	,('3', '3', '255901001', 'Julie', 'Randi', 'Randolph', 'Tenth grade', 1::bit, 'NoData' )
 	,('16', '16', '255901001', 'Allie', 'Allison', 'Combs', 'Tenth grade', 1::bit, 'NoData' )
 	,('27', '27', '255901001', 'Fannie', null, 'Medina', 'Ninth grade', 1::bit, 'NoData' )
 	,('29', '29', '255901001', 'Robert', null, 'Mckee', 'Ninth grade', 1::bit, 'NoData' )
