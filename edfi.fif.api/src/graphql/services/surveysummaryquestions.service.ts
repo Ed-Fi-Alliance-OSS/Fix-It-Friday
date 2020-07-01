@@ -25,7 +25,6 @@ constructor(
         `SurveySummaryAnswers.surveyquestionkey = ss.surveyquestionkey`,
       )
       .where({ surveyquestionkey: surveyquestionkey })
-      //.andWhere('SurveySummaryAnswers.sectionkey = :sectionkey', { sectionkey: sectionkey})
       .getMany();
   }
 }
