@@ -30,7 +30,7 @@ That is it =)
 ## How to run
 
 ```powershell
-npm surveyETL sampleData/surveys/InternetAccessSurvey.csv "Internet Access"
+node surveyETL sampleData/surveys/InternetAccessSurvey.csv "Internet Access"
 
 ```
 

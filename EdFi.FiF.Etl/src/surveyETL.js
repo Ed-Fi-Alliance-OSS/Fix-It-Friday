@@ -7,8 +7,8 @@ const STUDENT_SCHOOL_KEY_FIELD = "StudentUSI";
 const METADATA_FIELDS = [SURVEY_DATE_FIELD, STUDENT_SCHOOL_KEY_FIELD, "FirstName", "LastSurname", "ElectronicMailAddress", "GradeLevel", "StudentsELATeacher"];
 
 async function getDB() {
-    var pgConfig = config.conection;
-    var connectionString = `postgres://${pgConfig.userName}:${pgConfig.password}@${pgConfig.host}:${pgConfig.port}/${pgConfig.database}`;
+    const pgConfig = config.connection;
+    const connectionString = `postgres://${pgConfig.userName}:${pgConfig.password}@${pgConfig.host}:${pgConfig.port}/${pgConfig.database}`;
 
     const { Client } = require('pg');
     const client = new Client({ connectionString: connectionString });
@@ -19,7 +19,7 @@ async function getDB() {
 
 async function Extract(fileName) {
     let questions = null;
-    let answers = [];
+    const answers = [];
     return new Promise(resolve => {
         fs.createReadStream(fileName)
             .pipe(csv())
@@ -54,11 +54,11 @@ async function Load(surveytitle, questions, answers, db) {
     }
 
     async function getOrSaveQuestions(questions, surveykey, db) {
-        let dbQuestions = await getQuestions(surveykey, db);
-        let toSave = questions
+        const dbQuestions = await getQuestions(surveykey, db);
+        const toSave = questions
             .filter(h =>
-                !dbQuestions.some(q => q.question.toUpperCase() == h.toUpperCase()) &&
-                !METADATA_FIELDS.some(f => f.toUpperCase() == h.toUpperCase())
+                !dbQuestions.some(q => q.question.toUpperCase() === h.toUpperCase()) &&
+                !METADATA_FIELDS.some(f => f.toUpperCase() === h.toUpperCase())
             );
         for (q in toSave) {
             await db.query("INSERT INTO fif.surveyquestion (surveykey, question) VALUES($1, $2);", [surveykey, toSave[q]]);
@@ -69,22 +69,21 @@ async function Load(surveytitle, questions, answers, db) {
     }
 
     async function getOrSaveStudentSurvey(surveykey, studentAnswers, db) {
-        let date = studentAnswers[SURVEY_DATE_FIELD];
-        let studentschoolkey = studentAnswers[STUDENT_SCHOOL_KEY_FIELD];
+        const date = studentAnswers[SURVEY_DATE_FIELD];
+        const studentschoolkey = studentAnswers[STUDENT_SCHOOL_KEY_FIELD];
+
+        const result = await db
+            .query("SELECT studentsurveykey, surveykey, studentschoolkey, \"date\" FROM fif.studentsurvey where surveykey = $1 and studentschoolkey = $2; ", [surveykey, studentschoolkey]);
+        if (result.rows.length > 0) { return result.rows[0]; }
 
         return await db
-            .query("SELECT studentsurveykey, surveykey, studentschoolkey, \"date\" FROM fif.studentsurvey where surveykey = $1 and studentschoolkey = $2; ", [surveykey, studentschoolkey])
-            .then(async result => {
-                if (result.rows.length > 0) { return result.rows[0] }
-                return await db
-                    .query("INSERT INTO fif.studentsurvey (surveykey, studentschoolkey, \"date\") VALUES($1, $2, $3) RETURNING *;", [surveykey, studentschoolkey, date])
-                    .then(result => result.rows[0])
-                    .catch(err => { console.error("ERROR: " + err.detail); return null; });
-            });
+            .query("INSERT INTO fif.studentsurvey (surveykey, studentschoolkey, \"date\") VALUES($1, $2, $3) RETURNING *;", [surveykey, studentschoolkey, date])
+            .then(result => result.rows[0])
+            .catch(err => { console.error("ERROR: " + err.detail); return null; });
     }
 
     async function saveAnswers(surveykey, questions, studentSurveyAnswers, db, surveyProfile) {
-        let questionKeyMap = {};
+        const questionKeyMap = {};
         questions.forEach(element => {
             questionKeyMap[element.question] = element.surveyquestionkey;
         });
@@ -134,11 +133,11 @@ async function ETLRunner(surveytitle, filename) {
     let result = await Load(surveytitle, data.questions, data.answers, db);
     console.log("result:", {
         survey: {
-            surveykey:  result.survey.surveykey,
+            surveykey: result.survey.surveykey,
             title: result.survey.title,
             questions: result.survey.questions.length,
         },
-         answers: result.answers
+        answers: result.answers
     });
 }
 
@@ -150,7 +149,7 @@ function getArgs(argv) {
         surveyTitle: "Internet Access"
     }
 
-    if (argv[2] == "--help" || argv[2] == "-h") {
+    if (argv[2] === "--help" || argv[2] === "-h") {
         args.help = true;
         return args;
     }
@@ -168,7 +167,7 @@ function getArgs(argv) {
 
 
 async function main() {
-    let args = getArgs(process.argv);
+    const args = getArgs(process.argv);
 
     if (args.help) {
         var path = require("path");
