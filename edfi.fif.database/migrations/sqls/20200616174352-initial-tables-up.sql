@@ -69,14 +69,14 @@ CREATE TABLE fif.Section (
     SessionName varchar(60) NULL,
     SectionIdentifier varchar(255) NULL,
     SchoolYear smallint NOT NULL,
-    CONSTRAINT PK_SectionSectionKey PRIMARY KEY (SectionKey),
+    CONSTRAINT PK_SectionSectionKey PRIMARY KEY (SectionKey)
 );
 
 CREATE TABLE fif.StudentSection (
-    StudentSectionKey varchar(60) NOT NULL,
+    StudentSectionKey varchar(80) NOT NULL,
     StudentSchoolKey varchar(64) NOT NULL,
     StudentKey varchar(32) NOT NULL,
-    SectionKey varchar(60) NULL,
+    SectionKey varchar(128) NULL,
     LocalCourseCode varchar(60) NULL,
     Subject varchar(60) NOT NULL,
     CourseTitle varchar(60) NOT NULL,
