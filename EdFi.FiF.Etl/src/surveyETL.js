@@ -1,6 +1,6 @@
 const csv = require('csv-parser');
 const fs = require('fs');
-var config = require("./config.json");
+var config = require("./config.surveyEtl.json");
 
 const SURVEY_DATE_FIELD = "Timestamp";
 const STUDENT_SCHOOL_KEY_FIELD = "StudentUSI";
@@ -146,7 +146,7 @@ function getArgs(argv) {
     var args = {
         debug: true,
         help: false,
-        filename: "./sampleData/surveys/InternetAccessSurvey.csv",
+        filename: "../surveySampleData/InternetAccessSurvey.csv",
         surveyTitle: "Internet Access"
     }
 
