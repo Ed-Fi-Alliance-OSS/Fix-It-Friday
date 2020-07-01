@@ -1,10 +1,10 @@
 import { ViewEntity, ViewColumn, PrimaryColumn } from 'typeorm';
 import SurveySummaryQuestionsEntity from './surveysummaryquestions.entity';
 
-@ViewEntity({ schema: 'fif', name: 'surveysummaryansweres', synchronize: false })
+@ViewEntity({ schema: 'fif', name: 'surveysummaryanswers', synchronize: false })
 export default class SurveySummaryAnsweresEntity {
-  
-  @ViewColumn() 
+
+  @ViewColumn()
   sectionkey: number;
 
   @PrimaryColumn()
@@ -24,7 +24,7 @@ export default class SurveySummaryAnsweresEntity {
 
   @ViewColumn()
   studentname: string;
-  
+
   @ViewColumn()
   answer: string;
 }
