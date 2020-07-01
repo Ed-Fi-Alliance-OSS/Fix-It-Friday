@@ -1,5 +1,5 @@
-import { Args, Query, Resolver, ResolveProperty, Parent } from '@nestjs/graphql';
-import { SurveySummary, SurveySummaryQuestions, SurveySummaryAnsweres } from '../graphql.schema';
+import { Query, Resolver, ResolveProperty, Parent } from '@nestjs/graphql';
+import { SurveySummaryQuestions, SurveySummaryAnsweres } from '../graphql.schema';
 import SurveySummaryQuestionsService from '../services/surveysummaryquestions.service';
 
 @Resolver('SurveySummaryQuestions')

@@ -22,7 +22,7 @@ import SurveySummaryQuestionsModule from './graphql/modules/surveysummaryquestio
     StudentSchoolModule,
     SurveyModule,
     SurveySummaryModule,
-    SurveySummaryQuestionsModule
+    SurveySummaryQuestionsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
