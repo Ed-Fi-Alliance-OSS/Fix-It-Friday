@@ -3,7 +3,6 @@ import SurveySummaryAnsweres from './surveysummaryansweres.entity';
 
 @ViewEntity({ schema: 'fif', name: 'surveysummaryquestions', synchronize: false })
 export default class SurveySummaryQuestionsEntity {
-  
   @ViewColumn()
   surveykey: number;
 

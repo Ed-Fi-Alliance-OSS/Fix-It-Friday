@@ -3,8 +3,7 @@ import SurveySummaryQuestionsEntity from './surveysummaryquestions.entity';
 
 @ViewEntity({ schema: 'fif', name: 'surveysummary', synchronize: false })
 export default class SurveySummaryEntity {
-  
-  @ViewColumn() 
+  @ViewColumn()
   sectionkey: number;
 
   @PrimaryColumn()
@@ -21,6 +20,6 @@ export default class SurveySummaryEntity {
 
   @ViewColumn()
   totalstudents: number;
-  
+
   questions?: SurveySummaryQuestionsEntity[];
 }
