@@ -102,10 +102,10 @@ export class SurveySummaryQuestions {
     title?: string;
     surveyquestionkey?: number;
     question?: string;
-    answers?: SurveySummaryAnsweres[];
+    answers?: SurveySummaryAnswers[];
 }
 
-export class SurveySummaryAnsweres {
+export class SurveySummaryAnswers {
     sectionkey?: number;
     surveykey?: number;
     title?: string;

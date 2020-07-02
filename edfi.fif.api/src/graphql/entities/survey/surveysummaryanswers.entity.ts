@@ -2,7 +2,7 @@ import { ViewEntity, ViewColumn, PrimaryColumn } from 'typeorm';
 import SurveySummaryQuestionsEntity from './surveysummaryquestions.entity';
 
 @ViewEntity({ schema: 'fif', name: 'surveysummaryanswers', synchronize: false })
-export default class SurveySummaryAnsweresEntity {
+export default class SurveySummaryAnswersEntity {
 
   @ViewColumn()
   sectionkey: number;

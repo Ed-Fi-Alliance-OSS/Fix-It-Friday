@@ -1,5 +1,5 @@
 import { Args, Query, Resolver, ResolveProperty, Parent } from '@nestjs/graphql';
-import { SurveySummary, SurveySummaryQuestions, SurveySummaryAnsweres } from '../graphql.schema';
+import { SurveySummary, SurveySummaryQuestions, SurveySummaryAnswers } from '../graphql.schema';
 import SurveySummaryQuestionsService from '../services/surveysummaryquestions.service';
 
 @Resolver('SurveySummaryQuestions')
@@ -14,7 +14,7 @@ export default class SurveySummaryQuestionsResolvers {
 
   @ResolveProperty('answers')
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-  async answers(@Parent() parent): Promise<SurveySummaryAnsweres[]> {
+  async answers(@Parent() parent): Promise<SurveySummaryAnswers[]> {
     return this.surveySummaryQuestionsService.findAnswersByQuestion(9, parent.surveyquestionkey);
   }
 }
