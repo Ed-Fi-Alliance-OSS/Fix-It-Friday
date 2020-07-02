@@ -1,5 +1,5 @@
 import { ViewEntity, ViewColumn, PrimaryColumn } from 'typeorm';
-import SurveySummaryAnsweres from './surveysummaryansweres.entity';
+import SurveySummaryAnswers from './surveysummaryanswers.entity';
 
 @ViewEntity({ schema: 'fif', name: 'surveysummaryquestions', synchronize: false })
 export default class SurveySummaryQuestionsEntity {
@@ -15,5 +15,5 @@ export default class SurveySummaryQuestionsEntity {
   @ViewColumn()
   question: string;
 
-  answers?: SurveySummaryAnsweres[];
+  answers?: SurveySummaryAnswers[];
 }

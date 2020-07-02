@@ -52,7 +52,7 @@ AS
 
 ---
 
-CREATE OR REPLACE VIEW fif.SurveySummaryAnsweres
+CREATE OR REPLACE VIEW fif.SurveySummaryAnswers
 AS
   
   SELECT

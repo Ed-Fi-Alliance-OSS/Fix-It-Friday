@@ -83,9 +83,9 @@ type SurveySummaryQuestions {
   title: String
   surveyquestionkey: Int
   question: String
-  answers: [SurveySummaryAnsweres]
+  answers: [SurveySummaryAnswers]
 }
-type SurveySummaryAnsweres {
+type SurveySummaryAnswers {
   sectionkey: Int
   surveykey: Int
   title: String

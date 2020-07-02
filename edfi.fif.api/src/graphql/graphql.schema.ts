@@ -1,3 +1,4 @@
+
 /** ------------------------------------------------------
  * THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
  * -------------------------------------------------------
@@ -5,6 +6,25 @@
 
 /* tslint:disable */
 /* eslint-disable */
+export class ContactPerson {
+    uniquekey?: string;
+    contactpersonkey?: string;
+    studentkey?: string;
+    contactfirstname?: string;
+    contactlastname?: string;
+    relationshiptostudent?: string;
+    streetnumbername?: string;
+    apartmentroomsuitenumber?: string;
+    state?: string;
+    postalcode?: string;
+    phonenumber?: string;
+    primaryemailaddress?: string;
+    isprimarycontact?: boolean;
+    preferredcontactmethod?: string;
+    besttimetocontact?: string;
+    contactnotes?: string;
+}
+
 export abstract class IQuery {
     abstract staff(): Staff[] | Promise<Staff[]>;
 
@@ -37,6 +57,16 @@ export class Section {
     students?: StudentSchool[];
 }
 
+export class Staff {
+    staffkey?: number;
+    personaltitleprefix?: string;
+    firstname?: string;
+    middlename?: string;
+    lastsurname?: string;
+    staffuniqueid?: string;
+    sections?: Section[];
+}
+
 export class StudentSchool {
     studentschoolkey?: string;
     studentkey?: string;
@@ -54,16 +84,6 @@ export class StudentSchool {
     contacts?: ContactPerson[];
     siblingscount?: number;
     siblings?: StudentSchool[];
-}
-
-export class Staff {
-    staffkey?: number;
-    personaltitleprefix?: string;
-    firstname?: string;
-    middlename?: string;
-    lastsurname?: string;
-    staffuniqueid?: string;
-    sections?: Section[];
 }
 
 export class StudentSection {
@@ -96,15 +116,7 @@ export class SurveySummary {
     questions?: SurveySummaryQuestions[];
 }
 
-export class SurveySummaryQuestions {
-    surveykey?: number;
-    title?: string;
-    surveyquestionkey?: number;
-    question?: string;
-    answers?: SurveySummaryAnsweres[];
-}
-
-export class SurveySummaryAnsweres {
+export class SurveySummaryAnswers {
     sectionkey?: number;
     surveykey?: number;
     title?: string;
@@ -115,21 +127,10 @@ export class SurveySummaryAnsweres {
     answer?: string;
 }
 
-export class ContactPerson {
-    uniquekey?: string;
-    contactpersonkey?: string;
-    studentkey?: string;
-    contactfirstname?: string;
-    contactlastname?: string;
-    relationshiptostudent?: string;
-    streetnumbername?: string;
-    apartmentroomsuitenumber?: string;
-    state?: string;
-    postalcode?: string;
-    phonenumber?: string;
-    primaryemailaddress?: string;
-    isprimarycontact?: boolean;
-    preferredcontactmethod?: string;
-    besttimetocontact?: string;
-    contactnotes?: string;
+export class SurveySummaryQuestions {
+    surveykey?: number;
+    title?: string;
+    surveyquestionkey?: number;
+    question?: string;
+    answers?: SurveySummaryAnswers[];
 }
