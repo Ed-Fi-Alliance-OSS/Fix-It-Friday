@@ -63,6 +63,22 @@ export class Question {
     question?: string;
 }
 
+export class School {
+    schoolkey?: string;
+    schoolname?: string;
+    schooltype?: string;
+    schooladdress?: string;
+    schoolcity?: string;
+    schoolcounty?: string;
+    schoolstate?: string;
+    localeducationagencyname?: string;
+    localeducationagencykey?: number;
+    stateeducationagencyname?: string;
+    stateeducationagencykey?: number;
+    educationservicecentername?: string;
+    educationservicecenterkey?: number;
+}
+
 export class Section {
     sectionkey?: string;
     schoolkey?: string;
@@ -89,6 +105,7 @@ export class StudentSchool {
     studentschoolkey?: string;
     studentkey?: string;
     schoolkey?: string;
+    schoolname?: string;
     schoolyear?: string;
     studentfirstname?: string;
     studentmiddlename?: string;
