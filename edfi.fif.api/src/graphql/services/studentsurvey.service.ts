@@ -10,15 +10,16 @@ export default class StudentSurveyService {
   // eslint-disable-next-line no-useless-constructor
   constructor(
     @InjectRepository(SurveyEntity) private readonly FixItFridaySurveyRepository: Repository<SurveyEntity>,
-    @InjectRepository(AnswersByStudentEntity) private readonly FixItFridayAnswersByStudentRepository: Repository<AnswersByStudentEntity>) {}
+    @InjectRepository(AnswersByStudentEntity)
+    private readonly FixItFridayAnswersByStudentRepository: Repository<AnswersByStudentEntity>,
+  ) {}
 
   async findSurvey(surveykey: string): Promise<SurveyEntity> {
-    return this.FixItFridaySurveyRepository.findOne({ where: { surveykey: surveykey } });
+    return this.FixItFridaySurveyRepository.findOne({ where: { surveykey } });
   }
-  
+
   async findAnwsersByStudent(surveykey: string, studentschoolkey: string): Promise<AnswersByStudentEntity[]> {
-    return this.FixItFridayAnswersByStudentRepository
-      .createQueryBuilder('AnswersByStudent')
+    return this.FixItFridayAnswersByStudentRepository.createQueryBuilder('AnswersByStudent')
       .innerJoin(
         StudentSurveyEntity,
         'ss',

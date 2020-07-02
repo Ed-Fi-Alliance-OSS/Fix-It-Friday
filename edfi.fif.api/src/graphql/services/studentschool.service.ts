@@ -17,8 +17,9 @@ export default class SectionService {
   constructor(
     @InjectRepository(StudentSchoolEntity) private readonly FixItFridayRepository: Repository<StudentSchoolEntity>,
     @InjectRepository(ContactPersonEntity) private readonly FixItFridayRepositoryContacts: Repository<ContactPersonEntity>,
-    @InjectRepository(StudentSurveyEntity) private readonly FixItFridayStudentSurveyRepository: Repository<StudentSurveyEntity>,
-    @InjectRepository(StudentNoteEntity) private readonly FixItFridayStudentNotesRepository: Repository<StudentNoteEntity>
+    @InjectRepository(StudentSurveyEntity)
+    private readonly FixItFridayStudentSurveyRepository: Repository<StudentSurveyEntity>,
+    @InjectRepository(StudentNoteEntity) private readonly FixItFridayStudentNotesRepository: Repository<StudentNoteEntity>,
   ) {}
 
   async findAll(): Promise<StudentSchoolEntity[]> {
@@ -73,26 +74,24 @@ export default class SectionService {
   }
 
   async findByStudentSchoolKey(studentschoolkey: string): Promise<StudentSurveyEntity[]> {
-    return this.FixItFridayStudentSurveyRepository
-      .createQueryBuilder('studentsurvey')
+    return this.FixItFridayStudentSurveyRepository.createQueryBuilder('studentsurvey')
       .innerJoin(
         StudentSchoolEntity,
         'ss',
         `studentsurvey.studentschoolkey = ss.studentschoolkey and ss.studentschoolkey='${studentschoolkey}'`,
       )
-      .where({ studentschoolkey: studentschoolkey })
+      .where({ studentschoolkey })
       .getMany();
   }
 
   async findStudentNotesByStudentSchoolKey(studentschoolkey: string): Promise<StudentNoteEntity[]> {
-    return this.FixItFridayStudentNotesRepository
-      .createQueryBuilder('studentnotes')
+    return this.FixItFridayStudentNotesRepository.createQueryBuilder('studentnotes')
       .innerJoin(
         StudentSchoolEntity,
         'ss',
         `studentnotes.studentschoolkey = ss.studentschoolkey and ss.studentschoolkey='${studentschoolkey}'`,
       )
-      .where({ studentschoolkey: studentschoolkey })
+      .where({ studentschoolkey })
       .getMany();
   }
 }

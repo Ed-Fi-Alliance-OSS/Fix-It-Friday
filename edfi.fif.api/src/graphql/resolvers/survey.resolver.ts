@@ -5,8 +5,7 @@ import SurveyService from '../services/survey.service';
 @Resolver('Survey')
 export default class SurveyResolvers {
   // eslint-disable-next-line no-useless-constructor
-  constructor(
-    private readonly surveysService: SurveyService) {}
+  constructor(private readonly surveysService: SurveyService) {}
 
   @Query()
   async surveys(): Promise<Survey[]> {
@@ -22,9 +21,7 @@ export default class SurveyResolvers {
   }
 
   @ResolveProperty('questions')
-  async findQuestionBySurveyKey(
-    @Parent() parent
-  ): Promise<SurveyQuestion[]> {
+  async findQuestionBySurveyKey(@Parent() parent: Survey): Promise<SurveyQuestion[]> {
     return this.surveysService.findQuestionBySurveyKey(parent.surveykey);
   }
 }

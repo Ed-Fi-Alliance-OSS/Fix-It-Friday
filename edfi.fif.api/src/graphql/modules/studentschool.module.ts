@@ -9,7 +9,15 @@ import StudentNoteEntity from '../entities/studentnote.entity';
 import StudentSurveyEntity from '../entities/survey/studentsurvey.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([StudentSchoolEntity, ContactPersonEntity, StudentContactEntity, StudentSurveyEntity, StudentNoteEntity])],
+  imports: [
+    TypeOrmModule.forFeature([
+      StudentSchoolEntity,
+      ContactPersonEntity,
+      StudentContactEntity,
+      StudentSurveyEntity,
+      StudentNoteEntity,
+    ]),
+  ],
   providers: [StudentSchoolService, StudentSchoolResolvers],
 })
 export default class StudentSchoolModule {}

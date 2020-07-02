@@ -29,8 +29,8 @@ export default class StudentSchoolEntity {
   @Column() sex: string;
 
   @Column() pictureurl: string;
-  
+
   studentsurveys?: StudentSurveyEntity[];
-  
+
   notes?: StudentNoteEntity[];
 }
