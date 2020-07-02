@@ -4,6 +4,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import ContactPersonEntity from '../entities/contactperson.entity';
 import StudentSchoolEntity from '../entities/studentschool.entity';
 import StudentContactEntity from '../entities/studentcontact.entity';
+import StudentSurveyEntity from '../entities/survey/studentsurvey.entity';
+import StudentNoteEntity from '../entities/studentnote.entity';
 
 @Injectable()
 export default class SectionService {
@@ -15,6 +17,8 @@ export default class SectionService {
   constructor(
     @InjectRepository(StudentSchoolEntity) private readonly FixItFridayRepository: Repository<StudentSchoolEntity>,
     @InjectRepository(ContactPersonEntity) private readonly FixItFridayRepositoryContacts: Repository<ContactPersonEntity>,
+    @InjectRepository(StudentSurveyEntity) private readonly FixItFridayStudentSurveyRepository: Repository<StudentSurveyEntity>,
+    @InjectRepository(StudentNoteEntity) private readonly FixItFridayStudentNotesRepository: Repository<StudentNoteEntity>
   ) {}
 
   async findAll(): Promise<StudentSchoolEntity[]> {
@@ -65,6 +69,30 @@ export default class SectionService {
         `(cpcurrentstudent.RelationshipToStudent like :father or cpcurrentstudent.RelationshipToStudent like :mother) AND (cpsibling.RelationshipToStudent like :father or cpsibling.RelationshipToStudent like :mother)`,
         { father: `${this.fatherText}%`, mother: `${this.motherText}%` },
       )
+      .getMany();
+  }
+
+  async findByStudentSchoolKey(studentschoolkey: string): Promise<StudentSurveyEntity[]> {
+    return this.FixItFridayStudentSurveyRepository
+      .createQueryBuilder('studentsurvey')
+      .innerJoin(
+        StudentSchoolEntity,
+        'ss',
+        `studentsurvey.studentschoolkey = ss.studentschoolkey and ss.studentschoolkey='${studentschoolkey}'`,
+      )
+      .where({ studentschoolkey: studentschoolkey })
+      .getMany();
+  }
+
+  async findStudentNotesByStudentSchoolKey(studentschoolkey: string): Promise<StudentNoteEntity[]> {
+    return this.FixItFridayStudentNotesRepository
+      .createQueryBuilder('studentnotes')
+      .innerJoin(
+        StudentSchoolEntity,
+        'ss',
+        `studentnotes.studentschoolkey = ss.studentschoolkey and ss.studentschoolkey='${studentschoolkey}'`,
+      )
+      .where({ studentschoolkey: studentschoolkey })
       .getMany();
   }
 }

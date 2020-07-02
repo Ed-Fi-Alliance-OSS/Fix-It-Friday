@@ -5,9 +5,11 @@ import StudentSchoolService from '../services/studentschool.service';
 import StudentSchoolEntity from '../entities/studentschool.entity';
 import StudentContactEntity from '../entities/studentcontact.entity';
 import ContactPersonEntity from '../entities/contactperson.entity';
+import StudentNoteEntity from '../entities/studentnote.entity';
+import StudentSurveyEntity from '../entities/survey/studentsurvey.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([StudentSchoolEntity, ContactPersonEntity, StudentContactEntity])],
+  imports: [TypeOrmModule.forFeature([StudentSchoolEntity, ContactPersonEntity, StudentContactEntity, StudentSurveyEntity, StudentNoteEntity])],
   providers: [StudentSchoolService, StudentSchoolResolvers],
 })
 export default class StudentSchoolModule {}

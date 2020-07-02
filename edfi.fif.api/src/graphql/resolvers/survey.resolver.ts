@@ -1,11 +1,12 @@
-import { Args, Query, Resolver } from '@nestjs/graphql';
-import { Survey } from '../graphql.schema';
+import { Args, Query, Resolver, ResolveProperty, Parent } from '@nestjs/graphql';
+import { Survey, SurveyQuestion } from '../graphql.schema';
 import SurveyService from '../services/survey.service';
 
 @Resolver('Survey')
 export default class SurveyResolvers {
   // eslint-disable-next-line no-useless-constructor
-  constructor(private readonly surveysService: SurveyService) {}
+  constructor(
+    private readonly surveysService: SurveyService) {}
 
   @Query()
   async surveys(): Promise<Survey[]> {
@@ -18,5 +19,12 @@ export default class SurveyResolvers {
     surveykey: string,
   ): Promise<Survey> {
     return this.surveysService.findOneById(surveykey);
+  }
+
+  @ResolveProperty('questions')
+  async findQuestionBySurveyKey(
+    @Parent() parent
+  ): Promise<SurveyQuestion[]> {
+    return this.surveysService.findQuestionBySurveyKey(parent.surveykey);
   }
 }

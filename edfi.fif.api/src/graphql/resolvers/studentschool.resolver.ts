@@ -1,5 +1,5 @@
 import { Parent, Args, Query, Resolver, ResolveProperty } from '@nestjs/graphql';
-import { StudentSchool, ContactPerson } from '../graphql.schema';
+import { StudentSchool, ContactPerson, StudentSurvey, StudentNote } from '../graphql.schema';
 import StudentSchoolService from '../services/studentschool.service';
 
 @Resolver('StudentSchool')
@@ -37,5 +37,17 @@ export default class StudentSchoolResolvers {
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   async siblings(@Parent() parent): Promise<ContactPerson[]> {
     return this.studentschoolService.findStudentsSiblings(parent.studentschoolkey);
+  }
+
+  @ResolveProperty('studentsurveys')
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+  async studentsurveys(@Parent() parent): Promise<StudentSurvey[]> {
+    return this.studentschoolService.findByStudentSchoolKey(parent.studentschoolkey);
+  }
+
+  @ResolveProperty('notes')
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+  async studentnotes(@Parent() parent): Promise<StudentNote[]> {
+    return this.studentschoolService.findStudentNotesByStudentSchoolKey(parent.studentschoolkey);
   }
 }
