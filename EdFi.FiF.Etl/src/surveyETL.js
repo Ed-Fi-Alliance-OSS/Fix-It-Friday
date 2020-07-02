@@ -178,7 +178,7 @@ function getArgs(argv) {
     return args;
   }
 
-  [, args.filename, args.surveyTitle] = argv;
+  [, , args.filename, args.surveyTitle] = argv;
 
   return args;
 }
