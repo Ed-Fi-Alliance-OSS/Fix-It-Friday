@@ -5,15 +5,14 @@ const fs = require('fs');
 const path = require('path');
 const { Client } = require('pg');
 
-const config = require('./config.surveyEtl.json');
+const { pgConfig } = require('../config/dbs');
 
 const SURVEY_DATE_FIELD = 'Timestamp';
 const STUDENT_SCHOOL_KEY_FIELD = 'StudentUSI';
 const METADATA_FIELDS = [SURVEY_DATE_FIELD, STUDENT_SCHOOL_KEY_FIELD, 'FirstName', 'LastSurname', 'ElectronicMailAddress', 'GradeLevel', 'StudentsELATeacher'];
 
 async function getDB() {
-  const pgConfig = config.connection;
-  const connectionString = `postgres://${pgConfig.userName}:${pgConfig.password}@${pgConfig.host}:${pgConfig.port}/${pgConfig.database}`;
+  const connectionString = `postgres://${pgConfig.user}:${pgConfig.password}@${pgConfig.host}:${pgConfig.port}/${pgConfig.database}`;
 
   const client = new Client({ connectionString });
   await client.connect()
