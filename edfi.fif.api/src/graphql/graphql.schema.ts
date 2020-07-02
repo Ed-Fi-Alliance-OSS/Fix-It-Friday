@@ -1,3 +1,4 @@
+
 /** ------------------------------------------------------
  * THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
  * -------------------------------------------------------
@@ -134,15 +135,7 @@ export class SurveySummary {
     questions?: SurveySummaryQuestions[];
 }
 
-export class SurveySummaryQuestions {
-    surveykey?: number;
-    title?: string;
-    surveyquestionkey?: number;
-    question?: string;
-    answers?: SurveySummaryAnsweres[];
-}
-
-export class SurveySummaryAnsweres {
+export class SurveySummaryAnswers {
     sectionkey?: number;
     surveykey?: number;
     title?: string;
@@ -151,4 +144,12 @@ export class SurveySummaryAnsweres {
     studentschoolkey?: number;
     studentname?: string;
     answer?: string;
+}
+
+export class SurveySummaryQuestions {
+    surveykey?: number;
+    title?: string;
+    surveyquestionkey?: number;
+    question?: string;
+    answers?: SurveySummaryAnswers[];
 }
