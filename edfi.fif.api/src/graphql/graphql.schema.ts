@@ -5,22 +5,62 @@
 
 /* tslint:disable */
 /* eslint-disable */
+export class Answer {
+    metadata?: Metadata;
+    data?: Data[];
+}
+
+export class ContactPerson {
+    uniquekey?: string;
+    contactpersonkey?: string;
+    studentkey?: string;
+    contactfirstname?: string;
+    contactlastname?: string;
+    relationshiptostudent?: string;
+    streetnumbername?: string;
+    apartmentroomsuitenumber?: string;
+    state?: string;
+    postalcode?: string;
+    phonenumber?: string;
+    primaryemailaddress?: string;
+    isprimarycontact?: boolean;
+    preferredcontactmethod?: string;
+    besttimetocontact?: string;
+    contactnotes?: string;
+}
+
+export class Data {
+    question?: string;
+    answer?: string;
+}
+
+export class Metadata {
+    timestamp?: string;
+    studentschoolkey?: string;
+    studentname?: string;
+    studentemail?: string;
+}
+
 export abstract class IQuery {
     abstract staff(): Staff[] | Promise<Staff[]>;
 
-    abstract sectionsbystaff(staffkey: string): Staff | Promise<Staff>;
+    abstract staffbyid(staffkey: string): Staff | Promise<Staff>;
 
-    abstract sections(): Section[] | Promise<Section[]>;
+    abstract sectionsbystaff(staffkey: string): Section[] | Promise<Section[]>;
 
-    abstract section(sectionkey: string): Section | Promise<Section>;
+    abstract sectionbystaff(staffkey: string, sectionkey?: string): Section | Promise<Section>;
 
-    abstract students(): StudentSchool[] | Promise<StudentSchool[]>;
+    abstract studentbystaff(staffkey: string, studentschoolkey: string): StudentSchool | Promise<StudentSchool>;
 
-    abstract student(studentschoolkey: string): StudentSchool | Promise<StudentSchool>;
+    abstract studentsbystaff(staffkey: string): StudentSchool[] | Promise<StudentSchool[]>;
 
     abstract surveys(): Survey[] | Promise<Survey[]>;
 
     abstract survey(surveykey: string): Survey | Promise<Survey>;
+}
+
+export class Question {
+    question?: string;
 }
 
 export class Section {
@@ -30,7 +70,19 @@ export class Section {
     sessionname?: string;
     sectionidentifier?: string;
     schoolyear?: number;
+    student?: StudentSchool;
     students?: StudentSchool[];
+}
+
+export class Staff {
+    staffkey?: number;
+    personaltitleprefix?: string;
+    firstname?: string;
+    middlename?: string;
+    lastsurname?: string;
+    staffuniqueid?: string;
+    section?: Section;
+    sections?: Section[];
 }
 
 export class StudentSchool {
@@ -52,16 +104,6 @@ export class StudentSchool {
     siblings?: StudentSchool[];
 }
 
-export class Staff {
-    staffkey?: number;
-    personaltitleprefix?: string;
-    firstname?: string;
-    middlename?: string;
-    lastsurname?: string;
-    staffuniqueid?: string;
-    sections?: Section[];
-}
-
 export class StudentSection {
     studentsectionkey?: string;
     studentschoolkey?: string;
@@ -77,53 +119,13 @@ export class StudentSection {
     schoolyear?: string;
 }
 
-export class Data {
-    question?: string;
-    answer?: string;
-}
-
-export class Metadata {
-    timestamp?: string;
-    studentschoolkey?: string;
-    studentname?: string;
-    studentemail?: string;
-}
-
-export class Question {
-    question?: string;
-}
-
-export class Answer {
-    metadata?: Metadata;
-    data?: Data[];
-}
-
-export class SurveyJson {
-    questions?: Question[];
-    answers?: Answer[];
-}
-
 export class Survey {
     surveykey?: string;
     title?: string;
     info?: SurveyJson[];
 }
 
-export class ContactPerson {
-    uniquekey?: string;
-    contactpersonkey?: string;
-    studentkey?: string;
-    contactfirstname?: string;
-    contactlastname?: string;
-    relationshiptostudent?: string;
-    streetnumbername?: string;
-    apartmentroomsuitenumber?: string;
-    state?: string;
-    postalcode?: string;
-    phonenumber?: string;
-    primaryemailaddress?: string;
-    isprimarycontact?: boolean;
-    preferredcontactmethod?: string;
-    besttimetocontact?: string;
-    contactnotes?: string;
+export class SurveyJson {
+    questions?: Question[];
+    answers?: Answer[];
 }
