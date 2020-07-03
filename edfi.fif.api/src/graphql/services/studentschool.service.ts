@@ -19,7 +19,8 @@ export default class SectionService {
     @InjectRepository(StudentSchoolEntity) private readonly FixItFridayRepository: Repository<StudentSchoolEntity>,
     @InjectRepository(ContactPersonEntity) private readonly FixItFridayRepositoryContacts: Repository<ContactPersonEntity>,
     @InjectRepository(SchoolEntity) private readonly FixItFridayRepositorySchool: Repository<SchoolEntity>,
-    @InjectRepository(StudentSurveyEntity) private readonly FixItFridayStudentSurveyRepository: Repository<StudentSurveyEntity>,
+    @InjectRepository(StudentSurveyEntity)
+    private readonly FixItFridayStudentSurveyRepository: Repository<StudentSurveyEntity>,
     @InjectRepository(StudentNoteEntity) private readonly FixItFridayStudentNotesRepository: Repository<StudentNoteEntity>,
   ) {}
 
