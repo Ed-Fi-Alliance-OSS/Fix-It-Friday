@@ -1,4 +1,5 @@
 import { Entity, Column, PrimaryColumn } from 'typeorm';
+import StudentSurveyAnswerEntity from './studentsurveyanswer.entity';
 
 @Entity({ schema: 'fif', name: 'surveyquestion', synchronize: false })
 export default class SurveyQuestionEntity {
@@ -10,4 +11,6 @@ export default class SurveyQuestionEntity {
 
   @Column({ type: 'varchar', nullable: false })
   question: string;
+
+  studentanswer: StudentSurveyAnswerEntity;
 }

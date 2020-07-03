@@ -39,6 +39,22 @@ type StudentSchool
   contacts: [ContactPerson]
   siblingscount: Int,
   siblings: [StudentSchool]
+  studentsurveys: [StudentSurvey]
+  notes: [StudentNote]
+}
+type StudentNote {
+  studentnotekey: String
+  note: String
+  studentschoolkey: String
+}
+
+type StudentSurvey{
+  studentsurveykey:String
+  surveykey: String
+  studentschoolkey: String
+  date: String
+  survey: Survey
+  answers: [AnswersByStudent]
 }
 
 type Staff
@@ -68,10 +84,26 @@ type StudentSection{
   schoolyear: String
 }
 
+
 type Survey {
   surveykey: String
   title: String
+  questions: [SurveyQuestion]
 }
+type SurveyQuestion {
+  surveyquestionkey: String
+  surveykey: String
+  question: String
+  studentanswer: SurveySummaryAnswers
+}
+type AnswersByStudent {
+  surveykey: String
+  surveyquestionkey: String
+  question: String
+  studentschoolkey: String
+  answer: String
+}
+
 type SurveySummary {
   sectionkey: Int
   surveykey: Int

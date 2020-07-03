@@ -5,6 +5,14 @@
 
 /* tslint:disable */
 /* eslint-disable */
+export class AnswersByStudent {
+    surveykey?: string;
+    surveyquestionkey?: string;
+    question?: string;
+    studentschoolkey?: string;
+    answer?: string;
+}
+
 export class ContactPerson {
     uniquekey?: string;
     contactpersonkey?: string;
@@ -84,6 +92,12 @@ export class Staff {
     sections?: Section[];
 }
 
+export class StudentNote {
+    studentnotekey?: string;
+    note?: string;
+    studentschoolkey?: string;
+}
+
 export class StudentSchool {
     studentschoolkey?: string;
     studentkey?: string;
@@ -102,6 +116,8 @@ export class StudentSchool {
     contacts?: ContactPerson[];
     siblingscount?: number;
     siblings?: StudentSchool[];
+    studentsurveys?: StudentSurvey[];
+    notes?: StudentNote[];
 }
 
 export class StudentSection {
@@ -119,9 +135,26 @@ export class StudentSection {
     schoolyear?: string;
 }
 
+export class StudentSurvey {
+    studentsurveykey?: string;
+    surveykey?: string;
+    studentschoolkey?: string;
+    date?: string;
+    survey?: Survey;
+    answers?: AnswersByStudent[];
+}
+
 export class Survey {
     surveykey?: string;
     title?: string;
+    questions?: SurveyQuestion[];
+}
+
+export class SurveyQuestion {
+    surveyquestionkey?: string;
+    surveykey?: string;
+    question?: string;
+    studentanswer?: SurveySummaryAnswers;
 }
 
 export class SurveySummary {
