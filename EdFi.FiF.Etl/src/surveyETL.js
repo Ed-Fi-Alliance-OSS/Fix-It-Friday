@@ -8,7 +8,7 @@ const { Client } = require('pg');
 const { pgConfig } = require('../config/dbs');
 
 const SURVEY_DATE_FIELD = 'Timestamp';
-const STUDENT_SCHOOL_KEY_FIELD = 'StudentUSI';
+const STUDENT_SCHOOL_KEY_FIELD = 'StudentUniqueId';
 const METADATA_FIELDS = [SURVEY_DATE_FIELD, STUDENT_SCHOOL_KEY_FIELD, 'FirstName', 'LastSurname', 'ElectronicMailAddress', 'GradeLevel', 'StudentsELATeacher'];
 
 async function getDB() {
@@ -72,7 +72,13 @@ async function getOrSaveQuestions(questions, surveykey, db) {
 
 async function getOrSaveStudentSurvey(surveykey, studentAnswers, db) {
   const date = studentAnswers[SURVEY_DATE_FIELD];
-  const studentschoolkey = studentAnswers[STUDENT_SCHOOL_KEY_FIELD];
+  const studentkey = studentAnswers[STUDENT_SCHOOL_KEY_FIELD];
+  const studentSchoolKeyRow = await db.query("SELECT studentschoolkey FROM fif.studentschool s WHERE studentkey = $1", [studentkey])
+  if (studentSchoolKeyRow.rows.length == 0){
+    console.error(`ERROR: StudentUniqueId (${studentkey}) not found `);
+    return null;
+  }
+  studentschoolkey = studentSchoolKeyRow.rows[0].studentschoolkey;
 
   const result = await db
     .query('SELECT studentsurveykey, surveykey, studentschoolkey, "date" FROM fif.studentsurvey where surveykey = $1 and studentschoolkey = $2; ', [surveykey, studentschoolkey]);

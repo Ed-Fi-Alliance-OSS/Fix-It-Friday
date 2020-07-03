@@ -1,9 +1,0 @@
-{
-    "connection": {
-        "userName": "postgres",
-        "password": "p@ssw0rd",
-        "host": "localhost",
-        "port": 5432,
-        "database": "FixItFriday"
-    }
-}
