@@ -108,7 +108,7 @@ SELECT $1, $2, $3
 WHERE NOT EXISTS (SELECT FROM fif.studentsurveyanswer WHERE studentsurveykey = $1 AND surveyquestionkey = $2)
 `, [studentsurvey.studentsurveykey, questionKeyMap[q], currentAnswer[q]])
         .then((result) => {
-          if (result.rowCout > 0) {
+          if (result.rowCount > 0) {
             surveyProfile.answers.load += 1;
           } else {
             surveyProfile.answers.alreadyLoaded += 1;
