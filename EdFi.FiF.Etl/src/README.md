@@ -35,7 +35,7 @@ For testing with the survey sample data:
 
 ```powershell
 $ cd edfi.fif.etl
-$ node ./src/surveyETL.js sampleData/InternetAccessSurvey.csv "Internet Access"
+$ node ./src/surveyETL.js .\surveySampleData\InternetAccessSurvey.csv "Internet Access"
 ```
 
 ## How to run Database ETL
