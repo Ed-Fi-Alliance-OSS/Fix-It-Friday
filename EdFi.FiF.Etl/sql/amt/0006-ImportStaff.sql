@@ -7,5 +7,5 @@ SELECT DISTINCT
     s.staffuniqueid as staffuniqueid,
     (SELECT TOP 1 m.ElectronicMailAddress
       FROM edfi.StaffElectronicMail m
-      WHERE m.staffusi = s.staffusi) as electronicemailaddress
+      WHERE m.staffusi = s.staffusi) as electronicmailaddress
 FROM edfi.Staff s
