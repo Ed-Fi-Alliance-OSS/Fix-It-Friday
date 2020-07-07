@@ -42,20 +42,13 @@ const processEntity = async (values, pgClient, rowConfig) => {
     .then(async (res) => {
       if (res.rowCount === 0) {
         await pgClient.query(rowConfig.insertSql, values)
-          .catch((err) => {
-            console.error(`[${rowConfig.recordType}] ERROR insert error:\n${err.stack}`);
-          });
+          .catch(() => console.error(JSON.stringify(values)));
       }
 
       if (res.rowCount === 1) {
         await pgClient.query(rowConfig.updateSql, values)
-          .catch((err) => {
-            console.error(`[${rowConfig.recordType}] ERROR update error:\n${err.stack}`);
-          });
+          .catch(() => console.error(JSON.stringify(values)));
       }
-    })
-    .catch((err) => {
-      console.error(`[${rowConfig.recordType}] ERROR processEntity:\n${err.stack}`);
     });
 };
 
