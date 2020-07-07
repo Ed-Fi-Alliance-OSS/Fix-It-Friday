@@ -63,6 +63,7 @@ type Staff
   middlename: String
   lastsurname: String
   staffuniqueid: String
+  electronicmailaddress: String
   section(sectionkey:String!): Section
   sections: [Section]
 }
@@ -74,6 +75,7 @@ type StaffInformation
   middlename: String
   lastsurname: String
   staffuniqueid: String
+  electronicmailaddress: String
 }
 
 type StudentSection{

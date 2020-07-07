@@ -1,3 +1,4 @@
+
 /** ------------------------------------------------------
  * THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
  * -------------------------------------------------------
@@ -84,6 +85,7 @@ export class Staff {
     middlename?: string;
     lastsurname?: string;
     staffuniqueid?: string;
+    electronicmailaddress?: string;
     section?: Section;
     sections?: Section[];
 }
@@ -95,6 +97,7 @@ export class StaffInformation {
     middlename?: string;
     lastsurname?: string;
     staffuniqueid?: string;
+    electronicmailaddress?: string;
 }
 
 export class StudentNote {
