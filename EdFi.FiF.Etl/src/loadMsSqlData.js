@@ -118,7 +118,6 @@ const processRecords = async (config, rowConfig, pgConfig) => {
     done = true;
 
     rewriteLine(`[${rowConfig.recordType}] Loaded records: ${processedRows}`, process.stdout);
-    console.log(`\n[${rowConfig.recordType}] request.done`);
     await sql.close();
   });
 
@@ -139,8 +138,9 @@ sql.on('error', (sqlerror) => {
 });
 
 const loadMsSqlData = async (pgConfig, mssqlConfig, config) => {
+  console.log(`[${config.recordType}] loading....`);
   await processRecords(mssqlConfig, config, pgConfig);
-  console.log(`${config.recordType} done`);
+  console.log(`\n[${config.recordType}] done`);
 };
 
 exports.loadMsSqlData = loadMsSqlData;
