@@ -5,8 +5,8 @@ From edfi.Student s
     INNER JOIN
         edfi.StudentSchoolAssociation ssa ON
             S.StudentUSI = ssa.StudentUSI
-			LEFT JOIN edfi.StudentParentAssociation spa ON ssa.StudentUSI = spa.StudentUSI
-				LEFT JOIN edfi.Parent p ON spa.ParentUSI = p.ParentUSI
+            INNER JOIN edfi.StudentParentAssociation spa ON ssa.StudentUSI = spa.StudentUSI
+                INNER JOIN edfi.Parent p ON spa.ParentUSI = p.ParentUSI
 WHERE(
     ssa.ExitWithdrawDate IS NULL
     OR ssa.ExitWithdrawDate >= GETDATE());
