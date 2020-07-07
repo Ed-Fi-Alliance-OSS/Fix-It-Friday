@@ -15,7 +15,7 @@ export default class StaffEntity {
 
   @Column() staffuniqueid: string;
 
-  @Column() electronicemailaddress: string;
+  @Column() electronicmailaddress: string;
 
   @ManyToMany(() => SectionEntity, section => section.sectionkey)
   @JoinTable()

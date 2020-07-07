@@ -25,7 +25,7 @@ export default class StaffService {
   }
 
   async findOneByEmail(staffmail: string): Promise<StaffEntity> {
-    return this.FixItFridayRepository.findOne({ where: { electronicemailaddress: staffmail } });
+    return this.FixItFridayRepository.findOne({ where: { electronicmailaddress: staffmail } });
   }
 
   async findSectionsByStaff(staffkey: number): Promise<SectionEntity[]> {
