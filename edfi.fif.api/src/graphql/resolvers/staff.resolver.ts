@@ -31,7 +31,7 @@ export default class StaffResolvers {
     return this.staffService.findOneById(staffkey);
   }
 
-  @Query('sectionsbystaff')
+  @Query('sectionbystaff')
   @UseGuards(ValidateStaffIdGuard)
   async findSectionByStaff(
     @Args('staffkey')
