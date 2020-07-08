@@ -1,6 +1,9 @@
 import { Args, Query, Resolver, ResolveProperty, Parent } from '@nestjs/graphql';
+import { UseGuards } from '@nestjs/common';
+
 import { SurveySummary, SurveySummaryQuestions } from '../graphql.schema';
 import SurveySummaryService from '../services/surveysummary.service';
+import ValidateStaffIdGuard from '../guards/validateStaffId.guard';
 
 @Resolver('SurveySummary')
 export default class SurveySummaryResolvers {
@@ -8,6 +11,7 @@ export default class SurveySummaryResolvers {
   constructor(private readonly surveySummaryService: SurveySummaryService) {}
 
   @Query()
+  @UseGuards(ValidateStaffIdGuard)
   async surveysummary(
     @Args('title', { nullable: false }) title: string,
     @Args('staffkey', { nullable: false }) staffkey: number,

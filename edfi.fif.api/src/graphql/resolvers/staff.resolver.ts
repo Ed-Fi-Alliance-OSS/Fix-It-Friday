@@ -1,6 +1,9 @@
 import { Args, Parent, Query, Resolver, ResolveProperty } from '@nestjs/graphql';
+import { UseGuards } from '@nestjs/common';
+
 import { Staff, Section, StudentSchool } from '../graphql.schema';
 import StaffService from '../services/staff.service';
+import ValidateStaffIdGuard from '../guards/validateStaffId.guard';
 
 @Resolver('Staff')
 export default class StaffResolvers {
@@ -29,6 +32,7 @@ export default class StaffResolvers {
   }
 
   @Query('sectionsbystaff')
+  @UseGuards(ValidateStaffIdGuard)
   async findSectionByStaff(
     @Args('staffkey')
     staffkey: number,
@@ -39,6 +43,7 @@ export default class StaffResolvers {
   }
 
   @Query('sectionsbystaff')
+  @UseGuards(ValidateStaffIdGuard)
   async findSectionsByStaff(
     @Args('staffkey')
     staffkey: number,
