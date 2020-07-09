@@ -40,7 +40,7 @@ $ node ./src/surveyETL.js ./surveySampleData/InternetAccessSurvey.csv "Internet 
 
 ## How to run Database ETL
 
-The database ETL module (./src/dbETL.js) is executed directly by node.
+The database ETL module (./src/dbETL.js) is executed directly by node. Make sure that followed the steps above to rename sample.env to .env. ALl of this code should be executed in the edfi.fif.etl directory, as shown below.
 
 ```powershell
 $ cd edfi.fif.etl
