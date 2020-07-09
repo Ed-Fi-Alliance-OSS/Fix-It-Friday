@@ -7,7 +7,7 @@ import { Resolver, ResolveProperty, Parent, Args } from '@nestjs/graphql';
 import { UseGuards } from '@nestjs/common';
 import { SurveySummaryAnswers } from '../graphql.schema';
 import SurveySummaryQuestionsService from '../services/surveysummaryquestions.service';
-import { AuthGuard } from '../auth.guard';
+import AuthGuard from '../auth.guard';
 
 @UseGuards(AuthGuard)
 @Resolver('SurveySummaryQuestions')

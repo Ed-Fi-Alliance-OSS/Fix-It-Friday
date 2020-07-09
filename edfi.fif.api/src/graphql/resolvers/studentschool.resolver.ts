@@ -7,7 +7,7 @@ import { UseGuards } from '@nestjs/common';
 import { Parent, Args, Resolver, ResolveProperty } from '@nestjs/graphql';
 import { StudentSchool, ContactPerson, StudentSurvey, StudentNote } from '../graphql.schema';
 import StudentSchoolService from '../services/studentschool.service';
-import { AuthGuard } from '../auth.guard';
+import AuthGuard from '../auth.guard';
 
 @UseGuards(AuthGuard)
 @Resolver('StudentSchool')

@@ -8,7 +8,7 @@ import { UseGuards } from '@nestjs/common';
 
 import { Staff, Section, StudentSchool } from '../graphql.schema';
 import StaffService from '../services/staff.service';
-import { AuthGuard } from '../auth.guard';
+import AuthGuard from '../auth.guard';
 import ValidateStaffIdGuard from '../guards/validateStaffId.guard';
 import CurrentUser from '../decorators/currentUser.decorator';
 

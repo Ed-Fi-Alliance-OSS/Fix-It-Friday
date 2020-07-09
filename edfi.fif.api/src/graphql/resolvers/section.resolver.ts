@@ -7,7 +7,7 @@ import { UseGuards } from '@nestjs/common';
 import { Args, Parent, Resolver, ResolveProperty } from '@nestjs/graphql';
 import { Section, StudentSchool } from '../graphql.schema';
 import SectionService from '../services/section.service';
-import { AuthGuard } from '../auth.guard';
+import AuthGuard from '../auth.guard';
 
 @UseGuards(AuthGuard)
 @Resolver('Section')

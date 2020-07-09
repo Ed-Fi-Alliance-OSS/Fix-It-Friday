@@ -8,7 +8,7 @@ import { UseGuards } from '@nestjs/common';
 
 import { SurveySummary, SurveySummaryQuestions } from '../graphql.schema';
 import SurveySummaryService from '../services/surveysummary.service';
-import { AuthGuard } from '../auth.guard';
+import AuthGuard from '../auth.guard';
 import ValidateStaffIdGuard from '../guards/validateStaffId.guard';
 
 @UseGuards(AuthGuard)
