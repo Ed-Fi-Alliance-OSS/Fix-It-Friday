@@ -5,10 +5,9 @@
 
 import { CanActivate, ExecutionContext, Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { GqlExecutionContext } from '@nestjs/graphql';
+import fetch from 'node-fetch';
 import * as jwkToPem from 'jwk-to-pem';
 import * as jwt from 'jsonwebtoken';
-
-const google = require('../../src/google.json');
 
 import { config } from 'dotenv';
 
@@ -26,10 +25,25 @@ export class AuthGuard implements CanActivate {
         return true;
     }
 
+    async getJsonData(url) {
+        let jsonReturn;
+        try {
+            await fetch(url)
+                .then((res) => res.json())
+                .then((result) => (jsonReturn = result));
+            return jsonReturn;
+        } catch (error) {
+          console.error(error);
+          throw error;
+        }
+    }
+
     async createPem(token) {
+        const googleDiscoDoc = await this.getJsonData(process.env.GOOGLE_DISCOVERY);
+        const jwks = await this.getJsonData(googleDiscoDoc.jwks_uri);
         const decodedToken = jwt.decode(token, { complete: true, json: true });
-        const kid = decodedToken.header.kid;
-        const jwk = google.keys.filter((k) => k.kid === kid)[0];
+        const keyId = decodedToken.header.kid;
+        const jwk = jwks.keys.filter((k) => k.kid === keyId)[0];
         return await jwkToPem({ n: jwk.n, kty: jwk.kty, e: jwk.e });
     }
 
@@ -39,7 +53,7 @@ export class AuthGuard implements CanActivate {
         }
         const token = auth.split(' ')[1];
         try {
-            let pem = await this.createPem(token)
+            let pem = await this.createPem(token);
             return await jwt.verify(token, pem);
         } catch (err) {
             throw new HttpException('Invalid token', HttpStatus.UNAUTHORIZED);
