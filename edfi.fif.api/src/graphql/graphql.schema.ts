@@ -33,7 +33,7 @@ export class ContactPerson {
 }
 
 export abstract class IQuery {
-    abstract staffbyemail(staffemail: string): StaffInformation | Promise<StaffInformation>;
+    abstract staffbyemail(): StaffInformation | Promise<StaffInformation>;
 
     abstract staffbyid(staffkey: string): Staff | Promise<Staff>;
 
@@ -45,7 +45,7 @@ export abstract class IQuery {
 
     abstract studentsbystaff(staffkey: string): StudentSchool[] | Promise<StudentSchool[]>;
 
-    abstract surveysummary(staffkey: number, sectionkey: string, title?: string): SurveySummary[] | Promise<SurveySummary[]>;
+    abstract surveysummary(staffkey: number, sectionkey?: string, title?: string, surveykey?: number): SurveySummary[] | Promise<SurveySummary[]>;
 }
 
 export class School {
