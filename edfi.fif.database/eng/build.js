@@ -3,6 +3,9 @@
 // The Ed-Fi Alliance licenses this file to you under the Apache License, Version 2.0.
 // See the LICENSE and NOTICES files in the project root for more information.
 
+// This build script runs a number of yarn commands in an OS-agnostic fashion
+// with the help of Node.js.
+
 const { execSync } = require('child_process');
 
 const steps = [
