@@ -21,20 +21,20 @@ export default class SectionService {
 
   // eslint-disable-next-line no-useless-constructor
   constructor(
-    @InjectRepository(StudentSchoolEntity) private readonly FixItFridayRepository: Repository<StudentSchoolEntity>,
-    @InjectRepository(ContactPersonEntity) private readonly FixItFridayRepositoryContacts: Repository<ContactPersonEntity>,
-    @InjectRepository(SchoolEntity) private readonly FixItFridayRepositorySchool: Repository<SchoolEntity>,
+    @InjectRepository(StudentSchoolEntity) private readonly BuzzRepository: Repository<StudentSchoolEntity>,
+    @InjectRepository(ContactPersonEntity) private readonly BuzzRepositoryContacts: Repository<ContactPersonEntity>,
+    @InjectRepository(SchoolEntity) private readonly BuzzRepositorySchool: Repository<SchoolEntity>,
     @InjectRepository(StudentSurveyEntity)
-    private readonly FixItFridayStudentSurveyRepository: Repository<StudentSurveyEntity>,
-    @InjectRepository(StudentNoteEntity) private readonly FixItFridayStudentNotesRepository: Repository<StudentNoteEntity>,
+    private readonly BuzzStudentSurveyRepository: Repository<StudentSurveyEntity>,
+    @InjectRepository(StudentNoteEntity) private readonly BuzzStudentNotesRepository: Repository<StudentNoteEntity>,
   ) {}
 
   async findAll(): Promise<StudentSchoolEntity[]> {
-    return this.FixItFridayRepository.find();
+    return this.BuzzRepository.find();
   }
 
   async findAllBySection(id: string): Promise<StudentSchoolEntity[]> {
-    return this.FixItFridayRepository.createQueryBuilder('section')
+    return this.BuzzRepository.createQueryBuilder('section')
       .innerJoin(StudentSchoolEntity, 'ss', 'ss.sectionkey = section.sectionkey')
       .innerJoinAndSelect('section.students', 'student', 'student.studentschoolkey = ss.studentschoolkey')
       .where({ sectionkey: id })
@@ -42,11 +42,11 @@ export default class SectionService {
   }
 
   async findOneById(id: string): Promise<StudentSchoolEntity> {
-    return this.FixItFridayRepository.findOne({ where: { studentschoolkey: id } });
+    return this.BuzzRepository.findOne({ where: { studentschoolkey: id } });
   }
 
   async findStudentContactsById(studentschoolkey: string): Promise<ContactPersonEntity[]> {
-    return this.FixItFridayRepositoryContacts.createQueryBuilder('contactperson')
+    return this.BuzzRepositoryContacts.createQueryBuilder('contactperson')
       .innerJoin(
         StudentContactEntity,
         'sc',
@@ -56,7 +56,7 @@ export default class SectionService {
   }
 
   async findStudentsSiblings(studentschoolkey: string): Promise<StudentSchoolEntity[]> {
-    return this.FixItFridayRepository.createQueryBuilder('students')
+    return this.BuzzRepository.createQueryBuilder('students')
       .innerJoin(
         StudentContactEntity,
         'siblingcontact',
@@ -81,11 +81,11 @@ export default class SectionService {
   }
 
   async findOneSchoolByStudent(id: string): Promise<SchoolEntity> {
-    return this.FixItFridayRepositorySchool.findOne({ where: { schoolkey: id } });
+    return this.BuzzRepositorySchool.findOne({ where: { schoolkey: id } });
   }
 
   async findByStudentSchoolKey(studentschoolkey: string): Promise<StudentSurveyEntity[]> {
-    return this.FixItFridayStudentSurveyRepository.createQueryBuilder('studentsurvey')
+    return this.BuzzStudentSurveyRepository.createQueryBuilder('studentsurvey')
       .innerJoin(
         StudentSchoolEntity,
         'ss',
@@ -96,7 +96,7 @@ export default class SectionService {
   }
 
   async findStudentNotesByStudentSchoolKey(studentschoolkey: string): Promise<StudentNoteEntity[]> {
-    return this.FixItFridayStudentNotesRepository.createQueryBuilder('studentnotes')
+    return this.BuzzStudentNotesRepository.createQueryBuilder('studentnotes')
       .innerJoin(
         StudentSchoolEntity,
         'ss',

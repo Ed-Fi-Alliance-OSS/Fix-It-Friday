@@ -21,7 +21,7 @@ param(
   $DbPassword,
 
   [string]
-  $DbName = "fixitfriday"
+  $DbName = "EdFi_Buzz"
 )
 $InstallPath = "$PSScriptRoot/../dist"
 if (-not(Test-Path $InstallPath)) {
@@ -35,11 +35,11 @@ if (-not(Test-Path $InstallPath)) {
 
 function New-DotEnvFile {
   $fileContents = @"
-FIF_DB_HOST = '$DbServer'
-FIF_DB_PORT = $DbPort
-FIF_DB_USERNAME ='$DbUserName'
-FIF_DB_PASSWORD = '$DbPassword'
-FIF_DB_DATABASE = '$DbName'
+BUZZ_DB_HOST = '$DbServer'
+BUZZ_DB_PORT = $DbPort
+BUZZ_DB_USERNAME ='$DbUserName'
+BUZZ_DB_PASSWORD = '$DbPassword'
+BUZZ_DB_DATABASE = '$DbName'
 "@
 
   $fileContents | Out-File "$InstallPath/.env" -Encoding UTF8 -Force
@@ -55,11 +55,11 @@ function Install-Database {
     Pop-Location
 }
 
-Write-Host "Begin Fix-it-Friday database installation..." -ForegroundColor Yellow
+Write-Host "Begin EdFi Buzz database installation..." -ForegroundColor Yellow
 
 New-Item -Path $InstallPath -ItemType Directory -Force | Out-Null
 
 New-DotEnvFile
 Install-Database
 
-Write-Host "End Fix-it-Friday API installation." -ForegroundColor Yellow
+Write-Host "End EdFi Buzz API installation." -ForegroundColor Yellow

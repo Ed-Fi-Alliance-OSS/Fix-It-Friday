@@ -25,7 +25,7 @@ function Invoke-NuGetPack{
 
   $parameters = @(
     "pack",
-    "edfi.fif.database.nuspec",
+    "edfi.buzz.database.nuspec",
     "-version",
     $FullVersion
   )

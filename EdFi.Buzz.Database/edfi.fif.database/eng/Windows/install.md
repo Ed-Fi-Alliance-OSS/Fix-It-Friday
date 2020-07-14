@@ -1,4 +1,4 @@
-# Install Instructions for the Fix-it-Friday Database
+# Install Instructions for the Buzz Database
 
 ## Pre-Requisites
 
@@ -32,7 +32,7 @@ $params = @{
     DbPort = 5430
     DbUserName = "super"
     DbPassword = "myPassword"
-    DbName = "fif"
+    DbName = "EdFi_Buzz"
 }
 .\install.ps1 @params
 ```

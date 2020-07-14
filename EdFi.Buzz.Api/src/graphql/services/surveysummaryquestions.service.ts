@@ -14,17 +14,17 @@ export default class SurveySummaryQuestionsService {
   // eslint-disable-next-line no-useless-constructor
   constructor(
     @InjectRepository(SurveySummaryQuestionsEntity)
-    private readonly FixItFridayRepository: Repository<SurveySummaryQuestionsEntity>,
+    private readonly BuzzRepository: Repository<SurveySummaryQuestionsEntity>,
     @InjectRepository(SurveySummaryAnswersEntity)
-    private readonly FixItFridayAnswersRepository: Repository<SurveySummaryAnswersEntity>,
+    private readonly BuzzAnswersRepository: Repository<SurveySummaryAnswersEntity>,
   ) {}
 
   async findAll(): Promise<SurveySummaryQuestionsEntity[]> {
-    return this.FixItFridayRepository.find();
+    return this.BuzzRepository.find();
   }
 
   async findAnswersByQuestion(sectionkey: string, surveyquestionkey: number): Promise<SurveySummaryAnswersEntity[]> {
-    return this.FixItFridayAnswersRepository.createQueryBuilder('SurveySummaryAnswers')
+    return this.BuzzAnswersRepository.createQueryBuilder('SurveySummaryAnswers')
       .leftJoin(SurveySummaryQuestionsEntity, 'ss', `SurveySummaryAnswers.surveyquestionkey = ss.surveyquestionkey`)
       .where({ sectionkey, surveyquestionkey })
       .getMany();

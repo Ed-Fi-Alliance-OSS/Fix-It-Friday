@@ -14,21 +14,21 @@ import AnswersByStudentEntity from '../entities/survey/answersbystudent.entity';
 export default class StudentSurveyService {
   // eslint-disable-next-line no-useless-constructor
   constructor(
-    @InjectRepository(SurveyEntity) private readonly FixItFridaySurveyRepository: Repository<SurveyEntity>,
+    @InjectRepository(SurveyEntity) private readonly BuzzSurveyRepository: Repository<SurveyEntity>,
     @InjectRepository(AnswersByStudentEntity)
-    private readonly FixItFridayAnswersByStudentRepository: Repository<AnswersByStudentEntity>,
+    private readonly BuzzAnswersByStudentRepository: Repository<AnswersByStudentEntity>,
   ) {}
 
   async findSurvey(surveykey: string): Promise<SurveyEntity> {
-    return this.FixItFridaySurveyRepository.findOne({ where: { surveykey } });
+    return this.BuzzSurveyRepository.findOne({ where: { surveykey } });
   }
 
   async findAnwsersByStudent(surveykey: string, studentschoolkey: string): Promise<AnswersByStudentEntity[]> {
-    return this.FixItFridayAnswersByStudentRepository.createQueryBuilder('AnswersByStudent')
+    return this.BuzzAnswersByStudentRepository.createQueryBuilder('AnswersByStudent')
       .innerJoin(
         StudentSurveyEntity,
         'ss',
-        `AnswersByStudent.surveykey = ss.surveykey and ss.surveykey='${surveykey}' 
+        `AnswersByStudent.surveykey = ss.surveykey and ss.surveykey='${surveykey}'
           and AnswersByStudent.studentschoolkey = ss.studentschoolkey and ss.studentschoolkey='${studentschoolkey}'`,
       )
       .getMany();

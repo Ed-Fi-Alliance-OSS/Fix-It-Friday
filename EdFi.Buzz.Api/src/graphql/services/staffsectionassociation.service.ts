@@ -13,14 +13,14 @@ export default class StaffSectionAssociationService {
   // eslint-disable-next-line no-useless-constructor
   constructor(
     @InjectRepository(StaffSectionAssociationEntity)
-    private readonly FixItFridayRepository: Repository<StaffSectionAssociationEntity>,
+    private readonly BuzzRepository: Repository<StaffSectionAssociationEntity>,
   ) {}
 
   async findAll(): Promise<StaffSectionAssociationEntity[]> {
-    return this.FixItFridayRepository.find();
+    return this.BuzzRepository.find();
   }
 
   async findOneById(id: string): Promise<StaffSectionAssociationEntity> {
-    return this.FixItFridayRepository.findOne({ where: { staffkey: id } });
+    return this.BuzzRepository.findOne({ where: { staffkey: id } });
   }
 }

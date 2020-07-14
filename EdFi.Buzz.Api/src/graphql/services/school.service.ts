@@ -14,27 +14,27 @@ import StudentEntity from '../entities/studentsection.entity';
 export default class SchoolService {
   // eslint-disable-next-line no-useless-constructor
   constructor(
-    @InjectRepository(SchoolEntity) private readonly FixItFridayRepository: Repository<SchoolEntity>,
-    @InjectRepository(SectionEntity) private readonly FixItFridaySectionRepository: Repository<SectionEntity>,
-    @InjectRepository(StudentEntity) private readonly FixItFridayStudentRepository: Repository<StudentEntity>,
+    @InjectRepository(SchoolEntity) private readonly BuzzRepository: Repository<SchoolEntity>,
+    @InjectRepository(SectionEntity) private readonly BuzzSectionRepository: Repository<SectionEntity>,
+    @InjectRepository(StudentEntity) private readonly BuzzStudentRepository: Repository<StudentEntity>,
   ) {}
 
   async findAll(): Promise<SchoolEntity[]> {
-    return this.FixItFridayRepository.find();
+    return this.BuzzRepository.find();
   }
 
   async findOneById(id: string): Promise<SchoolEntity> {
-    return this.FixItFridayRepository.findOne({ where: { schoolkey: id } });
+    return this.BuzzRepository.findOne({ where: { schoolkey: id } });
   }
 
   async findSectionsBySchool(schoolkey: string): Promise<SectionEntity[]> {
-    return this.FixItFridaySectionRepository.createQueryBuilder('section')
+    return this.BuzzSectionRepository.createQueryBuilder('section')
       .innerJoin(SchoolEntity, 'school', `section.schoolkey = school.schoolkey and school.schoolkey='${schoolkey}'`)
       .getMany();
   }
 
   async findStudentsBySchool(schoolkey: string): Promise<StudentEntity[]> {
-    return this.FixItFridayStudentRepository.createQueryBuilder('student')
+    return this.BuzzStudentRepository.createQueryBuilder('student')
       .innerJoin(SchoolEntity, 'school', `student.schoolkey = school.schoolkey and school.schoolkey='${schoolkey}'`)
       .getMany();
   }

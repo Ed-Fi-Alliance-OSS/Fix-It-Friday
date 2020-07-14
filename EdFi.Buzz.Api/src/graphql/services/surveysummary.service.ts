@@ -13,9 +13,9 @@ import SurveySummaryQuestionsEntity from '../entities/survey/surveysummaryquesti
 export default class SurveySummaryService {
   // eslint-disable-next-line no-useless-constructor
   constructor(
-    @InjectRepository(SurveySummaryEntity) private readonly FixItFridayRepository: Repository<SurveySummaryEntity>,
+    @InjectRepository(SurveySummaryEntity) private readonly BuzzRepository: Repository<SurveySummaryEntity>,
     @InjectRepository(SurveySummaryQuestionsEntity)
-    private readonly FixItFridayQuestionsRepository: Repository<SurveySummaryQuestionsEntity>,
+    private readonly BuzzQuestionsRepository: Repository<SurveySummaryQuestionsEntity>,
   ) {}
 
   async findAll(title: string, staffkey: number, sectionkey: string, surveykey?: number): Promise<SurveySummaryEntity[]> {
@@ -23,13 +23,13 @@ export default class SurveySummaryService {
     const sectionKeyFilter = ` AND SurveySummary.sectionkey = '${sectionkey}'`;
     const surveyKeyFilter = surveykey ? ` AND SurveySummary.surveykey = ${surveykey}` : '';
 
-    return this.FixItFridayRepository.createQueryBuilder('SurveySummary')
+    return this.BuzzRepository.createQueryBuilder('SurveySummary')
       .where(`SurveySummary.staffkey = '${staffkey}' ${sectionKeyFilter} ${surveyTitleFilter} ${surveyKeyFilter}`)
       .getMany();
   }
 
   async findQuestionsBySurvey(surveykey: number): Promise<SurveySummaryQuestionsEntity[]> {
-    return this.FixItFridayQuestionsRepository.createQueryBuilder('SurveySummaryQuestions')
+    return this.BuzzQuestionsRepository.createQueryBuilder('SurveySummaryQuestions')
       .leftJoin(SurveySummaryEntity, 'ss', `SurveySummaryQuestions.surveykey = ss.surveykey and ss.surveykey='${surveykey}'`)
       .where({ surveykey })
       .getMany();

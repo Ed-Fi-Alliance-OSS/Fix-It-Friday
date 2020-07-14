@@ -13,21 +13,21 @@ import SurveyQuestionEntity from '../entities/survey/surveyquestion.entity';
 export default class SurveyService {
   // eslint-disable-next-line no-useless-constructor
   constructor(
-    @InjectRepository(SurveyEntity) private readonly FixItFridayRepository: Repository<SurveyEntity>,
+    @InjectRepository(SurveyEntity) private readonly BuzzRepository: Repository<SurveyEntity>,
     @InjectRepository(SurveyQuestionEntity)
-    private readonly FixItFridayQuestionsRepository: Repository<SurveyQuestionEntity>,
+    private readonly BuzzQuestionsRepository: Repository<SurveyQuestionEntity>,
   ) {}
 
   async findAll(): Promise<SurveyEntity[]> {
-    return this.FixItFridayRepository.find();
+    return this.BuzzRepository.find();
   }
 
   async findOneById(id: string): Promise<SurveyEntity> {
-    return this.FixItFridayRepository.findOne({ where: { surveykey: id } });
+    return this.BuzzRepository.findOne({ where: { surveykey: id } });
   }
 
   async findQuestionBySurveyKey(surveykey: string): Promise<SurveyQuestionEntity[]> {
-    return this.FixItFridayQuestionsRepository.createQueryBuilder('Questions')
+    return this.BuzzQuestionsRepository.createQueryBuilder('Questions')
       .innerJoin(SurveyEntity, 's', `Questions.surveykey = s.surveykey and s.surveykey=${surveykey}`)
       .where({ surveykey })
       .getMany();
