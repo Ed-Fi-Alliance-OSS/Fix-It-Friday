@@ -29,8 +29,7 @@ config({ path: `${__dirname}/.env` });
       password: process.env.FIF_DB_PASSWORD,
       database: process.env.FIF_DB_DATABASE,
       entities: [`${__dirname}/**/*.entity.js`],
-      synchronize: true,
-      logging: 'all',
+      synchronize: true
     }),
     GraphQLModule.forRoot({
       typePaths: [`${__dirname}/**/*.graphql`],
