@@ -33,7 +33,7 @@ config({ path: `${__dirname}/.env` });
       logging: 'all',
     }),
     GraphQLModule.forRoot({
-      typePaths: [`./**/*.graphql`],
+      typePaths: [`${__dirname}/**/*.graphql`],
       playground: true,
       context: ({ req }) => ({ headers: req.headers }),
     }),
