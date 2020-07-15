@@ -29,7 +29,7 @@ config({ path: `${__dirname}/.env` });
       password: process.env.BUZZ_API_DB_PASSWORD,
       database: process.env.BUZZ_API_DB_DATABASE,
       entities: [`${__dirname}/**/*.entity.js`],
-      synchronize: true
+      synchronize: true,
     }),
     GraphQLModule.forRoot({
       typePaths: [`${__dirname}/**/*.graphql`],
