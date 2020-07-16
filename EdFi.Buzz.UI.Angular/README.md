@@ -27,9 +27,9 @@ Setup Instructions for Development
 2. Open a PowerShell window and Navigate to the UI folder C:\projects\Ed-Fi-Buzz\UI\
 3. Open PowerShell as an "Administrator" and run yarn install
 4. Duplicate the [environment.example.json](src/assets/environment.example.json) file, and rename the copy to environment.json, then replace its contents with the correct values for your environment
-4. In the same Powershell window type "yarn start"
-5. Open a browser (Chrome) and navigate to http://localhost:4200/
-6. Others???
+5. In the same Powershell window type "yarn start"
+6. Open a browser (Chrome) and navigate to http://localhost:4200/
+
 
 ```PowerShell
 C:\temp\ed-fi\> .\BinaryInstall.ps1
