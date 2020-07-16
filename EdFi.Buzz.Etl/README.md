@@ -1,4 +1,4 @@
-# Buzz TOD - Teacher Observation Dashboards
+# Ed-Fi Buzz - ETL
 
 These scripts were made possible thanks to the Ed-Fi Alliance and the Michael and Susan Dell Foundation.
 
@@ -15,12 +15,11 @@ We recommend that the following prerequisites are installed on the machine that 
 
 That is it =)
 
-
 ## Setup Instructions for ETL
 
 1. Download the repository.
 2. Setup database using edfi.buzz.database if needed (Edit its database.json config file and run `yarn migrate`).
-3. Install dependencies with `npm install`.
+3. Install dependencies with `yarn install`.
 4. To configure the database, rename sample.env to .env and update the values to match your database configuration.
 
 ## How to run Survey ETL
@@ -28,7 +27,6 @@ That is it =)
 For testing with the survey sample data:
     1. Use edfi.buzz.etl/surveySampleData/InsertSampleStudentData.sql to insert buzz.studentschool
     2. edfi.buzz.etl/surveySampleData/* are example csv's to import that have studentkeys references to surveySampleData/InsertSampleStudentData.sql.
-
 
 ```bash
 $ cd edfi.buzz.etl
