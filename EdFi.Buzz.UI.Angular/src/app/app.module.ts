@@ -15,7 +15,6 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 import { hasLifecycleHook } from '@angular/compiler/src/lifecycle_reflector';
 import { AuthServiceConfig, GoogleLoginProvider, SocialLoginModule } from 'angularx-social-login';
 import { ChartsModule } from 'ng2-charts';
-import { TooltipModule } from 'ng2-tooltip-directive';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './Features/home/home.component';
@@ -31,13 +30,8 @@ import { LoginComponent } from './Features/Login/login.component';
 import { SurveyAnalytics2Component } from './Features/SurveyAnalytics2/surveyAnalytics2.component';
 import { JwtInterceptor } from './Interceptors/jwt.interceptor';
 import { AuthGuard } from './Interceptors/auth.guard';
-import { EnvironmentHttpService } from './Services/environment.http.service';
 import { EnvironmentService } from './Services/environment.service';
 import { HttpClient } from '@angular/common/http';
-
-export function app_Init(environmentHttpService: EnvironmentHttpService) {
-  return () => environmentHttpService.initializeApp();
-}
 
 export function provideApolloConfig({ environment }: EnvironmentService, httpLink: HttpLink) {
   return {
@@ -96,10 +90,9 @@ export function provideAuthServiceConfig({ environment }: EnvironmentService) {
     ], { useHash: true, scrollPositionRestoration: 'enabled' })
   ],
   providers: [
-    { provide: APP_INITIALIZER, useFactory: app_Init, deps: [EnvironmentHttpService], multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: AuthServiceConfig, useFactory: provideAuthServiceConfig, deps: [EnvironmentService, APP_INITIALIZER] },
-    { provide: APOLLO_OPTIONS, useFactory: provideApolloConfig, deps: [EnvironmentService, HttpLink, APP_INITIALIZER] }
+    { provide: AuthServiceConfig, useFactory: provideAuthServiceConfig, deps: [EnvironmentService] },
+    { provide: APOLLO_OPTIONS, useFactory: provideApolloConfig, deps: [EnvironmentService, HttpLink] }
   ],
   bootstrap: [AppComponent]
 })
