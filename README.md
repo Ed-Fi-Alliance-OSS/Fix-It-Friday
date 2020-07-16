@@ -9,7 +9,9 @@ Survey Results. This allows teachers to look into a survey and see how their stu
 
 ## Installation
 
-* [User Interface - Windows Installation](edfi.buzz.ui.angular/eng/windows/install.md)
+* [Database - Windows Installation](EdFi.Buzz.Database/eng/Windows/install.md)
+* [API - Windows Installation](EdFi.Buzz.Api/eng/Windows/install.md)
+* [User Interface - Windows Installation](EdFi.Buzz.UI.Angular/eng/windows/install.md)
 
 ## Legal Information
 
