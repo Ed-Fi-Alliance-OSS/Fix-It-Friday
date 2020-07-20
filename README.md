@@ -1,3 +1,7 @@
+MOVED TO https://github.com/Ed-Fi-Exchange-OSS/EdFi-Project-Buzz
+
+--------------------------
+
 # Ed-Fi Buzz
 
 Project Buzz is a mobile tool that puts roster, contact information, and student survey results into the hands of teachers, just in time for back-to-school preparations.  The tool provides an educator with three views into their student’s data:
